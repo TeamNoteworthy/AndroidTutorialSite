@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1> 7. Show NoteEdit Activity--Gautham</h1>
+<p>So now you&rsquo;ve set up a basic Note project with a &lt;code&gt;NoteListActivity&lt;code&gt; and persistence to save future notes. What seems to be the only thing missing from this notes app? Editing the notes themselves! This part of the tutorial will focus on editing the contents of pre-existing notes, adding text to new notes, deleting notes, and a couple of other cool things you can do with colors and layout files.</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>Right click the &ldquo;edu.gatech.androidnoteapp&rdquo; folder in the Project explorer and select <strong>New-&gt;Java Class</strong>. Name it <code>NoteEditActivity</code> and replace its content with this code:</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<code>
+<p>package edu.gatech.androidnoteapp;</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>import android.support.v7.app.ActionBarActivity;</p>
+<p>import android.os.Bundle;</p>
+<p>import android.view.Menu;</p>
+<p>import android.view.MenuItem;</p>
+<p>import android.widget.EditText;</p>
+<p>import android.widget.RelativeLayout;</p>
+<p>import android.widget.Toast;</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>import java.sql.Date;</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>public class NoteEditActivity extends ActionBarActivity {</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>&nbsp;&nbsp;&nbsp;@Override</p>
+<p>&nbsp;&nbsp;&nbsp;protected void onCreate(Bundle savedInstanceState) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.onCreate(savedInstanceState);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setContentView(R.layout.activity_note_edit);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getSupportActionBar().setDisplayHomeAsUpEnabled(true);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;titleText = (EditText) findViewById(R.id.note_title);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bodyText = (EditText) findViewById(R.id.note_text);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout = (RelativeLayout)findViewById(R.id.EditLayout);</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>&nbsp;&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;@Override</p>
+<p>&nbsp;&nbsp;&nbsp;public boolean onCreateOptionsMenu(Menu menu) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Inflate the menu; this adds items to the action bar if it is present.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getMenuInflater().inflate(R.menu.menu_note_edit, menu);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;</p>
+<p>&nbsp;&nbsp;&nbsp;}</p>
+<p>}</p>
+</code>
+<p>The onCreate() method is called because it holds the code for what you want the <code>NoteEditActivity</code> to do when it&rsquo;s called. The first three lines of code in the method are default code. The next three lines create references to the Title Textbox, Edit Textbox, and the layout for Edit Note screen that we will be constructing momentarily.</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>The findViewbyID() method selects an object based on an id attribute from the XML that was processed in. When we create the titleText, bodyText, and EditLayout objects in the NoteEdit XML file in the next section, each object will be specified with an id attribute which allows the findViewByID method to reference the proper object.</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>The onCreateOptionsMenu() method is called to fill the menu with a series of options from which to choose. The inflate method takes a resource and fills the options menu with the list of strings in the resource file. We will be going more into depth about that later in this chapter.</p>
+<p>&nbsp;</p>
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_Layout_Text_View.png">
+	<figcaption><strong>Figure 6-1:</strong> Layout Text View </figcaption>
+</figure>
+
+<h3>Creating the Note Edit Layout:</h3>
+<p>In the sidebar, you should see the project breakdown with the folder for layouts. Right click on the layout folder, click <strong>new -&gt; Layout resource file</strong>. Name the file activity_note_edit.xml. The view in Android Studio should switch from code to a layout view. Switch that view to a text view, which should show up as a tab at the very bottom. Fill the file with this code:</p>
+<code>
+<p>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"</p>
+<p>&nbsp;&nbsp;&nbsp;xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"</p>
+<p>&nbsp;&nbsp;&nbsp;android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"</p>
+<p>&nbsp;&nbsp;&nbsp;android:paddingRight="@dimen/activity_horizontal_margin"</p>
+<p>&nbsp;&nbsp;&nbsp;android:paddingTop="@dimen/activity_vertical_margin"</p>
+<p>&nbsp;&nbsp;&nbsp;android:paddingBottom="@dimen/activity_vertical_margin"</p>
+<p>&nbsp;&nbsp;&nbsp;android:id="@+id/EditLayout"</p>
+<p>&nbsp;&nbsp;&nbsp;tools:context="edu.gatech.androidnoteapp.NoteEditActivity"&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&lt;EditText</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="fill_parent"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:id="@+id/note_title"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:ems="12"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:maxLength="20"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:singleLine="true"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:inputType="text"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:hint="Title"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&lt;EditText</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:id="@+id/note_text"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:ems = "10"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:singleLine="false"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:inputType="textMultiLine"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:background="#00000000"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:hint="Enter a note"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_below="@+id/note_title"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_alignParentLeft="true"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_alignParentStart="true"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginLeft="3dp"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_marginStart="17dp" /&gt;</p>
+<p>&lt;/RelativeLayout&gt;</p>
+</code>
+<p>The layout resource file is an XML file. The XML code at the top of the file above the EditText objects is some code that sets up a Relative Layout with bounds on padding, element layout specifications, and names the layout with the <code>@+id/EditLayout</code> statement.</p>
+<p>The two sets of EditText objects indicate the Title and Body text boxes in the image below. The other variables in the specifications for these two objects set the height, width, input type, name, etc. If you look at the file, you can see that the two EditText objects are within the Relative Layout object. Thus, the Relative Layout is the parent to the two EditText Objects. So, any references to the parent&rsquo;s specifications will be referencing the specifications that are associated with the Relative Layout.</p>
+<p>After adding that code for the layout, this is what the graphic interface should look like (click the Design tab):</p>
+
+
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_Layout_Design_View.png">
+	<figcaption><strong>Figure 6-1:</strong> Layout Design View </figcaption>
+</figure>
+
+
+
+<h3>Creating the Menu Resource File:</h3>
+<p>The menu resource file will be used to populate the menu items that we want to be available when the options button is pressed in the top right corner of the <code>NoteEditActivity</code>. Right click on the menu folder, and click<strong> new -&gt; Menu Resource Item</strong>. Name the file menu_note_edit.xml and fill the file with this code:<strong><strong>&nbsp;</strong></strong></p>
+<code>
+<p>&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"</p>
+<p>&nbsp;&nbsp;&nbsp;xmlns:app="http://schemas.android.com/apk/res-auto"</p>
+<p>&nbsp;&nbsp;&nbsp;xmlns:tools="http://schemas.android.com/tools"</p>
+<p>&nbsp;&nbsp;&nbsp;tools:context="edu.gatech.androidnoteapp.NoteEditActivity"&gt;</p>
+<h3><strong><strong>&nbsp;</strong></strong></h3>
+<p>&nbsp;&nbsp;&nbsp;&lt;item android:id="@+id/action_notecolor" android:title="Color"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:orderInCategory="100" app:showAsAction="never" /&gt;</p>
+<p>&nbsp;&nbsp;&nbsp;&lt;item android:id="@+id/action_deletenote" android:title="Delete Note"</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:orderInCategory="100" app:showAsAction="never" /&gt;</p>
+<p>&lt;/menu&gt;</p>
+</code>
+<p>The menu object encompasses all the elements. The top lines of code are the default lines of code. The menu we will be implementing will include a <code>color</code> option and a <code>delete note</code> option. The <code>color</code> option will allow for customizing the note&rsquo;s color. The <code>delete note</code> option will delete the note from the database holding all the notes created so far.</p>
+<p>When constructing options in a menu, the <code>android:title</code> field indicates the text that will be displayed when the menu is shown to the user. The <code>showAsAction</code> field determines whether or not the menu item should remain in the options list or come to the action bar if there is room. When <code>never</code> is specified, that means that the menu item will never be in the action bar. When <code>ifRoom</code> is specified, that means that the menu item will be placed in the action bar if room is available. <code>Always</code> is another common option, which will force the menu item to permanently be in the action bar. Finally, the <code>orderInCategory</code> field will determine the order of priority of all the menu options. However, in the above example code, we have assigned both options to a value of 100, so there is no priority in this menu. Below is a screenshot of what the menu will look like when clicked on:</p>
+<h3><br /><br /></h3>
+
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_EditNote_Menu.png">
+	<figcaption><strong>Figure 6-1:</strong> Layout Text View </figcaption>
+</figure>
+
+<h3>Adding Functionality to the Menu Items:</h3>
+<p>As of now, the menu items exist as dummy items. They don&rsquo;t perform any function since the only thing we&rsquo;ve done so far is just create the items and not add functionality. However, the functionality should not be added in the resource files. It&rsquo;s time to go back to the Note Edit class! We will be adding the following code right above the onCreateOptionsMenu() method:</p>
+<code>
+<p>public boolean onOptionsItemSelected(MenuItem item) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AlertDialog.Builder builder;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int id = item.getItemId();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (id == android.R.id.home) { //Go back to the main page when the ActionBar button is tapped</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;saveAndFinish();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(id == R.id.action_notecolor){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Creates a popup screen that allows the user to choose a color</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder = new AlertDialog.Builder(this);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.setTitle("Pick a color");</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.setItems(colors, new DialogInterface.OnClickListener(){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void onClick(DialogInterface dialog, int which){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(which){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 0: // Red</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setColor(customRed);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout.setBackgroundColor(Color.parseColor(customRed));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 1: // Green</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setColor(customGreen);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout.setBackgroundColor(Color.parseColor(customGreen));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 2: // Blue</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setColor(customBlue);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout.setBackgroundColor(Color.parseColor(customBlue));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 3: // Yellow</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lonbsp;&nbsp;&nbsp;note.setColor(customYellow);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout.setBackgroundColor(Color.parseColor(customYellow));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AlertDialog alertDialog = builder.create();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alertDialog.show();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(id == R.id.action_deletenote) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder = new AlertDialog.Builder(this);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.setTitle("Are You Sure?");</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.setNegativeButton(R.string.menu_deletenote_yes, new DialogInterface.OnClickListener() {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void onClick(DialogInterface dialog, int id) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// User clicked the Yes Button (Deletes Note)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// The note is not saved</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (noteExists) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;controller.deleteNote(note);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setResult(RESULT_OK);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.setPositiveButton(R.string.menu_deletenote_no, new DialogInterface.OnClickListener() {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void onClick(DialogInterface dialog, int id) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// User clicked the No Button</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Nothing happens and returns to edit screen</p>
+<h3><strong><strong>&nbsp;</strong></strong></h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Shows the "are you sure" dialog box</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AlertDialog alertDialog = builder.create();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alertDialog.show();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;</p>
+<p>&nbsp;&nbsp;&nbsp;}<strong><strong>&nbsp;</strong></strong></p>
+</code>
+<p><em>The following import statements will also be necessary:</em></p>
+<code>
+<p>import android.app.AlertDialog;</p>
+<p>import android.app.Dialog;</p>
+<p>import android.content.DialogInterface;</p>
+</code>
+<h4><strong><strong>&nbsp;</strong></strong></h4>
+<p><em>These statements will also need to be inserted above the @Override statement above the onCreate method: </em></p>
+<code>
+<p>private String customRed = "#FF6666";</p>
+<p>private String customGreen = "#4DDB4D";</p>
+<p>private String customBlue = "#19A3FF";</p>
+<p>private String customYellow = "#FFFACD";</p>
+<p>String[] colors = {"Red", "Green","Blue","Yellow"};</p>
+</code>
+<h3><strong><strong>&nbsp;</strong></strong></h3>
+<p>IMPORTANT: You may be getting errors in your code because certain variables have not been defined yet or that an object is null. Ignore those for now. They will be fixed by the end of this chapter.<strong><strong>&nbsp;</strong></strong></p>
+<p>In this portion of the code we will be implementing something called an Alert Dialog. An Alert Dialog is basically a popup window that will give the user to choose from certain options. First, the code will determine the ID of the object that was passed into it as a parameter. With the Alert Dialog, we are actually using what is known as an anonymous inner class constructor. If you looked at the builder.setItems() method, the second parameter is the anonymous inner class for an onClickListener. The way an inner class works is that the class&rsquo;s methods are declared immediately below where the class is created as seen in the code above.</p>
+<p>If the ID indicates that it is the back button (home) that is pressed, the code will call a saveAndFinish() method, which saves the note into the database. However, we have not implemented that method just yet.<strong><strong>&nbsp;</strong></strong></p>
+<p>If the ID indicates that it is the Color button that is pressed, the code will create an Alert Dialog based on the String Array of colors we just added to the top of the code. The code then sets the color of the note and the EditLayout itself based on what color is chosen for the note. The AlertDialog will show the colors: Red, Green, Blue, and Yellow.</p>
+<p>If the ID indicates that the delete button is pressed, the code will once again create an Alert Dialog with two buttons. We cast the negative button to &ldquo;Yes&rdquo; because if the user selects &ldquo;Yes&rdquo; then the note needs to be deleted if it already exists in the database. The positive button is &ldquo;No&rdquo; because that means the user does not want to delete the note. The reason the code checks if the note exists is because the user could click delete note in the edit screen after just clicking add note in the &lt;code&gt;NoteListActivity&lt;/code&gt;. Thus, the note will not have been saved to the database yet.</p>
+<p>&nbsp;</p>
+
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_AlertDialog_Color.png">
+	<figcaption><strong>Figure 6-1:</strong> Layout Text View </figcaption>
+</figure>
+
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_AlertDialog_DeleteNote.png">
+	<figcaption><strong>Figure 6-1:</strong> Delete Note Alert Dialog </figcaption>
+</figure>
+
+<h3>Connecting Database to NoteEdit Activity:</h3>
+<p><em>Add the following code into the onCreate() method in the </em><code><em>NoteEditActivity</em></code><em> class below the code that already exists:</em></p>
+<code>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Determines if the note already exists or a new empty edit screen must be generated</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bundle extras = getIntent().getExtras();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noteExists = extras.getBoolean(NoteEditActivity.KEY_NOTEEXISTS);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (noteExists) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note = dbModel.getNoteByID(extras.getLong(NoteEditActivity.KEY_NOTEID));</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note = new Note(0, "", "", new Date(System.currentTimeMillis()), "#FFFFFF");</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Sets the title, body text, and background color of the note from note data in SQL Lite Database</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;titleText.setText(note.getTitle());</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bodyText.setText(note.getText());</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EditLayout.setBackgroundColor(Color.parseColor(note.getColor()));</p>
+<p>&nbsp;</p>
+</code>
+<p><em>Add the following code above the @Override statement above the onCreate method:</em><strong><strong>&nbsp;</strong></strong></p>
+<code>
+<p>EditText bodyText, titleText;</p>
+<p>private NoteDBModel dbModel = NoteListActivity.dbModel;</p>
+<p>private boolean noteExists;</p>
+<p>private Note note;</p>
+<p>public static final String KEY_NOTEEXISTS = "noteexists";</p>
+<p>public static final String KEY_NOTEID = "noteid";</p>
+<p>public RelativeLayout EditLayout = null;<strong><strong>&nbsp;</strong></strong></p>
+</code>
+<p>This code is primarily to create an instance of the <code>NoteDBModel</code> class. This is the middleman when pulling information from the database to be used with the current note and pushing information about what the user has typed back into the database into the proper note.<strong><strong>&nbsp;</strong></strong></p>
+<p>The information about whether or not the note exists is passed as a boolean value through a Bundle of Extras with the intent from the <code>NoteListActivity</code>. A Bundle is a collection datatype that is the commonly used to send Extras between activities. An Extra is a value in a String, Integer, Boolean, or other data type that is attached to an Intent to send data between activities. In this case, the Extra is a boolean denoting whether or not the current note exists. If the note exists, there is now a reference to the current note. If it doesn&rsquo;t exist, a new note has been created and you now have a reference to it. However, this new note has not been saved to the database just yet.</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<h3>Implementing the saveAndFinish() Method:</h3>
+<p><em>Add the following code right after the onCreate() method:</em></p>
+<code>
+<p>/**</p>
+<p>* This is the method that decides whether or not the app saves the note to the database, or just goes back to the previous screen if nothing is typed, etc.</p>
+<p>*/</p>
+<p>private void saveAndFinish() {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String title = titleText.getText().toString();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String body = bodyText.getText().toString();</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setTitle(title);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setText(body);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note.setDate(new Date(System.currentTimeMillis()));</p>
+<p><strong><strong>&nbsp;</strong></strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (noteExists) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(title.length() == 0 &amp;&amp; body.length()==0){</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dbModel.deleteNote(note);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dbModel.saveNote(note);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(title.length() == 0 &amp;&amp; body.length() == 0) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//if note doesn't exist and nothing in title or body, then don't save it and just return to the note list</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setResult(RESULT_OK);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish();</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dbModel.createNote(note);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Closes out of the edit activity</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setResult(RESULT_OK);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish();</p>
+<p>&nbsp;&nbsp;&nbsp;}</p>
+</code>
+<p>The saveAndFinish() method saves the current note and any associated information in the database when the user presses the back button in the menu to return to the <code>NoteListActivity</code> or else closes the application.</p>
+<p>The first part of the method sets all the attributes of the methods based on what the user has typed into the title and body text fields that we set up in the layout XML file. Then, if the note exists, but the title and body text fields are empty, the application will delete the note from the database since there&rsquo;s no point in storing an empty note. If the note doesn&rsquo;t already exist but the title and body text fields are empty, the application will not save the note for the same reason. For any other case, the application will just save the note.<strong><strong>&nbsp;</strong></strong></p>
+<p><em>The following code should be added after the onCreateOptionsMenu method:</em></p>
+<code>
+<p>public void onBackPressed() {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;saveAndFinish();</p>
+<p>}<strong><strong>&nbsp;</strong></strong></p>
+</code>
+<p>This piece of code will call the saveAndFinish() method we just defined if the back button built into the Android Operating system is pressed.<strong><strong>&nbsp;</strong></strong></p>
+<h3>Conclusion:</h3>
+<p>This concludes the section of the tutorial that covers the Edit screen of the NoteWorthy application. This chapter covered creating the layout for the screen, creating the Edit screen menu and menu items, hooking up the menu items to actions in the Edit screen, hooking up the notes in this <code>Activity</code> with the database holding the notes, and creating and saving new notes. Here is a picture of a sample screen of the application&rsquo;s Edit screen with a red screen and sample text:</p>
+
+<figure>
+	<img src = "https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/06_Final_Example.png">
+	<figcaption><strong>Figure 6-1:</strong> Layout Text View </figcaption>
+</figure>
+
+</body>
+</html>
