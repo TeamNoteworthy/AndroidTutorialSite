@@ -1,0 +1,273 @@
+<html>
+<head>
+<title>IDE Installation</title>
+</head>
+<body>
+<h2>Installing Android Studio</h2>
+<p>
+	Android Studio is Google's official IDE for Android development and includes all you need to start developing Apps for Android, including the Android Studio IDE and Android SDK Tools. Plus, it comes with a bunch of useful features and tools! Of course, there are alternatives to Android Studio such as Eclipse and Xamarin Studio, but we will be solely using Android Studio and highly recommend you to do the same for the purpose of this tutorial. You can download Android Studio by clicking <a href="http://developer.android.com/sdk/index.html">here</a>.
+</p>
+<figure>
+	<a href="http://developer.android.com/sdk/index.html"><img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_Download.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+
+<p>
+	Proceed to download Android by clicking the Download Android Studio button. Before you set up Android Studio, be sure you have installed Java Development Kit (JDK) 6 or higher since the Java Runtime Environment (JRE) alone is not sufficient (JDK 7 is required when developing for Android 5.0 and higher). To check if you have JDK installed (and which version), open a terminal and type <code>javac -version</code>. If the JDK is not available or the version is lower than 6, <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">go download JDK</a>. Refer to the following instructions below on how to setup Android Studio: 
+</p>
+
+<strong>To set up Android Studio on Windows</strong>:
+<ol>
+	<li>Launch the <code>.exe</code> file you just downloaded.</li>
+	<li>Follow the setup wizard to install Android Studio and any necessary SDK tools.</li>
+	<li>On some Windows systems, the launcher script does not find where Java is installed. If you encounter this problem, you need to set an environment variable indicating the correct location.  Select <strong>Start menu -> Computer -> System Properties -> Advanced System Properties</strong>. Then open <strong>Advanced tab -> Environment Variables</strong> and add a new system variable <code>JAVA_HOME</code> that points to your JDK folder, for example <code>C:\Program Files\Java\jdk1.7.0_21</code>.</li>
+</ol>
+
+<p>
+	The individual tools and other SDK packages are saved outside the Android Studio application directory. If you need to access the tools directly, use a terminal to navigate to the location where they are installed. For example: <code>C:\Users\YOUR_USER_NAME\sdk\</code>
+</p>
+
+<strong>To set up Android Studio on Mac OS X</strong>:
+<ol>
+	<li>Launch the <code>.dmg</code> file you just downloaded.</li>
+	<li>Drag and drop Android Studio into the Applications folder.</li>
+	<li>Open Android Studio and follow the setup wizard to install any necessary SDK tools. </li>
+	<li>Depending on your security settings, when you attempt to open Android Studio, you might see a warning that says the package is damaged and should be moved to the trash. If this happens, go to <strong>System Preferences -> Security & Privacy</strong> and under <strong>Allow applications downloaded from </strong>, select <strong>Anywhere</strong>. Then open Android Studio again.</li>
+</ol>
+
+<p>
+	If you need to use the Android SDK tools from a command line, you can access them at: <code>/Users/&ltuser&gt/Library/Android/sdk/</code>.
+</p>
+
+<strong>To set up Android Studio on Linux</strong>:
+<ol>
+	<li>Unpack the downloaded ZIP file into an appropriate location for your applications.</li>
+	<li>To launch Android Studio, navigate to the <code>android-studio/bin/</code> directory in a terminal and execute <code>studio.sh</code>.</li>
+	<li>You may want to add <code>android-studio/bin/</code> to your PATH environmental variable so that you can start Android Studio from any directory.</li>
+	<li>Follow the setup wizard to install any necessary SDK tools.</li>
+</ol>
+
+<p>
+	After installing Android Studio, there may still be a couple of packages you need to install to make your package complete. These packages can be downloaded as needed using the Android SDK Manager. To launch the Android SDK Manager, click the SDK Manager icon  in the toolbar in Android Studio. If you still require assistance, please refer to <a href= "http://developer.android.com/sdk/installing/index.html?pkg=studio">Installing the Android SDK</a>.
+</p>
+
+<ol>
+	<li>
+	<h3>Get the latest SDK tools</h3>
+	<figure>
+		<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_SDK_Tools.png"/></a>
+		<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+	</figure>
+	<p>As a minimum when setting up the Android SDK, you should download the latest tools and Android platform:</p>
+	<ol>
+		<li>
+			Open the tools directory and select:
+			<ul>
+			<strong>
+				<li>Android SDK Tools</li>
+				<li>Android SDK Platform-tools</li>
+				<li>Android SDK Build-tools</li>
+			</strong>
+			</ul>
+		</li>
+	</ol>
+	</li>
+	
+	<li>
+	<h3>Get the support library for additional APIs (optional)</h3>
+	<p>The support library is required for:</p>
+	<ol>
+		<li><a href="http://developer.android.com/wear/index.html">Android Wear</a></li>
+		<li><a href="http://developer.android.com/tv/index.html">Android TV</a></li>
+		<li><a href="http://developer.android.com/google/play-services/cast.html">Google Cast</a></li>
+	</ol>
+	<p>It also provides these poular APIs:</p>
+	<ol>
+		<li><a href="http://developer.android.com/reference/android/support/v4/widget/DrawerLayout.html">Navigation drawer</a></li>
+		<li><a href="http://developer.android.com/reference/android/support/v4/view/ViewPager.html">Swipe views</a></li>
+		<li><a href="http://developer.android.com/reference/android/support/v7/app/ActionBar.html">Backward-compatible action bar</a></li>
+	</ol>
+	<p>
+		The <a href="http://developer.android.com/tools/support-library/features.html">Android Support Library</a> provides an extended set of APIs that are compatible with most versions of Android. Open the <strong>Extras</strong> directory and select:
+	</p>
+	<ol>
+		<li><strong>Android Support Repository</strong></li>
+		<li><strong>Android Support Library</strong></li>
+	</ol>
+	</li>
+	
+	<li>
+	<h3>Get Google Play services for even more APIs (optional))</h3>
+	<p>The Google Play services APIs provide a variety of features and services for your Android apps, such as:</p>
+	<ol>
+		<li><a href="http://developer.android.com/google/play-services/plus.html">User authentication</a></li>
+		<li><a href="http://developer.android.com/google/play-services/maps.html">Google Maps</a></li>
+		<li><a href="http://developer.android.com/google/play-services/cast.html">Google Cast</a></li>
+		<li><a href="http://developer.android.com/google/play-services/games.html">Games achievements and leaderboards</a></li>
+		<li><a href="http://developer.android.com/google/play-services/index.html">And much more</a></li>
+	</ol>
+	<p>To develop with Google APIs, you need the Google Play services package: Open the <strong>Extras</strong> directory and select:</p>
+	<ol>
+		
+		<li><strong>Google Repository</strong></li>
+		<li><strong>Google Play services</strong></li>
+	</ol>
+	<p>
+		<strong>Note</strong>: Google Play services APIs are not available on all Android-powered devices, but are available on all devices with Google Play Store. To use these APIs in the Android emulator, you must also install the the <strong>Google APIs</strong> system image from the latest Android X.X directory in the SDK Manager.
+	</p>
+	</li>
+	
+	<li>
+	<h3>Install the packages</h3>
+	<p>Once you've selected all the desired packages, continue to install:</p>
+	<ol>
+		<li>Click <strong>Install X packages</strong> (X being the number of packages you're installing).</li>
+		<li>In the next window, double-click each package name on the left to accept the license agreement for each.</li>
+		<li>Click <strong>Install</strong>.</li>
+	</ol>
+	<p>The download progress is shown at the bottom of the SDK Manager window. <strong>Do not exit the SDK Manager</strong> or it will cancel the download.</p>
+	</li>
+</ol>
+
+<p>
+	That's it! You are now ready to begin building Android applications. As new tools and packages are released, simply launch the SDK Manager to download the new packages for your SDK.
+</p>
+
+<h3> GitHub Integration </h3>
+<p>
+	GitHub is a service that allows for easy and powerful team collaboration and code review. Using GitHub allows you to contribute and code projects easily within a team environment. If you've never used GitHub before, we highly suggest that you download <a href="https://windows.github.com/">GitHub for Windows</a> or <a href="https://mac.github.com"/>GitHub for Mac</a> according to your platform and read the instructions to set it up there. Setting up GitHub for the first time could be a bit tricky, so going to this link would be really useful: <a href="https://help.github.com/articles/set-up-git/">Setting Up Git</a>. After installing GitHub, launch Android Studio and set the proper Git tools path for Android Studio. This is done by going to <code>File -> Settings -> Version Control -> Git</code>.
+</p>
+<figure>
+	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_Git_01.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+
+<p>
+	Make sure that the path to the Git executable is correct. Also, under Version Control, go to GitHub and modify the fields so that they match up to your GitHub account.
+</p>
+<figure>
+	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_Git_02.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+<p>
+	After you have set up a repository or are a contributor to an existing repository (repo), you can clone the repo by executing the following command after going to the path or directory you want: <code>git clone [url]</code>. Otherwise, you can use the GitHub application for Windows and simply click the Plus Sign icon at the top left and click Clone, which will then list the available repositories to clone. Click clone and then select the directory you wish to put the repository in. Committing and pushing changes using GitHub for Windows is as simple as simply editing the files in the directory that you cloned, which will then prompt the uncommitted changes to the project. This will show all the uncommitted changes you've made to all of the different files in the repository. You can select the files you want to commit, and then after adding a description of the changes you've done, you're ready to commit! Afterwards, sync your local repository by clicking Sync on the top right.
+</p>
+
+<h3>Other Version Control Options</h3>
+<p>
+	Other Version Control alternatives follow a similar procedure to set up with in Android Studio. First off, make sure that the paths of the executables are correct in <code>Files->Settings->Version Control</code>, and then go to the option that matches your respective version control system. If you're using BitBucket, it may be a good idea to install the BitBucket plugin. Mostly anything that you may need to do with version control can be done by following IntelliJ's (Android Studio's base IDE) <a href="https://www.jetbrains.com/idea/help/version-control-with-intellij-idea.html">documentation</a>.
+</p>
+
+<h3>Exploring the Android Studio IDE User Interface</h3>
+<p>Android Studio has a nice user interface that's smooth and easy to follow.</p>
+<figure>
+	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_User_Interface_01.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+<p>
+	On the left hand side we have our project explorer, which lists all of the folders and subfolders that are inside of our project. You can also see the Structure tab on the left hand side to get a top level view of the variables, methods, etc. of whatever java file you're working on. There's also build variants and Favorites, which are out of the scope of this tutorial. On the top we have our standard toolbar, which gives us access to many useful features and tools that are included in Android Studio. When working with a .xml file, we are introduced to a new layout.
+</p>
+<figure>
+	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_User_Interface_02.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+<p>
+	These .xml files are used for designing the layout of specific activities. As you can see on the bottom left of the screen, there is a Design tab and a Text tab. The design tab is a graphical view of how your layout looks. You can add, edit, and remove objects onto your layout by simply dragging and dropping, with the values of each object listed on the right hand side in the Properties tab. When clicking on the Text tab at the bottom of the pane, you can see the XML that specifies the properties on the Design tab (which Android Studio keeps in sync with each other). 
+</p>
+<figure>
+	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_User_Interface_03.png"/></a>
+	<figcaption><strong>Figure 2-1:</strong> Download Android Studio.</figcaption>
+</figure>
+<h3>Structure: Projects and Modules</h3>
+<p>A few definitions based on concepts in Eclipse:</p>
+<ul>
+	<li>A <strong>module</strong> in Android Studio is like a <strong>project</strong> in Eclipse.</li>
+	<li>
+		A <strong>project</strong> in Android Studio is like a <strong>workspace</strong> in Eclipse (to be precise, a workspace with interdependent projects).
+	</li>
+</ul>
+<p>
+	Basically, a project is an organizational unit that represents a complete software solution. For Android, that means one project per app, and one module per library.
+</p>
+
+<h3>Structure: Folders </h3>
+
+<h4>Top Level Folders</h4>
+<ol>
+	<li><h4>Main Project</h4></li>
+	<p>
+		This would be entire project context. In Eclipse, this would be your workspace except it's limited to what's relevant to your project. For example, <code>appProject</code> would be your project context if the name of your application was <code>app</code>.
+	</p>
+	<li><h4>.idea</h4></li>
+	<p>This is where project specific metadata is stored by Android Studio.</p>
+	<li><h4>Project Module</h4></li>
+	<p>
+		This is the actual project. ex: <strong>app</strong> would be the project module if your app's name was app. Inside the project module has a few other folders which we will detail below:
+	</p>
+	<ol>
+		<li><strong>manifests</strong> - This is where you put the AndroidManifest.xml. Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. The manifest file presents essential information about your app to the Android system--information the system must have before it can run any of the app's code. </li><br>
+		<li><strong>java</strong> - This is where you put all of your Java source code that implements the functionality of your app.</li><br>
+
+		<li><strong>res</strong> - This folder contains various visual resources.</li><br>
+			
+		<li><strong>drawable</strong> - This folder is where you put resources that include images for icons, logos, pictures, etc.</li><br> 
+		<li>
+			<strong>layout</strong> - This folder is where you place the .xml files that specify each <code>Activity</code>'s layout each Activity.
+		</li><br>
+		<li><strong>menu</strong> - This folder is where you place the .xml files that relate to specific menus for certain activities.</li><br>
+		<li><strong>values</strong> - This folder is is intended for storing .xml files that describe resources of various types. </li><br>
+	</ol>
+	<li><h4>gradle</h4></li>
+	<p>This is the Gradle build system, which we'll discuss in more detail in the next section.</p>
+	<li><h4>External Libraries</h4></li>
+	<p>This is not actually a folder but a place where Referenced Libraries are shown.</p>
+</ol>
+
+<h3>Setting up the Android Emulator</h3>
+<p>
+	We anticipate you won't be using actual Android devices to run our applications (but by all means you can if you have if you do have an Android phone since the performance is far superior. For more information, visit <a href="http://developer.android.com/training/basics/firstapp/running-app.html">this page</a>). For the sake of our tutorial we'll be using the Android emulator. Now, how do you set up an Android emulator? It's easy: go to <strong>Tools -> Android -> AVD</strong> (Android Virtual Device) Manager.
+</p>
+<p>Next, you'll go to a page showing all of your current Android Virtual Devices.</p>
+<p>
+	You may not have all of these devices set up, but that's what we'll be doing in this section, so don't worry! First, click “Create Virtual Device" as shown by the red circle above. 
+</p>
+<p>
+	Now, in this section is where you'll be choosing the device you want to emulate. There are a plethora of devices here to choose from and whichever you choose is honestly up to you and is personal preference. Please note that each device has different pixel densities, resolutions, and sizes, so try to pick a device that fits the type of device you want your application to be emulated on. If you have no preference, just go with the Nexus 4 as it's a fairly standard device and is easily runnable as opposed to the devices with higher resolutions which may be more taxing on your personal computer. Click next and follow on to the next page.
+</p>
+<p>
+	Now, let's configure the system image of our Android device. We recommend using the most up-to-date version of Android which is Android Lollipop as of when this tutorial was last updated. Using the most up-to-date version ensures that you have the latest features and access to the latest API. Select the latest version and then click Next.
+</p>
+<p>
+	On this page we set up the name of the AVD, which can be whatever you want, but the default name is very useful as it is. Next, it's preferable that the Use Host GPU option is selected because it will allow for a faster emulator experience as it will use your computer's GPU to run the emulator. Of course, you can dabble in to the Advanced Settings by clicking the Show Advanced Settings button but you shouldn't need to delve into that for the sake of this tutorial. Now, click Finish and you should have your own AVD set up and running! If you have an AMD processor and you don't want to wait 20 minutes to boot your emulator (by running an ARM image), you should install <a href="https://www.genymotion.com/#!/download">Genymotion</a>, which runs Android in a VirtualBox VM.  You can find a step-by-step tutorial on its installation <a href="http://www.javacodegeeks.com/2013/07/android-studio-with-android-alternative-emulatorgenymotion.html">here</a>. 
+</p>
+
+<h3> What Exactly is Gradle and Maven?</h3>
+<p>
+	As you've created new projects, you've probably noticed the term Gradle and Maven being thrown out here and there and are unsure of what exactly they do. 
+</p>
+<p>
+	Gradle is an open source build automation system. Gradle can automate the building, testing, publishing, deployment, and more of software packages or other types of projects such as generated static websites, generated or documentation.
+</p>
+<p>
+	Maven, on the other hand, is a build management tool. It defines how your <code>.java</code> files get compiled to <code>.class</code> files, packaged into <code>.jar</code> (or </code>.war,.ear</code>) files, pre-processed or post-processed with tools, managing your CLASSPATH, and all others sorts of tasks that are required to build your project. It is similar to Apache <a href="http://ant.apache.org/">Ant</a> or <a href="http://en.wikipedia.org/wiki/Makefiles">Makefiles</a> in C/C++, but it attempts to be completely self-contained in it that you shouldn't need any additional tools or scripts by incorporating other common tasks like downloading & installing necessary libraries, because it downloads all of the necessary libraries and completes routine tasks for you. 
+</p>
+<p>
+	There are three things about Maven that are very beneficial.
+	<ol>
+		<li>
+			After you declare which libraries you are using, Maven will download all the libraries that you use and and the libraries that they use for you automatically. This is very nice, and makes dealing with lots of libraries easy and seamless.
+		</li>
+		<li>
+			It follows "Convention over Configuration", which basically means by default you don't need to define the tasks you want to do. Unlike Ant or Makefiles, you don't have to write a "compile", "test", "package", or "clean" step. Just put the files in the places Maven expects them and it should work just fine.
+		</li>
+		<li>
+			Maven also has lots of nice plug-ins that you can install that will handle various routine tasks that may fit your needs.
+		</li>
+	</ol>
+</p>
+<p>
+	Of course, fully understanding Gradle and Maven are outside the scope of this tutorial so feel free to learn more about <a href="https://gradle.org/learn">Gradle</a> on your own and <a href="http://maven.apache.org/what-is-maven.html">Maven</a>	 as well.
+</p>
+
+</body>
+</html>
