@@ -69,7 +69,7 @@
 					<li>Media codecs to play back music and videos.</li>
 					<li>SQLite, which forms the basis of the databases used in the applications.</li>
 					<li>Webkit browser engine for rendering HTML.</li>
-					<li>Android Runtime (ART)--compiled bytecode optimized for low resource usage.   Previously, this was the Dalvik Virtual Machine.  This allows multiple instances of core libaries (utility classes, IO libaries, etc.) so they can be used by multiple apps. ART is an Ahead Of Time (AOT) compiler--at the time the app is installed, a tool (<a href=”http://source.android.com/devices/tech/dalvik/”>dex2oat</a>) compiles apps to the particular device&#39;s native machine code so it runs faster on that particular device.</li>
+					<li>Android Runtime (ART)--compiled bytecode optimized for low resource usage.   Previously, this was the Dalvik Virtual Machine.  This allows multiple instances of core libaries (utility classes, IO libaries, etc.) so they can be used by multiple apps. ART is an Ahead Of Time (AOT) compiler--at the time the app is installed, a tool (<a href="http://source.android.com/devices/tech/dalvik/">dex2oat</a>) compiles apps to the particular device's native machine code so it runs faster on that particular device.</li>
 				</ul>
 
 				<p>
@@ -77,8 +77,8 @@
 				</p>
 				<ul>
 					<li>Activity Manager for managing the life cycle of activities. An <code>Activity</code> controls the GUI for an individual screen of the app.</li>
-					<li>Package Manager for managing versions and capabilities of each app. This allows for the use of <code><a href=”http://developer.android.com/reference/android/content/Intent.html”>Intents</a></code> and <code>BroadcastReceivers</code> to allow any app to handle specific kinds of requests by default as explained later.</li>
-					<li>Window Manager to encapsulate the native framework&#39;s surface manager.</li>
+					<li>Package Manager for managing versions and capabilities of each app. This allows for the use of <code><a href="http://developer.android.com/reference/android/content/Intent.html">Intents</a></code> and <code>BroadcastReceivers</code> to allow any app to handle specific kinds of requests by default as explained later.</li>
+					<li>Window Manager to encapsulate the native framework's surface manager.</li>
 					<li>Content Providers to allow apps to share capabilities with other apps.</li>
 					<li>Resource management for resources such as images.</li>
 					<li>UI components such as buttons, lists, etc.</li>
@@ -92,9 +92,9 @@
 					<li><code>Activities</code> represent individual screens. <code>Views</code> are the base class of all UI components, and collections of <code>Views</code> are organized into layouts known as <code>ViewGroups</code>.
 					<ul>
 						<li>The layout of the screen is usually defined in an XML file so you can separate screen layout from functional code</li>
-						<li>You must define all <code>Activities</code> in the <code>Manifest</code> [demonstrated <a href=”http://developer.android.com/guide/components/activities.html#Declaring”>here</a>].  Once you&#39;ve defined the <code>Activity</code>&#39;s name and published it, you cannot change the name for reasons explained <a href=”http://android-developers.blogspot.com/2011/06/things-that-cannot-change.html”>here</a>.</li>
+						<li>You must define all <code>Activities</code> in the <code>Manifest</code> [demonstrated <a href="http://developer.android.com/guide/components/activities.html#Declaring">here</a>].  Once you've defined the <code>Activity</code>'s name and published it, you cannot change the name for reasons explained <a href="http://android-developers.blogspot.com/2011/06/things-that-cannot-change.html">here</a>.</li>
 					</ul>
-					<li><code>BroadcastReceivers</code> respond to an event from outside the app.  Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We&#39;ll only touch on this in this tutorial, but you can find more info <a href=”http://developer.android.com/reference/android/content/Intent.html”>here</a>.</li>
+					<li><code>BroadcastReceivers</code> respond to an event from outside the app.  Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We'll only touch on this in this tutorial, but you can find more info <a href="http://developer.android.com/reference/android/content/Intent.html">here</a>.</li>
 					<li><code>Services</code> are tasks that run without UIs.  You would want these if you need something to run in the background while the UI is not being displayed because the user has switched to another application.  The <code>Service</code> can later be connected to the UI.  A music application would use this to play music while the user switches to other apps.</li>
 				</ul>
 
@@ -105,22 +105,22 @@
 				<h3>Life Cycle of Activities Within an Application</h3>
 
 				<p>
-					While Android does all it can to conserve resources, there are times when apps must die to make room for other resource-consuming apps.  Thus, the app must save state about meta-information to the UI (such as where you&#39;re scrolled on a page) so that the app can return to the state the user expects upon resuming use of the app.
+					While Android does all it can to conserve resources, there are times when apps must die to make room for other resource-consuming apps.  Thus, the app must save state about meta-information to the UI (such as where you're scrolled on a page) so that the app can return to the state the user expects upon resuming use of the app.
 				</p>
 
 				<p>
-					The Home application (like the Desktop of Android) is always running so it&#39;s easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.
+					The Home application (like the Desktop of Android) is always running so it's easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.
 				</p>
 
 				<p>
-					Android will give the app an opportunity to save and restore its state with various callback methods. The diagram that follows (taken from <a href=”http://developer.android.com/guide/components/activities.html”>Android's documentation</a>) will help to clarify.
+					Android will give the app an opportunity to save and restore its state with various callback methods. The diagram that follows (taken from <a href="http://developer.android.com/guide/components/activities.html">Android's documentation</a>) will help to clarify.
 				</p>
 				<ul>
 					<li><code>onCreate()</code> gets called when your <code>Activity</code> is created.</li>
-					<li><code>onPause()</code> gets called when Android takes your <code>Activity</code> off the foreground. This is the only method that&#39;s guaranteed to be called before an <code>Activity</code> is destroyed (<code>onStop()</code> and <code>onDestroy()</code> are not called in case of an emergency), but it also should be lightweight since it&#39;s called frequently.  So make it comprehensive but short! <code>onResume()</code> restores this state.</li>
-					<li>The app&#39;s full lifetime ranges from <code>onCreate()</code> to <code>onDestroy()</code>. In <code>onDestroy()</code>, you should save everything you need in a persistent state so you can restore it from scratch when the <code>Activity</code> is launched again.</li>
-					<li>The app&#39;s visible lifetime ranges from <code>onStart()</code> to <code>onStop()</code>.</li>
-					<li>The app&#39;s foreground lifetime ranges from <code>onResume()</code> to <code>onPause()</code>.</li>
+					<li><code>onPause()</code> gets called when Android takes your <code>Activity</code> off the foreground. This is the only method that's guaranteed to be called before an <code>Activity</code> is destroyed (<code>onStop()</code> and <code>onDestroy()</code> are not called in case of an emergency), but it also should be lightweight since it's called frequently.  So make it comprehensive but short! <code>onResume()</code> restores this state.</li>
+					<li>The app's full lifetime ranges from <code>onCreate()</code> to <code>onDestroy()</code>. In <code>onDestroy()</code>, you should save everything you need in a persistent state so you can restore it from scratch when the <code>Activity</code> is launched again.</li>
+					<li>The app's visible lifetime ranges from <code>onStart()</code> to <code>onStop()</code>.</li>
+					<li>The app's foreground lifetime ranges from <code>onResume()</code> to <code>onPause()</code>.</li>
 					<li><code>onSaveInstanceState()</code> and <code>onRestoreInstanceState()</code> are only for saving the state of the UI, but not persistent data. There are default versions already implemented that you can override.</li>
 				</ul>
 
@@ -140,11 +140,11 @@
 				</ul>
 				<figure>
 					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/01_New_Android_Buttons.png"/>
-					<figcaption><strong>Figure 1-2:</strong> Buttons on newer devices (<a href=”http://www.geek.com/mobile/android-4-0-soft-buttons-vs-software-buttons-1484277/”>taken from here</a>).</figcaption>
+					<figcaption><strong>Figure 1-2:</strong> Buttons on newer devices (<a href="http://www.geek.com/mobile/android-4-0-soft-buttons-vs-software-buttons-1484277/">taken from here</a>).</figcaption>
 				</figure>
 
 				<p>
-					On older devices, you&#39;ll find more fixed, dedicated buttons for the following functions.
+					On older devices, you'll find more fixed, dedicated buttons for the following functions.
 				</p>
 				<ul>
 					<li>Return</li>
@@ -155,23 +155,23 @@
 
 				<figure>
 					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/01_Old_Android_Buttons.png"/>
-					<figcaption><strong>Figure 1-3:</strong> Buttons on older devices (<a href=”http://www.geek.com/mobile/android-4-0-soft-buttons-vs-software-buttons-1484277/”>taken from here</a>).</figcaption>
+					<figcaption><strong>Figure 1-3:</strong> Buttons on older devices (<a href="http://www.geek.com/mobile/android-4-0-soft-buttons-vs-software-buttons-1484277/">taken from here</a>).</figcaption>
 				</figure>
 
 				<p>
-					Both new and old phones also have a power button and a button to increase and decrease volume.  In the past, you would have to implement the functionality of the Menu button, but now you don&#39;t have to worry about it.
+					Both new and old phones also have a power button and a button to increase and decrease volume.  In the past, you would have to implement the functionality of the Menu button, but now you don't have to worry about it.
 				</p>
 
 				<p>
-					A note on <a href=”http://developer.android.com/guide/practices/compatibility.html”>compatibility</a> amidst various Android devices: it&#39;s best to have different configurations (layout and <a href=”http://developer.android.com/guide/topics/resources/overview.html”>resources</a> such as media files) for different screen sizes.  Static strings and images should be separate from the code (in the resources folder) so you can maintain them separately and facilitate accommodation of various devices.  It&#39;s also notable that some devices have limited features (e.g. not all devices have GPS), so you must define the necessary features and the minimum platform required (version of Android) in the <a href=”http://developer.android.com/guide/practices/compatibility.html#Features”><code>Manifest</code> file</a>.
+					A note on <a href="http://developer.android.com/guide/practices/compatibility.html">compatibility</a> amidst various Android devices: it's best to have different configurations (layout and <a href="http://developer.android.com/guide/topics/resources/overview.html">resources</a> such as media files) for different screen sizes.  Static strings and images should be separate from the code (in the resources folder) so you can maintain them separately and facilitate accommodation of various devices.  It's also notable that some devices have limited features (e.g. not all devices have GPS), so you must define the necessary features and the minimum platform required (version of Android) in the <a href="http://developer.android.com/guide/practices/compatibility.html#Features"><code>Manifest</code> file</a>.
 				</p>
 
 				<p>
-					There are also a variety of platform versions for Android--it&#39;s ideal to pick the one that has the lowest functionality you need for your app.  If you want to support most platforms and only disable particular features on unsupported platforms, see this <a href=”https://developer.android.com/training/basics/supporting-devices/platforms.html”>article</a>.
+					There are also a variety of platform versions for Android--it's ideal to pick the one that has the lowest functionality you need for your app.  If you want to support most platforms and only disable particular features on unsupported platforms, see this <a href="https://developer.android.com/training/basics/supporting-devices/platforms.html">article</a>.
 				</p>
 
 				<p>
-					To read more on Android&#39;s architecture, see the 3-part YouTube series on <a href=””https://www.youtube.com/watch?v=Mm6Ju0xhUW8>Androidology</a>.  For background on everything else, see <a href=”http://developer.android.com/guide/components/fundamentals.html”>Android Fundamentals</a>.
+					To read more on Android's architecture, see the 3-part YouTube series on <a href="https://www.youtube.com/watch?v=Mm6Ju0xhUW8>Androidology</a>.  For background on everything else, see <a href="http://developer.android.com/guide/components/fundamentals.html">Android Fundamentals</a>.
 				</p>
 			</div>
 			
