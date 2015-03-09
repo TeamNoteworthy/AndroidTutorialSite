@@ -1,220 +1,273 @@
-<h1>Hello, World!</h1>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<title>Android Note Taking App Tutorial</title>
+</head>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
-<p>
-	First, start a new project from Android Studio&#39;s welcome screen by going to "Start a new Android Studio project."  Alternatively, you can go to <strong>File->New Project</strong> if you already have a project open.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_02.png"/>
-<p>
-	Next, you&#39;ll want to name your project and domain.  We&#39;ll call ours <code>AndroidNoteApp</code> and we&#39;ll call our company domain <code>androidnoteapp.gatech.edu</code>.  Normally, this would refer to a website that you own, but we&#39;re just making this up.  It&#39;s significant because the packages follow the naming convention of being in the reverse order of your domain. We had to hit the Edit button on the package name to make it <code>edu.gatech.androidnoteapp</code>.  When you&#39;re done, click <strong>Next</strong>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_03.png"/>
-<p>
-	We&#39;re going to target our app to Android 5.0 (Lollipop). In choosing a recent API, you have the tradeoff of having access to the latest features but having a smaller audience on Google Play since there are significant numbers of users who use early platforms. If you want to support most platforms except for certain features, read more <a href=”https://developer.android.com/training/basics/supporting-devices/platforms.html”>here</a>. Click <strong>Next</strong>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_04.png"/>
-<p>
-	We&#39;ll insert a blank Activity. Click <strong>Next</strong>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_05.png"/>
-<p>
-	Making the Activity Name <code>NoteListActivity</code> should auto-populate the other fields to the above values. This Activity will serve as the list of notes to edit in our final app. Click <strong>Finish</strong>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_06.png"/>
-<p>
-	When Android Studio is ready to let you see your project, upon selecting the Design tab under the file <code>activity_note_list.xml</code>, you should see a screen layout with the text “Hello, World!”  In this view, you can drag and drop items onto the <code>Activity</code>&#39;s layout and modify the value of various <code>Views</code>. We&#39;re going to look at the Text tab later so you have an idea of how to work on the manual side of layout design.
-</p>
+<body>
+	<div id="wrapper">
+		<header class="header">
+			<div class="nav">
+				<div class="leftnav">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Link2</a></li>
+						<li><a href="#">Link3</a></li>
+						<li><a href="#">Link4</a></li>
+						<li><a href="#">Link5</a></li>
+					</ul>
+				</div>
+				<div class="search">
+					<p>Future search box</p>
+				</div>
+			</div>
+		</header>
+		
+		<div class="container">
+		
+			<div class="toc">
+				<h1>Tutorial</h1>
+				<ul>
+					<li>0 - Test asdfsdf</li>
+					<li>2 - Test asdgfasdg</li>
+					<li>3 - Test asdfgh</li>
+					<li>4 - Test asdgsdg</li>
+					<li>5 - Test asdfghasdfg</li>
+					<li>6 - Test asdgfasdgf</li>
+					<li>7 - Test sdgrjdgh</li>
+				</ul>
+			</div>
+			
+			<div class="content">
+				<h1>Step 3: Hello, World!</h1>
 
-
-<h3>Adjust Manifest</h3>
-
-<p>
-	Let&#39;s look at the application&#39;s Manifest file. On the Project panel, expand the <code>manifests</code> folder and select <code>AndroidManifest.xml</code>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_07.png"/>
-<p>
-	This is the Manifest file for the entire application.  The first line defines that the file uses an XML layout.  The second line defines the namespace with <code>xmlns:android</code> (similar to the C++ concept of namespaces--it prevents variable name collisions).  The value of this attribute points to some line of text that must differentiate the elements inside of it from other elements.  It doesn&#39;t have to be a real website--it doesn&#39;t have to be a website at all, but it typically points to some resource that explains something about the project.  The next line defines the package, which must be unique for all applications on a device, and therefore Google Play requires unique package names across all those applications submitted.
-</p>
-
-<p>
-	A quick tutorial on XML (eXtendable Markup Language).  It is a language that describes data and it consists of tags contained in angle brackets similar to HTML.  For each attribute, there is an identifier to mark the kind of attribute.  Before the first closing angle bracket, there can be an arbitrary number of attributes listed with the syntax <code>&lt;tag attribute0="value0" attribute1="value1"&gt;</code>.  Namespaces prevent collisions of similarly named variables across a large number of XML files that may be used for a similar purpose.  To access a namespace, use this syntax: <code>&lt;tag namespace:attribute="value"&gt;</code>.  All the variables you&#39;ll edit are in the <code>android:</code> namespace as defined in the second line. Tags (once the initial angle bracket has been closed) can be nested so that text or other attributes apply in a nested-tree fashion to the tags which contain them. Learn more about XML<a href=”http://www.w3schools.com/xml/default.asp”>here</a>.
-</p>
-
-<p>
-	The application tag defines the app&#39;s icon, its name, and its activities, among other things.  At least one Activity must have an Intent designating it as the <code>LAUNCHER</code> Activity so Android can put that Activity on the Home screen (you could potentially have multiple launching activities).  Making the intent <code>MAIN</code> indicates that the intent needs no further information in an intent other than that the Activity should  launch (as opposed to being prompted by another Activity).  Read more <a href=”http://developer.android.com/reference/android/content/Intent.html”>here</a>.
-</p>
-
-</p>
-	To jazz up our app a little, we&#39;re going to add a theme: <code>@android:style/Theme.Holo.Light.DarkActionBar</code>.  So within the Activity tag (the particular order of attributes isn&#39;t important, but we&#39;ll insert it in a line after the android:label attribute), add this:
-</p>
-<code>
-	android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
-</code>
-<p>
-	with the tag closing afterwards.
-</p>
-
-<p>
-	The <code>@</code> symbol means that we&#39;re referring to a resource--if it is followed by <code>android:</code>, it&#39;s defined in the Android system&#39;s general resources.  Otherwise, it refers to a resource made in the particular project.
-</p>
-
-<p>
-	So now the manifest should look like this:
-</p>
-<code>
-<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"<br /> package="edu.gatech.androidnoteapp" &gt;</p>
-<p style="padding-left: 60px;">&lt;application<br /> android:allowBackup="true"<br /> android:icon="@drawable/ic_launcher"<br /> android:label="@string/app_name"<br /> android:theme="@style/AppTheme" &gt;</p>
-<p style="padding-left: 60px;">&lt;activity</p>
-<p style="padding-left: 90px;">android:name=".NoteListActivity"<br /> android:label="@string/app_name"<br /> android:theme="@android:style/Theme.Holo.Light.DarkActionBar"&gt;</p>
-<p style="padding-left: 90px;">&lt;intent-filter&gt;</p>
-<p style="padding-left: 120px;">&lt;action android:name="android.intent.action.MAIN" /&gt;</p>
-<p style="padding-left: 120px;">&lt;category android:name="android.intent.category.LAUNCHER" /&gt;</p>
-<p style="padding-left: 90px;">&lt;/intent-filter&gt;</p>
-<p style="padding-left: 60px;">&lt;/activity&gt;</p>
-<p style="padding-left: 30px;">&lt;/application&gt;</p>
-<p>&lt;/manifest&gt;</p>
-</code>
-
-<h3>Adjust Strings</h3>
-
-<p>
-	Navigate in the Project panel to the folder <code>res/values/strings.xml</code>.
-</p>
-
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
-
-<p>
-	The <code>strings.xml</code> file is where Android stores all its string resources.  It&#39;s good practice to keep all text that might possibly be updated in the future here as opposed to in a source file so you can maintain the files separately. We&#39;ll refer to the strings we make here in the code later with a tag such as <code>@string/name_of_string</code>.
- </p>
-
-<p>
-	Let&#39;s change the title of the Activity as displayed on the screen by changing the <code>title_activity_note_list</code> string to read "Noteworthy".  So the line should read
-</p>
-<code><string name="title_activity_note_list">Noteworthy</string></code>
-<p>
-	Just to prove that this is where Android pulls the “Hello world” string, we&#39;ll add a comma and a smiley face so that it reads:
-</p>
-	<code>Hello, world! :)</code>
-
-<p>
-The final file looks like this.
-</p>
-<code>
-<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />&lt;resources&gt;</p>
-<p style="padding-left: 30px;">&lt;string name="app_name"&gt;Noteworthy&lt;/string&gt;<br /> &lt;string name="hello_world"&gt;Hello, world! :)&lt;/string&gt;<br /> &lt;string name="action_settings"&gt;Settings&lt;/string&gt;</p>
-<p>&lt;/resources&gt;</p>
-</code>
-
-<h3>Adjust Layout</h3>
-<p>
-	Now navigate back to the code that&#39;s already open in a tab: <code>activity_note_list.xml</code>.
-</p>
-
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_08.png"/>
-
-<p>
-	This file is a description for how the screen will be laid out.  Android separates the layout from the code in order to avoid the clunky GUI code that is found in Java Swing (and to make debugging easier).  Thus, you can use the drag-and-drop editor (the Design tab on the bottom of the pane) to modify the layout, but for now we&#39;ll show you the manual way. However, for the sake of being able to edit layout at runtime, Android does allow for adding and modifying layout in the code.
-</p>
-
-<p>
-	Notice the Design and Text tabs at the bottom of the edit pane, which allow you to switch between the two ways of editing the same file.
-</p>
-
-<p>
-	In the Text editor, at the top you&#39;ll see a few lines describing how the layout is to be padded. Right now, we&#39;re going to modify the <code>layout_width</code> and <code>layout_height</code> attributes of the <code>TextView</code> tag slightly.  Change the value of those attributes from <code>wrap_content</code> to <code>match_parent</code>. While <code>wrap_content</code> tells that UI object to take up as much space as its content needs, <code>match_parent</code> tell the UI object to take up as much space as the parent will allow. With a little adjusting whitespace (which XML ignores), the resulting XML file should look like this.
-</p>
- 
-<code>
-<p>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"</p>
-<p style="padding-left: 30px;">xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"<br />android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"<br />android:paddingRight="@dimen/activity_horizontal_margin"<br />android:paddingTop="@dimen/activity_vertical_margin"<br />android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".NoteListActivity"&gt;</p>
-<p style="padding-left: 30px;">&lt;TextView android:text="@string/hello_world"</p>
-<p style="padding-left: 60px;">android:layout_width="match_parent"<br /> android:layout_height="match_parent" /&gt;</p>
-<p>&lt;/RelativeLayout&gt;</p></code>
-
-<p>
-	Read more about layout <a href=”http://developer.android.com/guide/topics/ui/declaring-layout.html”>here</a>.
-</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
+				<p>
+					First, start a new project from Android Studio&#39;s welcome screen by going to "Start a new Android Studio project."  Alternatively, you can go to <strong>File->New Project</strong> if you already have a project open.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_02.png"/>
+				<p>
+					Next, you&#39;ll want to name your project and domain.  We&#39;ll call ours <code>AndroidNoteApp</code> and we&#39;ll call our company domain <code>androidnoteapp.gatech.edu</code>.  Normally, this would refer to a website that you own, but we&#39;re just making this up.  It&#39;s significant because the packages follow the naming convention of being in the reverse order of your domain. We had to hit the Edit button on the package name to make it <code>edu.gatech.androidnoteapp</code>.  When you&#39;re done, click <strong>Next</strong>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_03.png"/>
+				<p>
+					We&#39;re going to target our app to Android 5.0 (Lollipop). In choosing a recent API, you have the tradeoff of having access to the latest features but having a smaller audience on Google Play since there are significant numbers of users who use early platforms. If you want to support most platforms except for certain features, read more <a href=”https://developer.android.com/training/basics/supporting-devices/platforms.html”>here</a>. Click <strong>Next</strong>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_04.png"/>
+				<p>
+					We&#39;ll insert a blank Activity. Click <strong>Next</strong>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_05.png"/>
+				<p>
+					Making the Activity Name <code>NoteListActivity</code> should auto-populate the other fields to the above values. This Activity will serve as the list of notes to edit in our final app. Click <strong>Finish</strong>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_06.png"/>
+				<p>
+					When Android Studio is ready to let you see your project, upon selecting the Design tab under the file <code>activity_note_list.xml</code>, you should see a screen layout with the text “Hello, World!”  In this view, you can drag and drop items onto the <code>Activity</code>&#39;s layout and modify the value of various <code>Views</code>. We&#39;re going to look at the Text tab later so you have an idea of how to work on the manual side of layout design.
+				</p>
 
 
-<h3>NoteListActivity</h3>
+				<h3>Adjust Manifest</h3>
 
-<p>
-	<code>NoteListActivity</code> is found in the Java folder. There&#39;s a series of folders under it for each sub-domain in your company&#39;s domain--that&#39;s just a Java convention.
-</p>
+				<p>
+					Let&#39;s look at the application&#39;s Manifest file. On the Project panel, expand the <code>manifests</code> folder and select <code>AndroidManifest.xml</code>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_07.png"/>
+				<p>
+					This is the Manifest file for the entire application.  The first line defines that the file uses an XML layout.  The second line defines the namespace with <code>xmlns:android</code> (similar to the C++ concept of namespaces--it prevents variable name collisions).  The value of this attribute points to some line of text that must differentiate the elements inside of it from other elements.  It doesn&#39;t have to be a real website--it doesn&#39;t have to be a website at all, but it typically points to some resource that explains something about the project.  The next line defines the package, which must be unique for all applications on a device, and therefore Google Play requires unique package names across all those applications submitted.
+				</p>
 
-<p>
-	The class imports a few necessary Android clases, then declares the class and extends <code>ActionBarActivity</code>. The base class all Activities need to extend is (*drum roll*) <code>Activity</code>, but there are various specialized Activities for various Activity templates. Since the <code>Theme</code> we are using is not supported by <code>ActionBarActivity</code>, we&#39;re going to downgrade to just <code>Activity</code>.  When that results in an error from not having the class imported, click on the word <code>Activity</code> and press <code>ALT + Enter</code>. A dialog will pop up asking you how to automatically fix the problem. The first way, by importing the class, is what we want, so just press Enter and it will be done. You can also remove the import line for <code>android.support.v7.app.ActionBarActivity</code>.
-</p>
+				<p>
+					A quick tutorial on XML (eXtendable Markup Language).  It is a language that describes data and it consists of tags contained in angle brackets similar to HTML.  For each attribute, there is an identifier to mark the kind of attribute.  Before the first closing angle bracket, there can be an arbitrary number of attributes listed with the syntax <code>&lt;tag attribute0="value0" attribute1="value1"&gt;</code>.  Namespaces prevent collisions of similarly named variables across a large number of XML files that may be used for a similar purpose.  To access a namespace, use this syntax: <code>&lt;tag namespace:attribute="value"&gt;</code>.  All the variables you&#39;ll edit are in the <code>android:</code> namespace as defined in the second line. Tags (once the initial angle bracket has been closed) can be nested so that text or other attributes apply in a nested-tree fashion to the tags which contain them. Learn more about XML<a href=”http://www.w3schools.com/xml/default.asp”>here</a>.
+				</p>
 
-<p>
-	From Android&#39;s <a href=”http://developer.android.com/guide/topics/ui/actionbar.html”>website</a>, this is an <code>ActionBar</code>.
-</p>
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Action_Bar.png"/>
-<p>
-	Nothing too exciting, but we&#39;ll use it later on.
-</p>
-<p>
-	The <code>@Override</code> line is a directive to the compiler to let it know that the next line will override a method previously defined by one of the parent classes.
-</p>
-<p>
-	The <code>onCreate()</code> method responds to what happens when the app first appears. The line
-</p>
-	<code>super.onCreate(savedInstanceState);</code>
-<p>
-	is merely Android&#39;s way of restoring some metadata about the state of the GUI from the last time the app opened. For now, we don&#39;t need to know its details.
-</p>
+				<p>
+					The application tag defines the app&#39;s icon, its name, and its activities, among other things.  At least one Activity must have an Intent designating it as the <code>LAUNCHER</code> Activity so Android can put that Activity on the Home screen (you could potentially have multiple launching activities).  Making the intent <code>MAIN</code> indicates that the intent needs no further information in an intent other than that the Activity should  launch (as opposed to being prompted by another Activity).  Read more <a href=”http://developer.android.com/reference/android/content/Intent.html”>here</a>.
+				</p>
 
-<p>
-	<code>setContentView(R.layout.activity_note_list)</code> tells the compiler to define how the app looks based on the XML layout as defined by <code>activity_note_list.xml</code> (the resource within the <code>layout</code> folder).
-</p>
+				</p>
+					To jazz up our app a little, we&#39;re going to add a theme: <code>@android:style/Theme.Holo.Light.DarkActionBar</code>.  So within the Activity tag (the particular order of attributes isn&#39;t important, but we&#39;ll insert it in a line after the android:label attribute), add this:
+				</p>
+				<code>
+					android:theme="@android:style/Theme.Holo.Light.DarkActionBar"
+				</code>
+				<p>
+					with the tag closing afterwards.
+				</p>
 
-<p>
-	The <code>createOptionMenu()</code> method determines how the menu that comes forth from the  button when it is pressed. <code>MenuInflater</code> is an XML parser that parses the XML file found at <code>R.menu.menu_note_list.xml</code>. We&#39;ll go over that in more detail when we edit the <strong>Options</strong> menu.
-</p>
-<p>
-	Finally, <code>onOptionsItemSelected()</code> determines how to react when the user selects one of the options in the <strong>Option</strong> menu.  It usually involves a large switch statement to determine which menu item has been pressed, and then reacts accordingly. Right now, it takes no action--it merely returns true (meaning no errors were incurred) without taking any action.
-</p>
-<p>
-The finished file should look like this:
-</p>
-<code>
-<p>package edu.gatech.androidnoteapp;</p>
-<p>import android.app.Activity;<br />import android.os.Bundle;<br />import android.view.Menu;<br />import android.view.MenuItem;</p>
-<p><br />public class NoteListActivity extends Activity {</p>
-<p style="padding-left: 30px;">@Override<br /> protected void onCreate(Bundle savedInstanceState) {</p>
-<p style="padding-left: 60px;">super.onCreate(savedInstanceState);<br /> setContentView(R.layout.activity_note_list);</p>
-<p style="padding-left: 30px;">}</p>
-<p style="padding-left: 30px;"><br /> @Override<br /> public boolean onCreateOptionsMenu(Menu menu) {</p>
-<p style="padding-left: 60px;">// Inflate the menu; this adds items to the action bar if it is present.<br /> getMenuInflater().inflate(R.menu.menu_note_list, menu);<br /> return true;</p>
-<p style="padding-left: 30px;">}</p>
-<p style="padding-left: 30px;">@Override<br /> public boolean onOptionsItemSelected(MenuItem item) {</p>
-<p style="padding-left: 60px;">// Handle action bar item clicks here. The action bar will<br /> // automatically handle clicks on the Home/Up button, so long<br /> // as you specify a parent activity in AndroidManifest.xml.<br /> int id = item.getItemId();</p>
-<p style="padding-left: 60px;">//noinspection SimplifiableIfStatement<br /> if (id == R.id.action_settings) {</p>
-<p style="padding-left: 90px;">return true;</p>
-<p style="padding-left: 60px;">}</p>
-<p style="padding-left: 60px;">return super.onOptionsItemSelected(item);</p>
-<p style="padding-left: 30px;">}</p>
-<p>}</p>
-</code>
+				<p>
+					The <code>@</code> symbol means that we&#39;re referring to a resource--if it is followed by <code>android:</code>, it&#39;s defined in the Android system&#39;s general resources.  Otherwise, it refers to a resource made in the particular project.
+				</p>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compile_and_Run.png"/>
+				<p>
+					So now the manifest should look like this:
+				</p>
+				<code>
+				<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"<br /> package="edu.gatech.androidnoteapp" &gt;</p>
+				<p style="padding-left: 60px;">&lt;application<br /> android:allowBackup="true"<br /> android:icon="@drawable/ic_launcher"<br /> android:label="@string/app_name"<br /> android:theme="@style/AppTheme" &gt;</p>
+				<p style="padding-left: 60px;">&lt;activity</p>
+				<p style="padding-left: 90px;">android:name=".NoteListActivity"<br /> android:label="@string/app_name"<br /> android:theme="@android:style/Theme.Holo.Light.DarkActionBar"&gt;</p>
+				<p style="padding-left: 90px;">&lt;intent-filter&gt;</p>
+				<p style="padding-left: 120px;">&lt;action android:name="android.intent.action.MAIN" /&gt;</p>
+				<p style="padding-left: 120px;">&lt;category android:name="android.intent.category.LAUNCHER" /&gt;</p>
+				<p style="padding-left: 90px;">&lt;/intent-filter&gt;</p>
+				<p style="padding-left: 60px;">&lt;/activity&gt;</p>
+				<p style="padding-left: 30px;">&lt;/application&gt;</p>
+				<p>&lt;/manifest&gt;</p>
+				</code>
 
-<p>
-	Now it&#39;s time to run the program! Select Build (first circled button), and when that&#39;s done (check the progress by the status bar at the bottom, as shown on the next figure), open up your emulator from the AVD (third circled button), and once you&#39;ve gotten the emulator running, hit <strong>Run</strong> (the green triangle or the second circled button). Note that it may take several minutes to get the emulator running depending on the configuration of your computer. Deploying to a real physical device is usually much faster.
-</p>
+				<h3>Adjust Strings</h3>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compiling.png"/>
+				<p>
+					Navigate in the Project panel to the folder <code>res/values/strings.xml</code>.
+				</p>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Choose_a_Device.png"/>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
 
-<p>
-	If you run into this dialog after hitting the Run button, you&#39;re on the right track! Select <strong>OK</strong> after the running emulator is selected. When the install has completed as shown in the next figure, the application will launch automatically.
-</p>
+				<p>
+					The <code>strings.xml</code> file is where Android stores all its string resources.  It&#39;s good practice to keep all text that might possibly be updated in the future here as opposed to in a source file so you can maintain the files separately. We&#39;ll refer to the strings we make here in the code later with a tag such as <code>@string/name_of_string</code>.
+				 </p>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Deployed_Successfully.png"/>
+				<p>
+					Let&#39;s change the title of the Activity as displayed on the screen by changing the <code>title_activity_note_list</code> string to read "Noteworthy".  So the line should read
+				</p>
+				<code><string name="title_activity_note_list">Noteworthy</string></code>
+				<p>
+					Just to prove that this is where Android pulls the “Hello world” string, we&#39;ll add a comma and a smiley face so that it reads:
+				</p>
+					<code>Hello, world! :)</code>
 
-<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Hello_World_Result.png"/>
+				<p>
+				The final file looks like this.
+				</p>
+				<code>
+				<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;<br />&lt;resources&gt;</p>
+				<p style="padding-left: 30px;">&lt;string name="app_name"&gt;Noteworthy&lt;/string&gt;<br /> &lt;string name="hello_world"&gt;Hello, world! :)&lt;/string&gt;<br /> &lt;string name="action_settings"&gt;Settings&lt;/string&gt;</p>
+				<p>&lt;/resources&gt;</p>
+				</code>
 
-<p>
-	Ta-da! We have our first, slightly-modified-from-the-box, Android app! And when you press the <strong>Menu</strong> button on the <code>ActionBar</code>, a dummy menu item pops up. Congratulations!
-</p>
+				<h3>Adjust Layout</h3>
+				<p>
+					Now navigate back to the code that&#39;s already open in a tab: <code>activity_note_list.xml</code>.
+				</p>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_08.png"/>
+
+				<p>
+					This file is a description for how the screen will be laid out.  Android separates the layout from the code in order to avoid the clunky GUI code that is found in Java Swing (and to make debugging easier).  Thus, you can use the drag-and-drop editor (the Design tab on the bottom of the pane) to modify the layout, but for now we&#39;ll show you the manual way. However, for the sake of being able to edit layout at runtime, Android does allow for adding and modifying layout in the code.
+				</p>
+
+				<p>
+					Notice the Design and Text tabs at the bottom of the edit pane, which allow you to switch between the two ways of editing the same file.
+				</p>
+
+				<p>
+					In the Text editor, at the top you&#39;ll see a few lines describing how the layout is to be padded. Right now, we&#39;re going to modify the <code>layout_width</code> and <code>layout_height</code> attributes of the <code>TextView</code> tag slightly.  Change the value of those attributes from <code>wrap_content</code> to <code>match_parent</code>. While <code>wrap_content</code> tells that UI object to take up as much space as its content needs, <code>match_parent</code> tell the UI object to take up as much space as the parent will allow. With a little adjusting whitespace (which XML ignores), the resulting XML file should look like this.
+				</p>
+				 
+				<code>
+				<p>&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"</p>
+				<p style="padding-left: 30px;">xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"<br />android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"<br />android:paddingRight="@dimen/activity_horizontal_margin"<br />android:paddingTop="@dimen/activity_vertical_margin"<br />android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".NoteListActivity"&gt;</p>
+				<p style="padding-left: 30px;">&lt;TextView android:text="@string/hello_world"</p>
+				<p style="padding-left: 60px;">android:layout_width="match_parent"<br /> android:layout_height="match_parent" /&gt;</p>
+				<p>&lt;/RelativeLayout&gt;</p></code>
+
+				<p>
+					Read more about layout <a href=”http://developer.android.com/guide/topics/ui/declaring-layout.html”>here</a>.
+				</p>
+
+
+				<h3>NoteListActivity</h3>
+
+				<p>
+					<code>NoteListActivity</code> is found in the Java folder. There&#39;s a series of folders under it for each sub-domain in your company&#39;s domain--that&#39;s just a Java convention.
+				</p>
+
+				<p>
+					The class imports a few necessary Android clases, then declares the class and extends <code>ActionBarActivity</code>. The base class all Activities need to extend is (*drum roll*) <code>Activity</code>, but there are various specialized Activities for various Activity templates. Since the <code>Theme</code> we are using is not supported by <code>ActionBarActivity</code>, we&#39;re going to downgrade to just <code>Activity</code>.  When that results in an error from not having the class imported, click on the word <code>Activity</code> and press <code>ALT + Enter</code>. A dialog will pop up asking you how to automatically fix the problem. The first way, by importing the class, is what we want, so just press Enter and it will be done. You can also remove the import line for <code>android.support.v7.app.ActionBarActivity</code>.
+				</p>
+
+				<p>
+					From Android&#39;s <a href=”http://developer.android.com/guide/topics/ui/actionbar.html”>website</a>, this is an <code>ActionBar</code>.
+				</p>
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Action_Bar.png"/>
+				<p>
+					Nothing too exciting, but we&#39;ll use it later on.
+				</p>
+				<p>
+					The <code>@Override</code> line is a directive to the compiler to let it know that the next line will override a method previously defined by one of the parent classes.
+				</p>
+				<p>
+					The <code>onCreate()</code> method responds to what happens when the app first appears. The line
+				</p>
+					<code>super.onCreate(savedInstanceState);</code>
+				<p>
+					is merely Android&#39;s way of restoring some metadata about the state of the GUI from the last time the app opened. For now, we don&#39;t need to know its details.
+				</p>
+
+				<p>
+					<code>setContentView(R.layout.activity_note_list)</code> tells the compiler to define how the app looks based on the XML layout as defined by <code>activity_note_list.xml</code> (the resource within the <code>layout</code> folder).
+				</p>
+
+				<p>
+					The <code>createOptionMenu()</code> method determines how the menu that comes forth from the  button when it is pressed. <code>MenuInflater</code> is an XML parser that parses the XML file found at <code>R.menu.menu_note_list.xml</code>. We&#39;ll go over that in more detail when we edit the <strong>Options</strong> menu.
+				</p>
+				<p>
+					Finally, <code>onOptionsItemSelected()</code> determines how to react when the user selects one of the options in the <strong>Option</strong> menu.  It usually involves a large switch statement to determine which menu item has been pressed, and then reacts accordingly. Right now, it takes no action--it merely returns true (meaning no errors were incurred) without taking any action.
+				</p>
+				<p>
+				The finished file should look like this:
+				</p>
+				<code>
+				<p>package edu.gatech.androidnoteapp;</p>
+				<p>import android.app.Activity;<br />import android.os.Bundle;<br />import android.view.Menu;<br />import android.view.MenuItem;</p>
+				<p><br />public class NoteListActivity extends Activity {</p>
+				<p style="padding-left: 30px;">@Override<br /> protected void onCreate(Bundle savedInstanceState) {</p>
+				<p style="padding-left: 60px;">super.onCreate(savedInstanceState);<br /> setContentView(R.layout.activity_note_list);</p>
+				<p style="padding-left: 30px;">}</p>
+				<p style="padding-left: 30px;"><br /> @Override<br /> public boolean onCreateOptionsMenu(Menu menu) {</p>
+				<p style="padding-left: 60px;">// Inflate the menu; this adds items to the action bar if it is present.<br /> getMenuInflater().inflate(R.menu.menu_note_list, menu);<br /> return true;</p>
+				<p style="padding-left: 30px;">}</p>
+				<p style="padding-left: 30px;">@Override<br /> public boolean onOptionsItemSelected(MenuItem item) {</p>
+				<p style="padding-left: 60px;">// Handle action bar item clicks here. The action bar will<br /> // automatically handle clicks on the Home/Up button, so long<br /> // as you specify a parent activity in AndroidManifest.xml.<br /> int id = item.getItemId();</p>
+				<p style="padding-left: 60px;">//noinspection SimplifiableIfStatement<br /> if (id == R.id.action_settings) {</p>
+				<p style="padding-left: 90px;">return true;</p>
+				<p style="padding-left: 60px;">}</p>
+				<p style="padding-left: 60px;">return super.onOptionsItemSelected(item);</p>
+				<p style="padding-left: 30px;">}</p>
+				<p>}</p>
+				</code>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compile_and_Run.png"/>
+
+				<p>
+					Now it&#39;s time to run the program! Select Build (first circled button), and when that&#39;s done (check the progress by the status bar at the bottom, as shown on the next figure), open up your emulator from the AVD (third circled button), and once you&#39;ve gotten the emulator running, hit <strong>Run</strong> (the green triangle or the second circled button). Note that it may take several minutes to get the emulator running depending on the configuration of your computer. Deploying to a real physical device is usually much faster.
+				</p>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compiling.png"/>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Choose_a_Device.png"/>
+
+				<p>
+					If you run into this dialog after hitting the Run button, you&#39;re on the right track! Select <strong>OK</strong> after the running emulator is selected. When the install has completed as shown in the next figure, the application will launch automatically.
+				</p>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Deployed_Successfully.png"/>
+
+				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Hello_World_Result.png"/>
+
+				<p>
+					Ta-da! We have our first, slightly-modified-from-the-box, Android app! And when you press the <strong>Menu</strong> button on the <code>ActionBar</code>, a dummy menu item pops up. Congratulations!
+				</p>
+			</div>
+			
+			<div class="clear"></div>
+			
+		</div>
+		
+	</div>
+</body>
+</html>
