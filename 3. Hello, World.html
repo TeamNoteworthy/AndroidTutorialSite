@@ -44,27 +44,50 @@
 			<div class="content">
 				<h1>Step 3: Hello, World!</h1>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
+					<figcaption><strong>Figure 3-1:</strong> Create a New Project dialog.</figcaption>
+				</figure>
 				<p>
 					First, start a new project from Android Studio&#39;s welcome screen by going to "Start a new Android Studio project."  Alternatively, you can go to <strong>File->New Project</strong> if you already have a project open.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_02.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_02.png"/>
+					<figcaption><strong>Figure 3-2:</strong> Name the new project.</figcaption>
+				</figure>
 				<p>
 					Next, you&#39;ll want to name your project and domain.  We&#39;ll call ours <code>AndroidNoteApp</code> and we&#39;ll call our company domain <code>androidnoteapp.gatech.edu</code>.  Normally, this would refer to a website that you own, but we&#39;re just making this up.  It&#39;s significant because the packages follow the naming convention of being in the reverse order of your domain. We had to hit the Edit button on the package name to make it <code>edu.gatech.androidnoteapp</code>.  When you&#39;re done, click <strong>Next</strong>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_03.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_03.png"/>
+					<figcaption><strong>Figure 3-3:</strong> Choose the Android platform version.</figcaption>
+				</figure>
 				<p>
 					We&#39;re going to target our app to Android 5.0 (Lollipop). In choosing a recent API, you have the tradeoff of having access to the latest features but having a smaller audience on Google Play since there are significant numbers of users who use early platforms. If you want to support most platforms except for certain features, read more <a href=”https://developer.android.com/training/basics/supporting-devices/platforms.html”>here</a>. Click <strong>Next</strong>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_04.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_04.png"/>
+					<figcaption><strong>Figure 3-4:</strong> Add an <code>Activity</code> to the project.</figcaption>
+				</figure>
 				<p>
 					We&#39;ll insert a blank Activity. Click <strong>Next</strong>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_05.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_05.png"/>
+					<figcaption><strong>Figure 3-5:</strong> Configure the <code>Activity</code> name.</figcaption>
+				</figure>
 				<p>
 					Making the Activity Name <code>NoteListActivity</code> should auto-populate the other fields to the above values. This Activity will serve as the list of notes to edit in our final app. Click <strong>Finish</strong>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_06.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_06.png"/>
+					<figcaption><strong>Figure 3-6:</strong> Preview the <code>Activity</code>'s design.</figcaption>
+				</figure>
 				<p>
 					When Android Studio is ready to let you see your project, upon selecting the Design tab under the file <code>activity_note_list.xml</code>, you should see a screen layout with the text “Hello, World!”  In this view, you can drag and drop items onto the <code>Activity</code>&#39;s layout and modify the value of various <code>Views</code>. We&#39;re going to look at the Text tab later so you have an idea of how to work on the manual side of layout design.
 				</p>
@@ -75,7 +98,11 @@
 				<p>
 					Let&#39;s look at the application&#39;s Manifest file. On the Project panel, expand the <code>manifests</code> folder and select <code>AndroidManifest.xml</code>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_07.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_07.png"/>
+					<figcaption><strong>Figure 3-7:</strong> The app&#39;s manifest.</figcaption>
+				</figure>
 				<p>
 					This is the Manifest file for the entire application.  The first line defines that the file uses an XML layout.  The second line defines the namespace with <code>xmlns:android</code> (similar to the C++ concept of namespaces--it prevents variable name collisions).  The value of this attribute points to some line of text that must differentiate the elements inside of it from other elements.  It doesn&#39;t have to be a real website--it doesn&#39;t have to be a website at all, but it typically points to some resource that explains something about the project.  The next line defines the package, which must be unique for all applications on a device, and therefore Google Play requires unique package names across all those applications submitted.
 				</p>
@@ -125,7 +152,11 @@
 					Navigate in the Project panel to the folder <code>res/values/strings.xml</code>.
 				</p>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_01.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_09.png"/>
+					<figcaption><strong>Figure 3-8:</strong> The app&#39;s <code>strings.xml</code>.</figcaption>
+				</figure>
 
 				<p>
 					The <code>strings.xml</code> file is where Android stores all its string resources.  It&#39;s good practice to keep all text that might possibly be updated in the future here as opposed to in a source file so you can maintain the files separately. We&#39;ll refer to the strings we make here in the code later with a tag such as <code>@string/name_of_string</code>.
@@ -154,7 +185,11 @@
 					Now navigate back to the code that&#39;s already open in a tab: <code>activity_note_list.xml</code>.
 				</p>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_08.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Create_New_Project_08.png"/>
+					<figcaption><strong>Figure 3-9:</strong> The completed manifest.</figcaption>
+				</figure>
 
 				<p>
 					This file is a description for how the screen will be laid out.  Android separates the layout from the code in order to avoid the clunky GUI code that is found in Java Swing (and to make debugging easier).  Thus, you can use the drag-and-drop editor (the Design tab on the bottom of the pane) to modify the layout, but for now we&#39;ll show you the manual way. However, for the sake of being able to edit layout at runtime, Android does allow for adding and modifying layout in the code.
@@ -193,7 +228,11 @@
 				<p>
 					From Android&#39;s <a href=”http://developer.android.com/guide/topics/ui/actionbar.html”>website</a>, this is an <code>ActionBar</code>.
 				</p>
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Action_Bar.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Action_Bar.png"/>
+					<figcaption><strong>Figure 3-10:</strong> The Action Bar.</figcaption>
+				</figure>
 				<p>
 					Nothing too exciting, but we&#39;ll use it later on.
 				</p>
@@ -241,23 +280,43 @@
 				<p>}</p>
 				</code>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compile_and_Run.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compile_and_Run.png"/>
+					<figcaption><strong>Figure 3-11:</strong> Compile and run the app.</figcaption>
+				</figure>
 
 				<p>
 					Now it&#39;s time to run the program! Select Build (first circled button), and when that&#39;s done (check the progress by the status bar at the bottom, as shown on the next figure), open up your emulator from the AVD (third circled button), and once you&#39;ve gotten the emulator running, hit <strong>Run</strong> (the green triangle or the second circled button). Note that it may take several minutes to get the emulator running depending on the configuration of your computer. Deploying to a real physical device is usually much faster.
 				</p>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compiling.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Compiling.png"/>
+					<figcaption><strong>Figure 3-12:</strong> Android Studio is compiling.</figcaption>
+				</figure>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Choose_a_Device.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Choose_a_Device.png"/>
+					<figcaption><strong>Figure 3-13:</strong> The <strong>Choose a Device</strong> dialog.</figcaption>
+				</figure>
 
 				<p>
 					If you run into this dialog after hitting the Run button, you&#39;re on the right track! Select <strong>OK</strong> after the running emulator is selected. When the install has completed as shown in the next figure, the application will launch automatically.
 				</p>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Deployed_Successfully.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Deployed_Successfully.png"/>
+					<figcaption><strong>Figure 3-14:</strong> Android Studio notifies you that the app was deployed successfully to the emulator.</figcaption>
+				</figure>
 
-				<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Hello_World_Result.png"/>
+				
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/03_Hello_World_Result.png"/>
+					<figcaption><strong>Figure 3-15:</strong> The "Hello, World!" app resulting from this step of the tutorial.</figcaption>
+				</figure>
 
 				<p>
 					Ta-da! We have our first, slightly-modified-from-the-box, Android app! And when you press the <strong>Menu</strong> button on the <code>ActionBar</code>, a dummy menu item pops up. Congratulations!
