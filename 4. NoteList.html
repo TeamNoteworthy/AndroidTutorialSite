@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" href="main.css" type="text/css">
+	<title>Android Note Taking App Tutorial</title>
+</head>
+
+<body>
+	<div id="wrapper">
+		<header class="header">
+			<div class="nav">
+				<div class="leftnav">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Link2</a></li>
+						<li><a href="#">Link3</a></li>
+						<li><a href="#">Link4</a></li>
+						<li><a href="#">Link5</a></li>
+					</ul>
+				</div>
+				<div class="search">
+					<p>Future search box</p>
+				</div>
+			</div>
+		</header>
+		
+		<div class="container">
+		
+			<div class="toc">
+				<h1>Tutorial</h1>
+				<ul>
+					<li>0 - Test asdfsdf</li>
+					<li>2 - Test asdgfasdg</li>
+					<li>3 - Test asdfgh</li>
+					<li>4 - Test asdgsdg</li>
+					<li>5 - Test asdfghasdfg</li>
+					<li>6 - Test asdgfasdgf</li>
+					<li>7 - Test sdgrjdgh</li>
+				</ul>
+			</div>
+			
+			<div class="content">
+				<h2>Show NoteList Activity</h2>
+
+				<p>
+					Now that we have the foundation of the app, let’s continue by getting the NoteListActivity to show our list of notes. For now, we will have it show dummy notes that we create manually - we’ll wait until the next chapter before implementing persistence to load and save notes.
+				</p>
+
+				<h3>Create Note Class</h3>
+
+				<p>
+					Our first task is to create the Note object. This object will act as a very simple vehicle for our Note’s data, such as its unique id, title, and text among other data.
+				</p>
+
+				<p>
+					Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select <strong>New->Java Class</strong>. Name it <code>Note</code> and replace its content with this code:
+				</p>
+				
+				<div align="center">
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/04_Create_Note.png" style="max-width: 75%;"/>
+					<figcaption><strong>Figure 4-1:</strong> Creating the <code>Note</code> class.</figcaption>
+				</figure>
+				</div>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					package edu.gatech.androidnoteapp;<br />
+					<br />
+					import java.sql.Date;<br />
+					&nbsp;<br />
+					/**<br />
+					 * The authoritative representation of a note in memory.<br />
+					 */<br />
+					public class Note {<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * A unique id for this note.<br />
+					&nbsp; */<br />
+					&nbsp;private long noteID;<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The title of the note.<br />
+					&nbsp; */<br />
+					&nbsp;private String titleText;<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The body of the note.<br />
+					&nbsp; */<br />
+					&nbsp;private String bodyText;<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The date when the note was last saved.<br />
+					&nbsp; */<br />
+					&nbsp;private Date lastEditDate;<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The color the note should render with.<br />
+					&nbsp; */<br />
+					&nbsp;private String displayColor;<br />
+					&nbsp;<br />
+					&nbsp;public Note(long id, String title, String body, Date date, String color) {<br />
+					&nbsp;&nbsp;this.noteID = id;<br />
+					&nbsp;&nbsp;this.titleText = title;<br />
+					&nbsp;&nbsp;this.bodyText = body;<br />
+					&nbsp;&nbsp;this.lastEditDate = date;<br />
+					&nbsp;&nbsp;this.displayColor = color;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Returns the ID of the note<br />
+					&nbsp; */<br />
+					&nbsp;public long getID() {<br />
+					&nbsp;&nbsp;return noteID;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Returns the Title of the note<br />
+					&nbsp; */<br />
+					&nbsp;public String getTitle() {<br />
+					&nbsp;&nbsp;return titleText;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Returns the Text of the note<br />
+					&nbsp; */<br />
+					&nbsp;public String getText() {<br />
+					&nbsp;&nbsp;return bodyText;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Returns the Date of the last edit to the note<br />
+					&nbsp; */<br />
+					&nbsp;public Date getDate() {<br />
+					&nbsp;&nbsp;return lastEditDate;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Returns the Color of the note<br />
+					&nbsp; */<br />
+					&nbsp;public String getColor() {<br />
+					&nbsp;&nbsp;return displayColor;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the ID of the note<br />
+					&nbsp; */<br />
+					&nbsp;public void setID(int ID) {<br />
+					&nbsp;&nbsp;noteID = ID;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the Title of the note<br />
+					&nbsp; */<br />
+					&nbsp;public void setTitle(String title) {<br />
+					&nbsp;&nbsp;titleText = title;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the Text of the note<br />
+					&nbsp; */<br />
+					&nbsp;public void setText(String body) {<br />
+					&nbsp;&nbsp;bodyText = body;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the Date of the last edit to the note<br />
+					&nbsp; */<br />
+					&nbsp;public void setDate(Date newDate) {<br />
+					&nbsp;&nbsp;lastEditDate = newDate;<br />
+					&nbsp;}<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the Color of the note<br />
+					&nbsp; */<br />
+					&nbsp;public void setColor(String newColor) {<br />
+					&nbsp;&nbsp;displayColor = newColor;<br />
+					&nbsp;}<br />
+					}
+				</code>
+				</p>
+				
+				<p>
+					Notice that this class is simply a collection of variables, getters, setters, and a constructor for convenience. In your own app, this class can be as complex as you want to make it. This is all we need to do for the Note class.
+				</p>
+				
+				<h3>Add ListView</h3>
+				
+				<p>
+					Our next task is to add the list visual itself to the screen. These are called <code>ListView</code>s and represent a UI container that pulls information from a data source in Java (often an array), formats that data into a visual layout representing a row in the list, and displays those rows in the <code>ListView</code>.
+				</p>
+				
+				<p>
+					Start by opening the layout file of our NoteListActivity: <code>res/layout/activity_note_list.xml</code>.
+				</p>
+				
+				<p>
+					Reminder: If you see a mockup phone screen instead of the XML text, click on the tab underneath the Palette and mockup that says “Text”.
+				</p>
+				
+				<p>
+					As we learned earlier, this layout determines the visual representation of the <code>Activity</code>, containing all of the UI components (<code>View</code>s) and layout items (<code>ViewGroup</code>s).
+				</p>
+				<p>
+					Let’s remove our “Hello World” <code>TextView</code> from the layout and replace it with a <code>ListView</code>. Replace the following lines:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					&lt;TextView android:text="@string/hello_world"<br />
+					&nbsp;android:layout_width="match_parent"<br />
+					&nbsp;android:layout_height="match_parent" />
+				</code>
+				</p>
+				
+				<p>
+					With these lines:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					&lt;ListView android:id="@android:id/list"<br />
+					&nbsp;android:layout_width="match_parent"<br />
+					&nbsp;android:layout_height="match_parent" />
+				</code>
+				</p>
+
+				<p>
+					The <code>android:id="@android:id/list"</code> part is very important. This assigns a specific identifier to the list that will enable our <code>Activity</code> to locate it later in the tutorial.
+				</p>
+				
+				<p>
+					Your layout file should now look like this:
+				</p>
+
+				<p style="background: #DDDDDD;">
+				<code>
+					&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"<br />
+					&nbsp;xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"<br />
+					&nbsp;android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"<br />
+					&nbsp;android:paddingRight="@dimen/activity_horizontal_margin"<br />
+					&nbsp;android:paddingTop="@dimen/activity_vertical_margin"<br />
+					&nbsp;android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".NoteListActivity"><br />
+					&nbsp;<br />
+					&nbsp;&lt;ListView android:id="@android:id/list"<br />
+					&nbsp;&nbsp;android:layout_width="match_parent"<br />
+					&nbsp;&nbsp;android:layout_height="match_parent" /><br />
+					&nbsp;<br />
+					&lt;/RelativeLayout>
+				</code>
+				</p>
+
+				<!--
+					DYNAMIC: An alternative way to accomplish the same thing visually is to not switch to the “Text” tab. Instead stay on the “Design” tab. Delete the <code>TextView</code> by clicking on it and pressing delete. Then from the Palette on the left under the Containers subheading, drag in a <code>ListView</code>. Be sure to set its width and height to match_parent in the Properties pane.
+
+					If you choose this alternative route you must then enter the “Text” tab and change <code>android:id="@+id/listView"</code> to <code>android:id="@android:id/list"</code>.
+				-->
+				
+				<p>
+					If you go back to the Design tab, this is what the preview should look like:
+				</p>
+				
+				<div align="center">
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/04_List_View.png" style="max-width: 75%;"/>
+					<figcaption><strong>Figure 4-2:</strong> <code>ListView</code> preview.</figcaption>
+				</figure>
+				</div>
+				
+				<p>
+					This is all we need to do as far as creating and laying out the <code>ListView</code>. If you test the app at this point it will look empty since we have not yet linked data to the list.
+				</p>
+				
+				<h3>List Row Layout</h3>
+				
+				<p>
+					Before we add support to our <code>ListView</code> to show list items, let’s create a layout that describes how we want each row in the list to look and what <code>View</code>s it has. Right click the <code>layout</code> folder in the Project explorer in the far left pane. Select New->Layout resource file. Name it <code>note_row_layout.xml</code>.
+				</p>
+				
+				<p>
+					For each note, we want its row to display the title of the note, and beneath that, the last date it was edited. For this we need two <code>TextView</code>s. Structure your XML contents as follows:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					&lt;?xml version="1.0" encoding="utf-8"?><br />
+					&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"<br />
+					&nbsp;android:id="@+id/full_row"<br />
+					&nbsp;android:orientation="horizontal"<br />
+					&nbsp;android:layout_width="match_parent"<br />
+					&nbsp;android:layout_height="64dip"><br />
+					&nbsp;<br />
+					&nbsp;&lt;LinearLayout<br />
+					&nbsp;&nbsp;android:id="@+id/row_layout"<br />
+					&nbsp;&nbsp;android:orientation="vertical"<br />
+					&nbsp;&nbsp;android:paddingRight="8dip"<br />
+					&nbsp;&nbsp;android:paddingLeft="16dip"<br />
+					&nbsp;&nbsp;android:layout_gravity="center_vertical"<br />
+					&nbsp;&nbsp;android:layout_width="wrap_content"<br />
+					&nbsp;&nbsp;android:layout_height="wrap_content"><br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;&lt;TextView<br />
+					&nbsp;&nbsp;&nbsp;android:id="@+id/note_title"<br />
+					&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content"<br />
+					&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"<br />
+					&nbsp;&nbsp;&nbsp;android:ellipsize="end"<br />
+					&nbsp;&nbsp;&nbsp;android:maxLines="1"<br />
+					&nbsp;&nbsp;&nbsp;android:text="The Title"<br />
+					&nbsp;&nbsp;&nbsp;android:textAppearance="@android:style/TextAppearance.Medium" /><br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;&lt;TextView<br />
+					&nbsp;&nbsp;&nbsp;android:id="@+id/note_date"<br />
+					&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content"<br />
+					&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"<br />
+					&nbsp;&nbsp;&nbsp;android:ellipsize="end"<br />
+					&nbsp;&nbsp;&nbsp;android:maxLines="1"<br />
+					&nbsp;&nbsp;&nbsp;android:text="The Date"<br />
+					&nbsp;&nbsp;&nbsp;android:textAppearance="@android:style/TextAppearance.Small" /><br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&lt;/LinearLayout><br />
+					&nbsp;<br />
+					&lt;/LinearLayout>
+				</code>
+				</p>
+
+				<p>
+					Notice how we wrap both <code>TextView</code>s in a “vertical” <code>LinearLayout</code> so that the first <code>TextView</code> is on top and the second is below it. We also made sure to set the width/height of the <code>LinearLayout</code> and <code>TextView</code>s to wrap_content so they don’t monopolize the space but share it instead.
+				</p>
+				
+				<p>
+					Also, take special note of the <code>ids</code> we have assigned to the title and date <code>TextView</code>s (<code>note_title</code> and <code>note_date</code>). These <code>ids</code> are what we will reference to locate these two views and set their text in the next section.
+				</p>
+				
+				<p>
+					This is what the row layout should look like if you preview it:
+				</p>
+				
+				<div align="center">
+				<figure>
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/04_Row_Layout.png" style="max-width: 75%;"/>
+					<figcaption><strong>Figure 4-3:</strong> Row layout preview.</figcaption>
+				</figure>
+				</div>
+				
+				<p>
+					That’s all we need to do to set our desired layout. Before we can display the rows, however, we must create a class that does a three-way link between the layout we just created, our list row data, and our <code>ListView</code>. These types of classes are called <code>Adapter</code>s.
+				</p>
+				
+				<h3>Note List Adapter</h3>
+
+				<p>
+					Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteListAdapter</code>.
+				</p>
+				
+				<p>
+					An adapter is a class that links a data source (i.e. an array of <code>Note</code> objects) to a <code>View</code> that pulls from data sources (i.e. <code>ListView</code>). It is like a middleman that handles translating the data into a format that the <code>View</code> is designed to accept.
+				</p>
+				
+				<p>
+					Android has a <code>ListAdapter</code> class, but for our purposes we need to extend <code>BaseAdapter</code> since we need to track our list row IDs manually. This way we can have the rows be able to reference our actual <code>Note</code>s, which will help us when implementing the <code>NoteListActivity</code> later.
+				</p>
+				
+				<p>
+					Replace the entirety of this file’s content with this code:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					package edu.gatech.androidnoteapp;<br />
+					<br />
+					import android.app.Activity;<br />
+					import android.graphics.Color;<br />
+					import android.view.LayoutInflater;<br />
+					import android.view.View;<br />
+					import android.view.ViewGroup;<br />
+					import android.widget.BaseAdapter;<br />
+					import android.widget.LinearLayout;<br />
+					import android.widget.TextView;<br />
+					<br />
+					import java.sql.Date;<br />
+					import java.util.List;<br />
+					<br />
+					/**<br />
+					 * An adapter for a list of notes.<br />
+					 */<br />
+					public class NoteListAdapter extends BaseAdapter {<br />
+					<br />
+					&nbsp;private List<Note> items;<br />
+					&nbsp;<br />
+					&nbsp;private Activity context;<br />
+					&nbsp;<br />
+					&nbsp;public NoteListAdapter(Activity context, List<Note> items) {<br />
+					&nbsp;&nbsp;super();<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;this.context = context;<br />
+					&nbsp;&nbsp;this.items = items;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * @return The number of items in the list of notes<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public int getCount() {<br />
+					&nbsp;&nbsp;return items.size();<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Get the item at the indicated position<br />
+					&nbsp; * @param position The desired position for the item to get<br />
+					&nbsp; * @return The item at the indicated position<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public Note getItem(int position) {<br />
+					&nbsp;&nbsp;return items.get(position);<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Get the ID of the item with the indicated position<br />
+					&nbsp; * @param position The desired position for the item whose ID you'll get<br />
+					&nbsp; * @return The ID of the desired item<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public long getItemId(int position) {<br />
+					&nbsp;&nbsp;return getItem(position).getID();<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Return a view object for the given position<br />
+					&nbsp; * @param position The desired position for the item to get<br />
+					&nbsp; * @param convertView The old view to reuse if possible<br />
+					&nbsp; * @param parent The parent for the view to which the returned View will be attached<br />
+					&nbsp; * @return The resulting View created from the desired item index<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public View getView(int position, View convertView, ViewGroup parent) {<br />
+					&nbsp;&nbsp;View view;<br />
+					&nbsp;&nbsp;RowViewElements viewElements;<br />
+					&nbsp;&nbsp;if(convertView == null) { // if no existing view, populate all view fields<br />
+					&nbsp;&nbsp;&nbsp;// populate the view parent based on XML in note_row_layout<br />
+					&nbsp;&nbsp;&nbsp;view = LayoutInflater.from(context).inflate(R.layout.note_row_layout, parent, false);<br />
+					&nbsp;&nbsp;&nbsp;   <br />
+					&nbsp;&nbsp;&nbsp;viewElements = new RowViewElements();<br />
+					&nbsp;&nbsp;&nbsp;viewElements.title = (TextView)view.findViewById(R.id.note_title);<br />
+					&nbsp;&nbsp;&nbsp;viewElements.date = (TextView)view.findViewById(R.id.note_date);<br />
+					&nbsp;&nbsp;&nbsp;viewElements.layout = (LinearLayout)view.findViewById(R.id.full_row);<br />
+					&nbsp;&nbsp;&nbsp;view.setTag(viewElements);<br />
+					&nbsp;&nbsp;} else {<br />
+					&nbsp;&nbsp;&nbsp;// If there is an existing view,<br />
+					&nbsp;&nbsp;&nbsp;view = convertView;<br />
+					&nbsp;&nbsp;&nbsp;viewElements = (RowViewElements)view.getTag();<br />
+					&nbsp;&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;// update view based on Note at given position<br />
+					&nbsp;&nbsp;Note note = getItem(position);<br />
+					&nbsp;&nbsp;viewElements.setTitle(note.getTitle());<br />
+					&nbsp;&nbsp;viewElements.setDate(note.getDate());<br />
+					&nbsp;&nbsp;viewElements.setBackgroundColor(note.getColor());<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;return view;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * For any given item in the Notes, we'll return a row whose data will be<br />
+					&nbsp; * stored in this class while we're creating it<br />
+					&nbsp; */<br />
+					&nbsp;private class RowViewElements {<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * The encompassing layout for the entire row<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;private LinearLayout layout;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * The TextView for the title for the returned row for the given note<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;private TextView title;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * The TextView for the last modified date for the returned row for the<br />
+					&nbsp;&nbsp; * given note<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;private TextView date;<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * @param color String color of the note<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;public void setBackgroundColor(String color){ this.layout.setBackgroundColor(Color.parseColor(color)); }<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * @return Title for this RowViewElement<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;public TextView getTitle() {<br />
+					&nbsp;&nbsp;&nbsp;return title;<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * @param title Title for this RowViewElement<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;public void setTitle(String title) {<br />
+					&nbsp;&nbsp;&nbsp;this.title.setText(title);<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * @return Date for this RowViewElement<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;public TextView getDate() {<br />
+					&nbsp;&nbsp;&nbsp;return date;<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;/**<br />
+					&nbsp;&nbsp; * @param date Date for this RowViewElement<br />
+					&nbsp;&nbsp; */<br />
+					&nbsp;&nbsp;public void setDate(Date date) {<br />
+					&nbsp;&nbsp;&nbsp;this.date.setText(date.toString());<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;}<br />
+					}
+				</code>
+				</p>
+
+				<p>
+					What we have just done is implement a subclass of <code>BaseAdapter</code>, overriding many of its methods. A lot of this class implements the default behavior, but there are three important things to take notice of here.
+				</p>
+				
+				<p>
+					The first is that we maintain a reference to a list of <code>Note</code>s in this class. This serves as an unchanging reference to the underlying data source from which we pull rows and to which we add rows.
+				</p>
+				
+				<p>
+					The second is that we implemented getItemId() to return the id stored in our <code>Note</code>. This will be helpful later when we want to find a <code>Note</code> object based solely on its position in the list when the row is touched.
+				</p>
+
+				<p>
+					The third is the behavior of getView().  The way a list manages <code>View</code>s for its rows is by recycling them if possible. Since the <code>View</code> types of every row in the list are the same, you only need enough <code>View</code>s to display the number of items shown on screen. Then, for example, when you scroll the list, the <code>View</code>s that go off screen can be recycled to handle the items that come on screen.
+				</p>
+				
+				<p>
+					Notice that we implemented a class called <code>RowViewElements</code>. This acts as a simple vehicle, much like a <code>Note</code>, to store references to <code>View</code>s within each list row. In getView(), if we are processing a new <code>View</code> that is not being recycled (<code>if (convertView == null)</code>), we have to link each reference to the <code>View</code>s in the row’s layout, otherwise we don’t since they have already been linked by this same code before being recycled.
+				</p>
+				
+				<p>
+					Another important part of initializing a non-recycled <code>View</code> is <code>LayoutInflater.from(context).inflate(R.layout.note_row_layout, parent, false);</code> With this line we are essentially creating an instance of a <code>note_row_layout</code>, corresponding to the <code>note_row_layout.xml</code> that we created earlier that is the visual representation of our list rows.
+				</p>
+				
+				<p>
+					We then, regardless of whether the <code>View</code> is recycled or not, use the <code>View</code> references from <code>RowViewElements</code> to set the actual title, date, and color of the row.
+				</p>
+				
+				<h3>Note Model Interface</h3>
+
+				<p>
+					We have to get the actual <code>Note</code> data from somewhere to link with the <code>NoteListAdapter</code>. We could just make a list of <code>Note</code> objects, but it would be nice if we encapsulated the list in a class to let us pull from a database, a file, the Internet, etc. along with allowing us to call complex functions to, for example, add or delete notes.
+				</p>
+				
+				<p>
+					Let’s create a <code>NoteDBModel</code> interface that supports these methods. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteDBModel</code> and set its Kind to Interface. Replace the contents with this code:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					package edu.gatech.androidnoteapp;<br />
+					<br />
+					import java.util.ArrayList;<br />
+					<br />
+					/**<br />
+					 * An interface to the note database for reading and writing.<br />
+					 */<br />
+					public interface NoteDBModel {<br />
+					<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the adapter to be notified when the data changes<br />
+					&nbsp; * @param adapter The adapter to notify<br />
+					&nbsp; */<br />
+					&nbsp;public void setAdapter(NoteListAdapter adapter);<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Refreshes the notes ArrayList for later use with getNotes()<br />
+					&nbsp; */<br />
+					&nbsp;public void refreshNotes();<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * @return ArrayList of Notes from the Database<br />
+					&nbsp; */<br />
+					&nbsp;public ArrayList<Note> getNotes();<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Saves a new note to the database.<br />
+					&nbsp; *<br />
+					&nbsp; * @param note The note to create.<br />
+					&nbsp; */<br />
+					&nbsp;public void createNote(Note note);<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Saves a note to the database.<br />
+					&nbsp; * Will overwrite notes with the same ID.<br />
+					&nbsp; *<br />
+					&nbsp; * @param note The note to save.<br />
+					&nbsp; */<br />
+					&nbsp;public void saveNote(Note note);<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Deletes a note from the database.<br />
+					&nbsp; *<br />
+					&nbsp; * @param note The note to delete.<br />
+					&nbsp; */<br />
+					&nbsp;public void deleteNote(Note note);<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Tries to find a note with the given id.<br />
+					&nbsp; *<br />
+					&nbsp; * @param id The id to look up.<br />
+					&nbsp; * @return The note with the given id, else null<br />
+					&nbsp; */<br />
+					&nbsp;public Note getNoteByID(long id);<br />
+					}
+				</code>
+				</p>
+
+				<p>
+					With this definition, we can be sure that any class that implements this interface will support these methods. Now let’s create a class that implements this interface.
+				</p>
+				
+				<h3>NoteSQLiteDBModel</h3>
+
+				<p>
+					Our goal is to have persistent storage of notes so when we save a note, close the app, and open the app again, the note will still be there. One common way to achieve persistence on Android devices is to use a SQLite database. This is a simple relational database (one row for each object, one column for each attribute) that is stored on the device supporting the SQL language for row inserting, deleting, updating, etc. We will cover the database in more detail in Chapter  6.
+				</p>
+				
+				<p>
+					For now, we will make a barebones (“stubbed out”) implementation of this class and hardcode some list items to show how the list works. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteSQLiteDBModel</code> and replace the contents with this code:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					package edu.gatech.androidnoteapp;<br />
+					<br />
+					import android.content.Context;<br />
+					<br />
+					import java.util.ArrayList;<br />
+					<br />
+					/**<br />
+					 * An implementation of a notes database that uses SQLite for storage.<br />
+					 */<br />
+					public class NoteSQLiteDBModel implements NoteDBModel {<br />
+					<br />
+					&nbsp;/**<br />
+					&nbsp; * List of notes, mirrored from database data.<br />
+					&nbsp; */<br />
+					&nbsp;private ArrayList<Note> notes = new ArrayList<Note>();<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The adapter that should update<br />
+					&nbsp; */<br />
+					&nbsp;private NoteListAdapter adapter;<br />
+					&nbsp;<br />
+					&nbsp;//TODO: add database variables<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Standard constructor for the SQLiteModel, initializes the dbHelper variable so we can access the correct database<br />
+					&nbsp; * @param context Android context (usually an activity)<br />
+					&nbsp; */<br />
+					&nbsp;public NoteSQLiteDBModel(Context context) {<br />
+					&nbsp;&nbsp;//TODO: open database<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Sets the adapter to be notified when the data changes<br />
+					&nbsp; * @param adapter The adapter to notify<br />
+					&nbsp; */<br />
+					&nbsp;public void setAdapter(NoteListAdapter adapter) {<br />
+					&nbsp;&nbsp;this.adapter = adapter;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;//TODO: add open function<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Refreshes the (ArrayList<Note> notes) from the database<br />
+					&nbsp; */<br />
+					&nbsp;public void refreshNotes() {<br />
+					&nbsp;&nbsp;notes.clear();<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;//TODO: pull from database instead of placeholders<br />
+					&nbsp;&nbsp;notes.add(new Note(0, "Note 1", "Note text 1", new java.sql.Date(0), "#FFFFFF"));<br />
+					&nbsp;&nbsp;notes.add(new Note(0, "Note 2", "Note text 2", new java.sql.Date(0), "#FF6666"));<br />
+					&nbsp;&nbsp;notes.add(new Note(0, "Note 3", "Note text 3", new java.sql.Date(0), "#4DDB4D"));<br />
+					&nbsp;&nbsp;notes.add(new Note(0, "Note 4", "Note text 4", new java.sql.Date(0), "#19A3FF"));<br />
+					&nbsp;&nbsp;notes.add(new Note(0, "Note 5", "Note text 5", new java.sql.Date(0), "#FFFACD"));<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;if (adapter != null) {<br />
+					&nbsp;&nbsp;&nbsp;adapter.notifyDataSetChanged();<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Standard getter for the notes ArrayList<br />
+					&nbsp; * @return notes ArrayList<br />
+					&nbsp; */<br />
+					&nbsp;public ArrayList<Note> getNotes() {<br />
+					&nbsp;&nbsp;return notes;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;//TODO: add restart db function<br />
+					&nbsp;<br />
+					&nbsp;//TODO: add cursor to note function<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Adds a note to the database and calls refreshNotes() to fix the ArrayList appropriately<br />
+					&nbsp; * @param note The note to create.<br />
+					&nbsp; */<br />
+					&nbsp;public void createNote(Note note) {<br />
+					&nbsp;&nbsp;//TODO: add a new note to database<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;refreshNotes();<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Saves a note's data in the database, then calls refreshNotes() to rebuild the ArrayList appropriately<br />
+					&nbsp; * @param note The note to save.<br />
+					&nbsp; */<br />
+					&nbsp;public void saveNote(Note note) {<br />
+					&nbsp;&nbsp;//TODO: update note in database<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;refreshNotes();<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Deletes a note based on it's ID inside the database<br />
+					&nbsp; * @param note The note to delete.<br />
+					&nbsp; */<br />
+					&nbsp;public void deleteNote(Note note) {<br />
+					&nbsp;&nbsp;//TODO: delete note from database<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;refreshNotes();<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;public Note getNoteByID(long id) {<br />
+					&nbsp;&nbsp;for (Note note : notes) {<br />
+					&nbsp;&nbsp;&nbsp;if (note.getID() == id) {<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;return note;<br />
+					&nbsp;&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;return null;<br />
+					&nbsp;}<br />
+					}
+				</code>
+				</p>
+
+				<p>
+					The main point of this class is to manage the notes <code>ArrayList</code>. Currently, we are doing that manually by adding new <code>Note</code>s in refreshNotes(). Later we will update the <code>ArrayList</code> by pulling from the SQLite database.
+				</p>
+
+				<h3>Note List Menu</h3>
+
+				<p>
+					Let’s make one last change before we make our <code>Activity</code> display notes. We will make the options menu show “Add Note” instead of “Settings” and assign an id so we can actually add the note when it is pressed later on.
+				</p>
+				
+				<p>
+					Start by opening the menu file of the <code>NoteListActivity</code>’s menu: <code>res/menu/menu_note_list.xml</code>. This file was automatically created when the project was created.
+				</p>
+				
+				<p>
+					Change both the id and title from “action_settings” to “action_addnote”.
+				</p>
+				
+				<p>
+					The final layout should look like this:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"<br />
+					&nbsp;xmlns:app="http://schemas.android.com/apk/res-auto"<br />
+					&nbsp;xmlns:tools="http://schemas.android.com/tools"<br />
+					&nbsp;tools:context="edu.gatech.androidnoteapp.NoteListActivity"><br />
+					&nbsp;&lt;item android:id="@+id/action_addnote" android:title="@string/action_addnote"<br />
+					&nbsp;&nbsp;android:orderInCategory="100" app:showAsAction="never" />
+					&lt;/menu>
+				</code>
+				</p>
+
+				<p>
+					Finally, let’s return to our original <code>NoteListActivity</code> to add support to actually show some list items.
+				</p>
+				
+				<h3>NoteListActivity</h3>
+
+				<p>
+					Start by opening our <code>NoteListActivity</code> java file. Replace its contents with this code:
+				</p>
+				
+				<p style="background: #DDDDDD;">
+				<code>
+					package edu.gatech.androidnoteapp;<br />
+					<br />
+					import android.app.ListActivity;<br />
+					import android.content.Intent;<br />
+					import android.os.Bundle;<br />
+					import android.view.ContextMenu;<br />
+					import android.view.Menu;<br />
+					import android.view.MenuItem;<br />
+					import android.view.View;<br />
+					import android.view.ContextMenu.ContextMenuInfo;<br />
+					import android.widget.ListView;<br />
+					import android.widget.AdapterView.AdapterContextMenuInfo;<br />
+					<br />
+					/**<br />
+					 * The main activity that shows the list of notes.<br />
+					 * It is created on app open and stays until app close.<br />
+					 *<br />
+					 */<br />
+					public class NoteListActivity extends ListActivity {<br />
+					<br />
+					&nbsp;//TODO: add static activity ids<br />
+					&nbsp;<br />
+					&nbsp;private static final int DELETE_ID = Menu.FIRST;<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * The controller that manages note data.<br />
+					&nbsp; */<br />
+					&nbsp;public NoteDBModel model;<br />
+					&nbsp;public NoteListAdapter adapter;<br />
+					&nbsp;<br />
+					&nbsp;@Override<br />
+					&nbsp;protected void onCreate(Bundle savedInstanceState) {<br />
+					&nbsp;&nbsp;super.onCreate(savedInstanceState);<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;model = new NoteSQLiteDBModel(this);<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;setContentView(R.layout.activity_note_list);<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;model.refreshNotes();<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;adapter = new NoteListAdapter(this, model.getNotes());<br />
+					&nbsp;&nbsp;model.setAdapter(adapter);<br />
+					&nbsp;&nbsp;setListAdapter(adapter);<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;registerForContextMenu(getListView());<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Creates the menu for the action bar.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public boolean onCreateOptionsMenu(Menu menu) {<br />
+					&nbsp;&nbsp;// Inflate the menu; this adds items to the action bar if it is present.<br />
+					&nbsp;&nbsp;getMenuInflater().inflate(R.menu.menu_note_list, menu);<br />
+					&nbsp;&nbsp;return true;<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Called when a menu item from the action bar is clicked.<br />
+					&nbsp; * Creates a note if add note is clicked.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public boolean onOptionsItemSelected(MenuItem item) {<br />
+					&nbsp;&nbsp;// Handle action bar item clicks here. The action bar will<br />
+					&nbsp;&nbsp;// automatically handle clicks on the Home/Up button, so long<br />
+					&nbsp;&nbsp;// as you specify a parent activity in AndroidManifest.xml.<br />
+					&nbsp;&nbsp;int id = item.getItemId();<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;//noinspection SimplifiableIfStatement<br />
+					&nbsp;&nbsp;if (id == R.id.action_addnote) {<br />
+					&nbsp;&nbsp;&nbsp;createNote();<br />
+					&nbsp;&nbsp;&nbsp;return true;<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;<br />
+					&nbsp;&nbsp;return super.onOptionsItemSelected(item);<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Creates a context menu when user long-presses a list item.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {<br />
+					&nbsp;&nbsp;super.onCreateContextMenu(menu, v, menuInfo);<br />
+					&nbsp;&nbsp;menu.add(0, DELETE_ID, 0, R.string.menu_deletenote);<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Called when a context item is clicked.<br />
+					&nbsp; * Deletes the note if delete is clicked.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;public boolean onContextItemSelected(MenuItem item) {<br />
+					&nbsp;&nbsp;switch(item.getItemId()) {<br />
+					&nbsp;&nbsp;&nbsp;case DELETE_ID:<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;model.deleteNote(model.getNoteByID(info.id));<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;return true;<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;&nbsp;return super.onContextItemSelected(item);<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Called when a new note is created.<br />
+					&nbsp; * Starts the edit activity.<br />
+					&nbsp; */<br />
+					&nbsp;private void createNote() {<br />
+					&nbsp;&nbsp;//TODO: spawn note edit activity<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Called when a note in the list is clicked.<br />
+					&nbsp; * Starts the edit activity, passing the note to edit.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;protected void onListItemClick(ListView l, View v, int position, long id) {<br />
+					&nbsp;&nbsp;super.onListItemClick(l, v, position, id);<br />
+					&nbsp;&nbsp;//TODO: spawn note edit activity passing note id<br />
+					&nbsp;}<br />
+					&nbsp;<br />
+					&nbsp;/**<br />
+					&nbsp; * Called when this activity is returned to from edit activity.<br />
+					&nbsp; * Refreshes the list with the new note data.<br />
+					&nbsp; */<br />
+					&nbsp;@Override<br />
+					&nbsp;protected void onActivityResult(int requestCode, int resultCode, Intent intent) {<br />
+					&nbsp;&nbsp;super.onActivityResult(requestCode, resultCode, intent);<br />
+					&nbsp;&nbsp;model.refreshNotes();<br />
+					&nbsp;}<br />
+					}
+				</code>
+				</p>
+
+				<p>
+					<code>ListActivity</code> is a predefined Android subclass of <code>Activity</code> that has convenient pre-made functionality for managing <code>ListView</code>s.
+				</p>
+				
+				<p>
+					When the <code>Activity</code> is created, we create a new model and adapter and bind them with the <code>ListView</code>.We also reference our menu_note_list for the options menu. The Context menu pops up when a row item is touched and held and we use this for deleting notes. The rest of the methods are stubs that we will fill out in the following chapters.
+				</p>
+				
+				<p>
+					That’s all for the basics of the note list! If you run the app this should be your result:
+				</p>
+				
+				<div align="center">
+				<figure style="display:inline-block; max-width: 37%; margin: 0px;">
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/04_Final.png" style="max-width: 75%;"/>
+					<figcaption><strong>Figure 4-4:</strong> <code>NoteListActivity</code>.</figcaption>
+				</figure>
+				
+				<figure style="display:inline-block; max-width: 37%; margin: 0px;">
+					<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/04_Final_Delete.png" style="max-width: 75%;"/>
+					<figcaption><strong>Figure 4-5:</strong> <code>NoteListActivity</code> long-press.</figcaption>
+				</figure>
+				</div>
+			</div>
+			
+			<div class="clear"></div>
+			
+		</div>
+		
+	</div>
+</body>
+</html>
