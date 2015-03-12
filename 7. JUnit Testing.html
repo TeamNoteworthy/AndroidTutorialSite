@@ -1,0 +1,171 @@
+<h2>JUnit Testing<h2>
+<p>
+	So we want to at least mention how JUnit testing is done in Android for those who are curious or concerned about it for any reason. This is going to be a very brief section that really only touches on a quick example or two because it’s difficult to write a fully comprehensive tutorial for this sort of thing. If you’ve never used JUnit testing before, you’ll understand why after reading this section.
+</p>
+<p>
+	The reason why it is so difficult to teach well is because JUnit testing doesn’t do anything on its own. It depends on your application and how you’ve written it, among other things. JUnit testing is a way to formally test programming and other implementation assumptions in your code that you have written in an automated way. The main way this is used is by building the JUnit test around the special case for which you’d like to test.
+</p>
+<p>
+	A good example of a basic JUnit test for something is easy to understand with a basic example. For now, let’s consider some code that looks like this:
+</p>
+<code>
+public class AdditionClass {
+
+	public int add(int a, int b) {
+		return a + b;
+	}
+
+}
+</code>
+<p>
+	This is about the most basic example of a Java class that one can create, but I’ll go over what I mean here. Basically, let’s say we wanted to test some addition cases for this AdditionClass. It’s easy to think of some test cases, because it’s just adding two numbers together. So for example, let’s make a quick test that assumes <code>a</code> is 1 and <code>b</code> is 3, so the result we would expect would be 4. An Android JUnit test case for this is a separate class that will look something like this:
+</p>
+<code>
+public class AdditionTest extends InstumentationTestCase {
+
+import AdditionClass;
+
+	public void test() throws Exception {
+
+		AdditionClass adder = new AdditionClass();
+
+		final int expected = 4;
+		final int a = 1;
+		final int b = 3;
+		
+		assertEquals(expected, adder.add(a,b));
+	}
+
+}
+</code>
+<p>
+	This is an extremely basic test case for something like this, and obviously the classes involved with our android application are a fair bit more complex, and thus require more elaborate testing. This example could have some important test cases to think about as well, for example, perhaps we could test for <code>a</code> being negative, and then <code>b</code> being negative, and then both, and then we could test for integer overflow correctness, etc. There are a dozen things just with this simple addition function that could be tested thoroughly. If you want to dig deeper into meta-analysis, one could even potentially test whether or not the line:
+</p>
+<code>
+AdditionClass adder = new AdditionClass();
+</code>
+<p>
+	is actually working as expected. There are some assumptions that we as programmers must make when we are creating an application or program. One of them is that Java works like it should, and that it is instantiating classes correctly. If we can’t make that assumption, then the JUnit test itself could be running incorrectly, and thus be completely invalid.
+</p>
+<p>
+	The difficult part of JUnit testing isn’t actually writing the test cases. The difficult part is determining what your edge cases are, and how you should realistically approach finding as many as you possibly can. This is something that is difficult to teach because involves a deeper understanding of your application or code that you are writing. Since we can’t really teach this part, we can at least teach how to set up a quick test case in Android Studio to get yourself started.
+</p>
+<h2>Android Studio JUnit Testing</h2>
+<p>
+	I’m making the assumption here that your application code is already imported/open in Android Studio. With that said, here’s what you need to do to get started:
+</p>
+<p>
+	Go ahead and add another package (folder) to your android project under the Java folder. Should look something like this when done: (Ignore the ExampleTest file, that won’t exist yet)
+</p>
+<figure>
+	<img src="" style="max-width:75%"/>
+	<figcaption><strong>Figure 7-1:</strong> Getting started.</figcaption>
+</figure>
+<p>
+	Click on Run, and then Edit Configurations...
+</p>
+<figure>
+	<img src="" style="max-width:75%"/>
+	<figcaption><strong>Figure 7-2:</strong> Run -> Edit configurations</figcaption>
+</figure>
+<p>
+	Then click the little + symbol, and click on Android Tests:
+</p>
+<figure>
+	<img src="" style="max-width:75%"/>
+	<figcaption><strong>Figure 7-3:</strong>Click on + -> Android Tests</figcaption>
+</figure>
+<p>
+	Select your current app module from the drop-down menu:
+</p>
+<figure>
+	<img src="" style="max-width:75%"/>
+	<figcaption><strong>Figure 7-4:</strong>Selecting your module from the drop-down menu</figcaption>
+</figure>
+<p>
+	You’re going to want the options to look something like this:
+</p>
+<figure>
+	<img src="" style="max-width:75%"/>
+	<figcaption><strong>Figure 7-5:</strong>Selecting the correct options</figcaption>
+</figure>
+<p>
+	I found it helpful to hit the “Show Chooser Dialog” button just because it lets you choose what device to run the tests on, which is sometimes helpful. Then, to finish it up, you just need to hit Apply, and then Close.
+</p>
+<p>
+	Now you have a defined testing folder (package) for Android to run tests correctly for you. This also lets the IDE know that you’ll need certain parts (the testing parts to be specific) of the SDK to be available inside that folder. This is for things like imports, etc.
+</p>
+<h2>A Quick Example Test File</h2>
+<code>
+TODO: Add ExampleTest.java HERE
+</code>
+<p>
+	So I wanted to go over what a quick test file could look like so that you have some perspective, and a hands-on sort of example to get started writing your own test cases for certain aspects of your application.
+</p>
+<p>
+	This file extends a class called AndroidTestCase which has some tools necessary for doing things like creating fake contexts that the Android parts of the program require to function properly.
+</p>
+<p>
+	To start off, the top of the tile just contains some variables that we’ll be testing against, and this example only tests that the notes() array has 1 object, and that it has ID 1, and the same text and stuff as our “expected” note. This is just to make sure the database has saved the data we wanted, and then the NoteSQLiteDBModel class created the notes ArrayList correctly with one note in it that has the values we expect.
+</p>
+<p>
+	Since we don’t want to make any assumptions about how Java tests equality between ArrayLists, we can write our own quick function that compares two <Note> ArrayLists for the same notes, and not based on attributes such as the ArrayList memory address or any other Java meta-stuff we don’t need.
+</p>
+<p>
+	Basically, this function compareNotesArrays() just compares two ArrayLists of Notes together to make sure they are the same, and returns an integer (in this case acting as an error code) representing the status of the two ArrayLists. This function can be more complicated or simple depending on your needs as a tester, but this suffices this simple example.
+</p>
+<p>
+	The setUp() function is called only once inside of AndroidTestCase classes, and so can therefore be used to set up the variables that we need initialized properly only once, like the database and the dummy context we’re using to test the database.
+</p>
+<p>
+	Then the test function literally just creates a note, and shoves it into the database. We grab the notes ArrayList from the NoteSQLiteDBModel, and then compare it with our “expected” test case arraylist we created as a variable of the ExampleTest class earlier. If they are the same, then the database should be behaving correctly. If you run this test with our application, you will find that everything is as it should be, and it correctly adds one Note to the Arraylist of Notes in the way we expect it to, so this test was a success.
+</p>
+<h2>Future Testing</h2>
+<p>
+	There are many things that could be improved about this test, and there are many more tests that could be written to fully test our application to the absolute limit. However, since this is an example application, it’s not as important.
+</p>
+<p>
+	Some things to consider for your own applications in the future:
+</p>
+<ol>
+	<li>Data Dependencies (Databases, other storage concerns, etc.)</li>
+	<li><ul>
+			<li>Inserting/Deletion</li>
+			<li>Incorrect data values (do you handle errors gracefully without crashing?</li>
+			<li>Expected value testing: Insertion and Deletion</li>
+		</ul>
+	</li>
+	<li>Android-based testing</li>
+	<li><ul>
+			<li>Do Activities fire properly?</li>
+			<li>Are the Intents being created with the correct payloads?</li>
+			<li>Are your Contexts working as they should?</li>
+		</ul>
+	</li>
+	<li>Null Checks</li>
+	<li><ul>
+			<li>Throw null at everything and see how the Application reacts</li>
+			<li>Fix NullPointerExceptions where necessary</li>
+		</ul>
+	</li>
+	<li>Test assumptions</li>
+	<li><ul>
+			<li>Make tests cases with explicit rules and assumptions stated, and make sure they work as intended</li>
+		</ul>
+	</li>
+</ol>
+<p>
+	There are many more things to think about, but overall just have the mindset that testing is meant to break stuff intentionally. If you break stuff early and often, you will be able to fix it in a timely manner, and most importantly <b>BEFORE</b> you release your application to the public. How awful would it be if you released a new app whose main screen button didn’t work after you used the Android back button at some point within the program for some obscure reason? You don’t want this to happen, so test everything and anything you can think of.
+</p>
+<p>
+	The benefit of writing tests that are formal like this is that you can change the way your program works internally, and still run all the same tests over and over, assuming there are few internal variable name changes, etc. and therefore test at every new point in development as you go, and as you release (or plan to release) future updates to your application. If you make the tests robust enough, this will lighten your load later if you plan to deal with bug reports, etc.
+</p>
+<p>
+	The main rule of thumb for testing is <b>be thorough</b>! The other rule is <b>TRY</b> to break it. Don’t be gentle with testing when you can afford to be ruthless. Every test case you run teaches you something about the internal workings of your program, and if your tests fail, then there is something that could potentially go wrong that should be fixed. Sometimes this is your fault as a programmer, and sometimes it’s created through some interaction with some 3rd party API that you happen to be using (Android’s API is a possible candidate). 
+</p>
+<p>
+	Don’t ever assume your program works entirely the way you intended, and definitely don’t assume that the user is trustworthy. If a user can break your program from the interface that you have provided them with, you are doing something wrong.
+</p>
+<p>
+	Good luck with your future testing endeavors. May no bugs pass under your nose!
+</p>
