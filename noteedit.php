@@ -1,5 +1,5 @@
 <?php
     include("header.html");
-    include("4. NoteList.html");
+    include("noteedit.html");
     include("footer.html");
 ?>
