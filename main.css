@@ -56,17 +56,25 @@ pre.code code {
 
 .leftnav ul li {
 	float: left;
-}
-
-.leftnav a:link, a:visited{
-	display: block;
-	width: 150px;
+	display: inline-block;
+	width: auto;
+	min-width:150px;
 	padding: 7px;
 	text-align:center;
 	background-color: #333;
+	font-size:20px;
+}
+
+.leftnav a{
 	text-decoration: none;
-	font-size: 20px;
+}
+.leftnav a:link{
+
 	color: #FFF;
+}
+
+.leftnav a:visited{
+	color:#AC75AC;
 }
 
 .leftnav a:hover, a:active {
