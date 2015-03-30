@@ -1,5 +1,5 @@
 <?php
     include("header.html");
-    include("shipcode.html");
+    include("01intro.html");
     include("footer.html");
 ?>
