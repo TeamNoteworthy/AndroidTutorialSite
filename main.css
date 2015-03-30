@@ -133,3 +133,13 @@ a:hover {
 a:active {
     color: #FF0000;
 }
+
+input.dynamicTriangle{
+	background-image: url(/images/dynamic_triangle);
+	background-color:transparent;
+	background-repeat:no-repeat;
+	border:none;
+	float:right;
+	cursor:pointer;
+
+}
