@@ -5,13 +5,41 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<link rel="stylesheet" href="main.css" type="text/css">
 	<link href="tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.css?v=2.1.5" media="screen">
+    
+    <script src="jquery-1.11.2.min.js"></script>
+	<script src="tipuesearch/tipuesearch_set.js"></script>
+	<script src="tipuesearch/tipuesearch.js"></script>
+	<script src="fancybox/jquery.fancybox.js?v=2.1.5"></script>
+    
+    <script>
+    $(document).ready(function() {
+		 $('.fancybox').fancybox();
+		 
+		 $(".fancybox-img").fancybox({
+			wrapCSS     : 'fancybox-custom',
+			padding     : 0,
+
+			openEffect  : 'elastic',
+			openSpeed   : 150,
+
+			closeEffect : 'elastic',
+			closeSpeed  : 150,
+
+			closeClick  : true,
+
+			helpers : {
+				overlay : {
+					css : {
+						'background' : 'rgba(238,238,238,0.85)'
+					},
+					locked: false
+				}
+			}
+		});
+    });
+    </script>
 </head>
-<script src="jquery-1.11.2.min.js"""></script>
-<script>
-$(document).ready(function() {
-     $('#tipue_search_input').tipuesearch();
-});
-</script>
 <body>
 	<div id="wrapper">
 		<header class="header">

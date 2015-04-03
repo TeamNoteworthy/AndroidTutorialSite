@@ -122,6 +122,12 @@ pre.code code {
 	
 }
 
+/* image sizes */
+img {
+    max-width: 75%;
+    max-height: 600px;
+}
+
 /* unvisited link */
 a:link {
     color: #0000FF;
@@ -143,7 +149,7 @@ a:active {
 }
 
 input.expander{
-	background-image: url(/images/dynamic_triangle.png);
+	background-image: url(./images/dynamic_triangle.png);
 	background-color:transparent;
 	background-repeat:no-repeat;
 	border:none;
