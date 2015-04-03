@@ -1,17 +1,11 @@
 html, body {
 	position: relative;
 	height: 100%;
-	background-color: #000080
-}
-
-p, h1 {
-	color:#ffffff;
 }
 
 code, pre.code {
 	background:#EEEEEE;
 	padding:3px;
-	color: #e5c100
 }
 
 pre.code code {
@@ -33,7 +27,7 @@ pre.code code {
 }
 
 .nav {
-	height: 37px;
+	height: 60px;
 	width: 70%;
 	margin: 0 auto;
 	background-color: #333;
@@ -44,18 +38,19 @@ pre.code code {
 }
 
 .search {
-	float: left;
+	float: right;
+	margin: 6px 100px 0 0;
 }
 
 .search p {
-	margin: 9px 0 0 200px;
+	
 	padding: 0;
 	color: #FFF;
 }
 
 .leftnav ul {
 	list-style-type: none;
-	margin: 0;
+	margin: 8px 0 0 0;
 	padding: 0;
 	overflow: hidden;
 }
@@ -65,7 +60,7 @@ pre.code code {
 	display: inline-block;
 	width: auto;
 	min-width:150px;
-	padding: 7px;
+	padding: 10px;
 	text-align:center;
 	background-color: #333;
 	font-size:20px;
@@ -97,8 +92,7 @@ pre.code code {
 }
 
 .toc {
-	float: left;
-	width: 15%;
+	position: fixed;
 }
 
 .toc h1 {
@@ -116,8 +110,16 @@ pre.code code {
 
 
 .content {
-	float: left;
-	width: 85%;
+	width: 70%;
+	margin: 0 0 0 200px;
+}
+
+.dynamicSection {
+
+	display: none;
+	background: #CCC;
+	width: 92%;
+	
 }
 
 /* unvisited link */
@@ -140,12 +142,17 @@ a:active {
     color: #FF0000;
 }
 
-input.dynamicTriangle{
-	background-image: url(/images/dynamic_triangle);
+input.expander{
+	background-image: url(/images/dynamic_triangle.png);
 	background-color:transparent;
 	background-repeat:no-repeat;
 	border:none;
 	float:right;
 	cursor:pointer;
-
+	width: 52px;
+	height: 47px;
+	-moz-transition: transform 1s;
+	-webkit-transition: transform 1s;
+	transition: transform 1s;
+	
 }

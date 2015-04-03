@@ -1,4 +1,6 @@
-<head><title>Step 1: Intro to Android</title></head>
+<head><title>Step 1: Intro to Android</title>
+
+</head>
 <h1>Step 1: Intro to Android</h1>
 
 <h3>History</h3>
@@ -7,11 +9,13 @@
 	Android is an open source Operating System (OS) for mobile platforms, particularly for phones and tablets. It was developed by Google, but other companies (particularly hardware manufacturers) have written customizable OS layouts (known as flavors) on top of the OS.
 </p>
 
-<input type="button" class="dynamicTriangle"/>
-<div id="dynamicSection">
+<div>
+<input type="button" class="expander"/>
+<div class="dynamicSection">
 <p>
 	Its various versions have various desserts as nicknames, created in alphabetical order--Froyo (2.2), Gingerbread (2.3), Ice Cream Sandwich (4.0), Jelly Bean (4.1), KitKat (4.4), and Lollipop (5.0) to name a few of the better known ones.
 </p>
+</div>
 </div>
 
 <p>
@@ -20,8 +24,9 @@
 
 <h3>Architecture</h3>
 
-<input type="button" class="dynamicTriangle"/>
-<div id="dynamicSection">
+<div>
+<input type="button" class="expander"/>
+<div class="dynamicSection">
 <p>
 	Android has a Linux kernel written in C as a hardware abstraction layer. Its native framework is written in C and C++ in user mode. A few notable components of the native framework:
 </p>
@@ -33,6 +38,7 @@
 	<li>Webkit browser engine for rendering HTML.</li>
 	<li>Android Runtime (ART)--compiled bytecode optimized for low resource usage.   Previously, this was the Dalvik Virtual Machine.  This allows multiple instances of core libaries (utility classes, IO libaries, etc.) so they can be used by multiple apps. ART is an Ahead Of Time (AOT) compiler--at the time the app is installed, a tool (<a href="http://source.android.com/devices/tech/dalvik/">dex2oat</a>) compiles apps to the particular device's native machine code so it runs faster on that particular device.</li>
 </ul>
+</div>
 </div>
 
 <p>
@@ -57,7 +63,7 @@
 		<li>The layout of the screen is usually defined in an XML file so you can separate screen layout from functional code</li>
 		<li>You must define all <code>Activities</code> in the <code>Manifest</code> [demonstrated <a href="http://developer.android.com/guide/components/activities.html#Declaring">here</a>].  Once you've defined the <code>Activity</code>'s name and published it, you cannot change the name for reasons explained <a href="http://android-developers.blogspot.com/2011/06/things-that-cannot-change.html">here</a>.</li>
 	</ul>
-	<li><code>BroadcastReceivers</code> respond to an event from outside the app.  <input type="button" class="dynamicTriangle"/><div id="dynamicSection">Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We'll only touch on this in this tutorial, but you can find more info <a href="http://developer.android.com/reference/android/content/Intent.html">here</a>.</li></div>
+	<li><code>BroadcastReceivers</code> respond to an event from outside the app.<div><input type="button" class="expander"/><div class="dynamicSection">Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We'll only touch on this in this tutorial, but you can find more info <a href="http://developer.android.com/reference/android/content/Intent.html">here</a>.</div></div></li>
 	<li><code>Services</code> are tasks that run without UIs.  You would want these if you need something to run in the background while the UI is not being displayed because the user has switched to another application.  The <code>Service</code> can later be connected to the UI.  A music application would use this to play music while the user switches to other apps.</li>
 </ul>
 
@@ -72,14 +78,15 @@
 </p>
 
 <p>
-	The Home application (like the Desktop of Android) is always running so it's easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  <input type="button" class="dynamicTriangle"/><div id="dynamicSection">The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.</div>
+	The Home application (like the Desktop of Android) is always running so it's easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  <div><input type="button" class="expander"/><div class="dynamicSection">The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.</div></div><br/><br/>
 </p>
 
 <p>
 	Android will give the app an opportunity to save and restore its state with various callback methods. Figure 1-1 (taken from <a href="http://developer.android.com/guide/components/activities.html">Android's documentation</a>) will help to clarify.
 </p>
-<input type="button" class="dynamicTriangle"/>
-<div id="dynamicSection">
+<div>
+<input type="button" class="expander"/>
+<div class="dynamicSection">
 <ul>
 	<li><code>onCreate()</code> gets called when your <code>Activity</code> is created.</li>
 	<li><code>onPause()</code> gets called when Android takes your <code>Activity</code> off the foreground. This is the only method that's guaranteed to be called before an <code>Activity</code> is destroyed (<code>onStop()</code> and <code>onDestroy()</code> are not called in case of an emergency), but it also should be lightweight since it's called frequently.  So make it comprehensive but short! <code>onResume()</code> restores this state.</li>
@@ -88,6 +95,7 @@
 	<li>The app's foreground lifetime ranges from <code>onResume()</code> to <code>onPause()</code>.</li>
 	<li><code>onSaveInstanceState()</code> and <code>onRestoreInstanceState()</code> are only for saving the state of the UI, but not persistent data. There are default versions already implemented that you can override.</li>
 </ul>
+</div>
 </div>
 
 <figure>
@@ -112,9 +120,9 @@
 <p>
 	On older devices (as pictured in Figure 1-3), you'll find more fixed, dedicated buttons for the following functions.
 </p>
-
-<input type="button" class="dynamicTriangle"/>
-<div id="dynamicSection">
+<div>
+<input type="button" class="expander"/>
+<div class="dynamicSection">
 <ul>
 	<li>Return</li>
 	<li>Menu (for a menu specific to each app)</li>
@@ -126,6 +134,7 @@
 	<img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/01_Old_Android_Buttons.png"/>
 	<figcaption><strong>Figure 1-3:</strong> Buttons on older devices (<a href="http://www.geek.com/mobile/android-4-0-soft-buttons-vs-software-buttons-1484277/">taken from here</a>).</figcaption>
 </figure>
+</div>
 </div>
 
 <p>
