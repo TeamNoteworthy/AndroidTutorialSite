@@ -11,7 +11,7 @@ p, h1{
 code, pre.code {
 	background:#EEEEEE;
 	padding:3px;
-	color:#e5c100;
+	color:#CC9900;
 }
 
 pre.code code {
@@ -36,7 +36,7 @@ pre.code code {
 	height: 60px;
 	width: 70%;
 	margin: 0 auto;
-	background-color: #333;
+	background-color: #FFFFFF;
 }
 
 .leftnav {
@@ -68,7 +68,7 @@ pre.code code {
 	min-width:150px;
 	padding: 10px;
 	text-align:center;
-	background-color: #333;
+	background-color: #CC9900;
 	font-size:20px;
 }
 
@@ -105,7 +105,7 @@ pre.code code {
 	font-size: 24px;
 	margin: 0 0 0 17px;
 	padding: 0;
-	color: #FF0000;
+	color: #000066;
 }
 
 .toc ul {
@@ -146,12 +146,12 @@ a:visited {
 
 /* mouse over link */
 a:hover {
-    color: #FF0000;
+    color: #000066;
 }
 
 /* selected link */
 a:active {
-    color: #FF0000;
+    color: #000066;
 }
 
 input.expander{
