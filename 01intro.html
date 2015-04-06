@@ -10,7 +10,7 @@
 </p>
 
 <div>
-<input type="button" class="expander"/>
+<input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
 <p>
 	Its various versions have various desserts as nicknames, created in alphabetical order--Froyo (2.2), Gingerbread (2.3), Ice Cream Sandwich (4.0), Jelly Bean (4.1), KitKat (4.4), and Lollipop (5.0) to name a few of the better known ones.
@@ -25,7 +25,7 @@
 <h3>Architecture</h3>
 
 <div>
-<input type="button" class="expander"/>
+<input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
 <p>
 	Android has a Linux kernel written in C as a hardware abstraction layer. Its native framework is written in C and C++ in user mode. A few notable components of the native framework:
@@ -63,7 +63,7 @@
 		<li>The layout of the screen is usually defined in an XML file so you can separate screen layout from functional code</li>
 		<li>You must define all <code>Activities</code> in the <code>Manifest</code> [demonstrated <a href="http://developer.android.com/guide/components/activities.html#Declaring">here</a>].  Once you've defined the <code>Activity</code>'s name and published it, you cannot change the name for reasons explained <a href="http://android-developers.blogspot.com/2011/06/things-that-cannot-change.html">here</a>.</li>
 	</ul>
-	<li><code>BroadcastReceivers</code> respond to an event from outside the app.<div><input type="button" class="expander"/><div class="dynamicSection">Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We'll only touch on this in this tutorial, but you can find more info <a href="http://developer.android.com/reference/android/content/Intent.html">here</a>.</div></div></li>
+	<li><code>BroadcastReceivers</code> respond to an event from outside the app.<div><input type="button" class="dynamicTriangle"/><div class="dynamicSection">Since they are based on an interface, the app initiating the event can be swapped for any other app with the same functionality.  You define which Intents your app can receive in the <code>Manifest</code> file.  We'll only touch on this in this tutorial, but you can find more info <a href="http://developer.android.com/reference/android/content/Intent.html">here</a>.</div></div></li>
 	<li><code>Services</code> are tasks that run without UIs.  You would want these if you need something to run in the background while the UI is not being displayed because the user has switched to another application.  The <code>Service</code> can later be connected to the UI.  A music application would use this to play music while the user switches to other apps.</li>
 </ul>
 
@@ -78,14 +78,14 @@
 </p>
 
 <p>
-	The Home application (like the Desktop of Android) is always running so it's easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  <div><input type="button" class="expander"/><div class="dynamicSection">The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.</div></div><br/><br/>
+	The Home application (like the Desktop of Android) is always running so it's easily accessible, but other Android applications use a LIFO stack of <code>Activities</code> so Android can easily go back through a series of screens.  <div><input type="button" class="dynamicTriangle"/><div class="dynamicSection">The goal is for a user to be able to switch through applications without worrying about whether the device has sufficient resources.  Android takes care of all resource management behind the scenes--it kills and restarts processes as necessary to create a fluid experience across <code>Activities</code> within an app and across apps.</div></div><br/><br/>
 </p>
 
 <p>
 	Android will give the app an opportunity to save and restore its state with various callback methods. Figure 1-1 (taken from <a href="http://developer.android.com/guide/components/activities.html">Android's documentation</a>) will help to clarify.
 </p>
 <div>
-<input type="button" class="expander"/>
+<input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
 <ul>
 	<li><code>onCreate()</code> gets called when your <code>Activity</code> is created.</li>
@@ -127,7 +127,7 @@
 	On older devices (as pictured in Figure 1-3), you'll find more fixed, dedicated buttons for the following functions.
 </p>
 <div>
-<input type="button" class="expander"/>
+<input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
 <ul>
 	<li>Return</li>
