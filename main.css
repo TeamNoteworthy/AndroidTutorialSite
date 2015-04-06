@@ -1,11 +1,17 @@
 html, body {
 	position: relative;
 	height: 100%;
+	background-color: #FFFFFF;
+}
+
+p, h1{
+	color:#FFFFFF;
 }
 
 code, pre.code {
 	background:#EEEEEE;
 	padding:3px;
+	color:#e5c100;
 }
 
 pre.code code {
