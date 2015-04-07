@@ -5,7 +5,7 @@ html, body {
 }
 
 p, h1{
-	color:#FFFFFF;
+	color:black;
 }
 
 code, pre.code {
@@ -123,7 +123,7 @@ pre.code code {
 .dynamicSection {
 
 	display: none;
-	background: #CCC;
+	background: #A1E4E7;
 	width: 92%;
 	
 }
