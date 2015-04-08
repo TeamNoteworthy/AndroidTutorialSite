@@ -136,10 +136,23 @@ pre.code code {
 	
 }
 
+table {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table td {
+    display: table-cell;
+    text-align: center;
+}
+
 /* image sizes */
 img {
     max-width: 75%;
-    max-height: 600px;
+    max-height: 400px;
 }
 
 /* unvisited link */
