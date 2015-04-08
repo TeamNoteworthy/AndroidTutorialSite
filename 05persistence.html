@@ -15,7 +15,7 @@
 </p>
 
 <div style="margin:0 auto; padding: 0;">
-	<table>
+	<table style="border:1px solid #000;">
 		<tr>
 			<td><b>EmployeeID</b></td>
 			<td><b>First Name</b></td>
@@ -52,7 +52,7 @@
 
 <h3>Notes</h3>
 <div style="margin:0 auto; padding: 0;">
-	<table>
+	<table style="border:1px solid #000;">
 		<tr>
 			<td><b>_id</b></td>
 			<td><b>title</b></td>
@@ -97,15 +97,292 @@ CREATE TABLE notes (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, 
 <p>
 	The onCreate() function is called when the database needs to be created (more on this shortly), and the onUpgrade function can do many things, but we decided to use it primarily during testing to refresh the entire database of notes at once if necessary. On to the next parts of code!
 </p>
-<code>
-TODO: Put SQLiteOpenHelper HERE
-</code>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
+<pre class="code">
+<code>package edu.gatech.androidnoteapp;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+/**
+ * Created by Ses on 2/14/2015.
+ */
+public class NoteSQLiteHelper extends SQLiteOpenHelper {
+
+
+    /**
+     * Public static final (unalterable) strings for use in other classes in case these change
+     * for some reason
+     */
+    public static final String TABLE_NOTES =    "notes";
+    public static final String COLUMN_ID =      "_id";
+    public static final String COLUMN_TITLE =   "title";
+    public static final String COLUMN_TEXT =    "text";
+    public static final String COLUMN_DATE =    "date";
+    public static final String COLUMN_COLOR =   "color";
+
+    /**
+     * Actual file stored on disk (On the Android device)
+     */
+    private static final String DATABASE_NAME = "notes.db";
+
+    /**
+     * Dummy variable to make Android behave
+     */
+    private static final int DATABASE_VERSION = 1;
+
+
+    /**
+     * Database creation string, formatted weirdly in the editor so it's
+     * easier to read for a human mostly
+     *
+     * Creates a table called notes inside of notes.db with row structure:
+     * | _id | title | text | date | color |
+     *
+     * _id = primary key, just an auto-incrementing integer
+     * title = title of the note
+     * text = body content of the note
+     * date = date note was last edited
+     * color = for future use, potential color of note
+     */
+    private static final String DATABASE_CREATE =
+            "CREATE TABLE " + TABLE_NOTES
+                    + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COLUMN_TITLE + " TEXT NOT NULL, "
+                    + COLUMN_TEXT  + " TEXT, "
+                    + COLUMN_DATE  + " TEXT, "
+                    + COLUMN_COLOR + " TEXT)";
+
+    /**
+     * Calls the constructor for a context-sensitive SQLite database
+     **/
+    public NoteSQLiteHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    /**
+     * Calls the simple CREATE TABLE... code to actually initialize the database
+     **/
+    @Override
+    public void onCreate(SQLiteDatabase database) {
+        database.execSQL(DATABASE_CREATE);
+    }
+
+    /**
+     * An onUpgrade function required to make this work properly.
+     * Version isn't stored anywhere internally or anything, so it's basically just a dummy variable
+     * used to flush the entire database table on demand.
+     **/
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.w("SQLiteDBUpgrade", "Upgrading database");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+        onCreate(db);
+    }
+}
+</code></pre>
+</div></div>
 <p>
 	The next code to look at is the whole point of the helper class, which is to actually go into the database and edit and change stuff as we please. The code for this entire process is below:
 </p>
-<code>
-TODO: Put NoteSQLiteDBModel HERE
-</code>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
+<pre class="code">
+<code>package edu.gatech.androidnoteapp;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+/**
+ * An implementation of a notes database that uses SQLite for storage.
+ */
+public class NoteSQLiteDBModel implements NoteDBModel {
+
+    /**
+     * List of notes, mirrored from database data.
+     */
+    private ArrayList<Note> notes = new ArrayList<Note>();
+
+    /**
+     * The adapter that should update
+     */
+    private NoteListAdapter adapter;
+
+    /**
+     * The actual SQLite database being changed
+     */
+    private SQLiteDatabase database;
+
+    /**
+     * Helper class for initializing and clearing the database when necessary
+     */
+    private NoteSQLiteHelper dbHelper;
+
+    /**
+     * String array of all column names in the database for use later
+     */
+    private String[] allColumns = {
+            NoteSQLiteHelper.COLUMN_ID,
+            NoteSQLiteHelper.COLUMN_TITLE,
+            NoteSQLiteHelper.COLUMN_TEXT,
+            NoteSQLiteHelper.COLUMN_DATE,
+            NoteSQLiteHelper.COLUMN_COLOR
+    };
+
+    /**
+     * Standard constructor for the SQLiteModel, initializes the dbHelper variable so we can access the correct database
+     * @param context Android context (usually an activity)
+     */
+    public NoteSQLiteDBModel(Context context) {
+        dbHelper = new NoteSQLiteHelper(context);
+        try {
+            database = dbHelper.getWritableDatabase();
+        } catch (SQLException e) {
+            Log.w("SQLiteDBError", "Failed to find writable database, check system storage capacity");
+        }
+    }
+
+    /**
+     * Sets the adapter to be notified when the data changes
+     * @param adapter The adapter to notify
+     */
+    public void setAdapter(NoteListAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    /**
+     * Refreshes the (ArrayList<Note> notes) from the database
+     */
+    public void refreshNotes() {
+
+        notes.clear(); //clear the notes array so that there aren't any bugs later with the garbage collector
+
+        Cursor cursor = database.query(NoteSQLiteHelper.TABLE_NOTES, allColumns, null, null, null, null, null); //query the database to grab all notes
+
+        if(cursor == null) {
+            Log.w("SQLiteDBError", "SQLite cursor returning null, something broke");
+            return;
+        }
+
+        cursor.moveToFirst(); //set the cursor to look at the very first row in the return query
+        while(!cursor.isAfterLast()) {
+            Note temp = cursorToNote(cursor);
+            this.notes.add(temp);
+            cursor.moveToNext();
+        }
+
+        cursor.close(); //not using the cursor any more, so don't need it
+
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Standard getter for the notes ArrayList
+     * @return notes ArrayList
+     */
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+
+    /**
+     * Restart the database if necessary
+     */
+    public void restartDB() {
+        dbHelper.onUpgrade(database, 1, 2);
+    }
+
+    /**
+     * Private helper function to convert an Android SQLite Cursor into an actual Java Note Object
+     * @param cursor SQLite cursor pointed at a database
+     * @return temp, the note object generated by the SQLite cursor
+     */
+    private Note cursorToNote(Cursor cursor) {
+        java.sql.Date noteDate;
+        try {
+            noteDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(cursor.getString(3)).getTime());
+        } catch (ParseException e) {
+            noteDate = new java.sql.Date(0);
+        }
+
+        Note temp = new Note(cursor.getLong(0), cursor.getString(1), cursor.getString(2), noteDate, cursor.getString(4));
+        return temp;
+    }
+
+    /**
+     * Adds a note to the database and calls refreshNotes() to fix the ArrayList appropriately
+     * @param note The note to create.
+     */
+    public void createNote(Note note) {
+        ContentValues values = new ContentValues();
+        values.put(NoteSQLiteHelper.COLUMN_TITLE, note.getTitle());
+        values.put(NoteSQLiteHelper.COLUMN_TEXT, note.getText());
+        values.put(NoteSQLiteHelper.COLUMN_DATE, note.getDate().toString());
+        values.put(NoteSQLiteHelper.COLUMN_COLOR, note.getColor());
+
+        long insertID = database.insert(NoteSQLiteHelper.TABLE_NOTES, null, values);
+
+        Cursor cursor = database.query(NoteSQLiteHelper.TABLE_NOTES, allColumns, NoteSQLiteHelper.COLUMN_ID + " = " + insertID, null, null, null, null);
+        if(cursor == null) {
+            Log.w("SQLiteDatabaseError", "Null cursor, something broke");
+            return;
+        }
+        refreshNotes();
+    }
+
+    /**
+     * Saves a note's data in the database, then calls refreshNotes() to rebuild the ArrayList appropriately
+     * @param note The note to save.
+     */
+    public void saveNote(Note note) {
+        ContentValues values = new ContentValues();
+        values.put(NoteSQLiteHelper.COLUMN_TITLE, note.getTitle());
+        values.put(NoteSQLiteHelper.COLUMN_TEXT, note.getText());
+        values.put(NoteSQLiteHelper.COLUMN_DATE, note.getDate().toString());
+        values.put(NoteSQLiteHelper.COLUMN_COLOR, note.getColor());
+
+        database.update(NoteSQLiteHelper.TABLE_NOTES, values, NoteSQLiteHelper.COLUMN_ID + " = ?", new String[] {String.valueOf(note.getID())});
+
+        refreshNotes();
+    }
+
+    /**
+     * Deletes a note based on it's ID inside the database
+     * @param note The note to delete.
+     */
+    public void deleteNote(Note note) {
+        long id = note.getID();
+
+        System.out.println("Item Deleted with ID = " + id); //console printout for debugging later
+        database.delete(NoteSQLiteHelper.TABLE_NOTES, NoteSQLiteHelper.COLUMN_ID + " = " + id, null);
+
+        refreshNotes();
+    }
+
+    public Note getNoteByID(long id) {
+        for (Note note : notes) {
+            if (note.getID() == id) {
+                return note;
+            }
+        }
+
+        return null;
+    }
+}
+</code></pre>
+</div></div>
 <p>
 	Since we’ve decided to use the Model-View-Controller design paradigm for this project, this class is called the NoteSQLiteDBModel. It’s a “model” of the SQLite database that the rest of the application can use to display stuff to the user.
 </p>

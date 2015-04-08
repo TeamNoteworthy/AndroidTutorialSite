@@ -223,7 +223,7 @@ a:active {
     color: #000066;
 }
 
-input.expander{
+input.dynamicTriangle{
 	background-image: url(./images/dynamic_triangle.png);
 	background-color:transparent;
 	background-repeat:no-repeat;

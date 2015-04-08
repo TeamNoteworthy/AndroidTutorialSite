@@ -9,20 +9,26 @@
 <p>
 	A good example of a basic JUnit test for something is easy to understand with a basic example. For now, let’s consider some code that looks like this:
 </p>
-<code>
-public class AdditionClass {
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
+<pre class="code">
+<code>public class AdditionClass {
 
 	public int add(int a, int b) {
 		return a + b;
 	}
 
 }
-</code>
+</code></pre>
+</div></div>
 <p>
 	This is about the most basic example of a Java class that one can create, but I’ll go over what I mean here. Basically, let’s say we wanted to test some addition cases for this AdditionClass. It’s easy to think of some test cases, because it’s just adding two numbers together. So for example, let’s make a quick test that assumes <code>a</code> is 1 and <code>b</code> is 3, so the result we would expect would be 4. An Android JUnit test case for this is a separate class that will look something like this:
 </p>
-<code>
-public class AdditionTest extends InstumentationTestCase {
+
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
+<pre class="code">
+<code>public class AdditionTest extends InstumentationTestCase {
 
 import AdditionClass;
 
@@ -38,7 +44,8 @@ import AdditionClass;
 	}
 
 }
-</code>
+</code></pre>
+</div></div>
 <p>
 	This is an extremely basic test case for something like this, and obviously the classes involved with our android application are a fair bit more complex, and thus require more elaborate testing. This example could have some important test cases to think about as well, for example, perhaps we could test for <code>a</code> being negative, and then <code>b</code> being negative, and then both, and then we could test for integer overflow correctness, etc. There are a dozen things just with this simple addition function that could be tested thoroughly. If you want to dig deeper into meta-analysis, one could even potentially test whether or not the line:
 </p>
@@ -58,38 +65,44 @@ AdditionClass adder = new AdditionClass();
 <p>
 	Go ahead and add another package (folder) to your android project under the Java folder. Should look something like this when done: (Ignore the ExampleTest file, that won’t exist yet)
 </p>
+<div align="center">
 <figure>
-	<img src="" style="max-width:75%"/>
+	<a class="fancybox-img" href="images/07_exampletest.jpg" title = "Figure 7-1: Getting Started"><img src="images/07_exampletest.jpg" style="max-width:75%" alt=""/></a>
 	<figcaption><strong>Figure 7-1:</strong> Getting started.</figcaption>
 </figure>
+</div>
 <p>
 	Click on Run, and then Edit Configurations...
 </p>
+<div align="center">
 <figure>
-	<img src="" style="max-width:75%"/>
+	<a class="fancybox-img" href="images/07_editconfigs.png" title = "Figure 7-2: Run -> Edit Configurations"><img src="images/07_editconfigs.png" style="max-width:75%" alt=""/></a>
 	<figcaption><strong>Figure 7-2:</strong> Run -> Edit configurations</figcaption>
-</figure>
+</figure></div>
 <p>
 	Then click the little + symbol, and click on Android Tests:
 </p>
+<div align="center">
 <figure>
-	<img src="" style="max-width:75%"/>
+	<a class="fancybox-img" href="images/07_androidtests.png" title = "Figure 7-3: Click on + -> Android Tests"><img src="images/07_androidtests.png" style="max-width:75%" alt=""/></a>
 	<figcaption><strong>Figure 7-3:</strong>Click on + -> Android Tests</figcaption>
-</figure>
+</figure></div>
 <p>
 	Select your current app module from the drop-down menu:
 </p>
+<div align="center">
 <figure>
-	<img src="" style="max-width:75%"/>
+	<a class="fancybox-img" href="images/07_appmodule.png" title = "Figure 7-4: Selecting your module from the drop-down menu"><img src="images/07_appmodule.png" style="max-width:75%" alt=""/></a>
 	<figcaption><strong>Figure 7-4:</strong>Selecting your module from the drop-down menu</figcaption>
-</figure>
+</figure></div>
 <p>
 	You’re going to want the options to look something like this:
 </p>
+<div align="center">
 <figure>
-	<img src="" style="max-width:75%"/>
+	<a class="fancybox-img" href="images/07_options.png" title = "Figure 7-5: Selecting the correct options"><img src="images/07_options.png" style="max-width:75%" alt=""/></a>
 	<figcaption><strong>Figure 7-5:</strong>Selecting the correct options</figcaption>
-</figure>
+</figure></div>
 <p>
 	I found it helpful to hit the “Show Chooser Dialog” button just because it lets you choose what device to run the tests on, which is sometimes helpful. Then, to finish it up, you just need to hit Apply, and then Close.
 </p>
@@ -97,9 +110,81 @@ AdditionClass adder = new AdditionClass();
 	Now you have a defined testing folder (package) for Android to run tests correctly for you. This also lets the IDE know that you’ll need certain parts (the testing parts to be specific) of the SDK to be available inside that folder. This is for things like imports, etc.
 </p>
 <h2>A Quick Example Test File</h2>
-<code>
-TODO: Add ExampleTest.java HERE
-</code>
+
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
+<pre class="code">
+<code>package test;
+
+import android.test.AndroidTestCase;
+import android.test.RenamingDelegatingContext;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+import edu.gatech.androidnoteapp.*;
+
+/**
+ * Created by Ses on 2/25/2015.
+ */
+public class ExampleTest extends AndroidTestCase {
+
+    Note expected = new Note(1, "test", "test_body", new Date(0), "#FFFFFF");
+    ArrayList notesExpected = new ArrayList<Note>();
+
+    RenamingDelegatingContext context;
+    NoteSQLiteDBModel dbmodel;
+
+    public int compareNotesArrays(ArrayList<Note> a, ArrayList<Note> b) {
+
+
+        if(a.size() != b.size()) {
+            return -7;
+        }
+
+        for(int i=0; i<a.size(); i++) {
+            Note tempA = a.get(i);
+            Note tempB = b.get(i);
+
+            if(!tempA.getColor().equals(tempB.getColor())) return -1; //Could test getColor, but no real need
+            //if(tempA.getDate() != tempB.getDate()) return -2;   //This is created upon note creation, hard to recreate, but could be done in theory
+            if(tempA.getID() != tempB.getID()) return -3;
+            if(!tempA.getText().equals(tempB.getText())) return -4;
+            if(!tempA.getTitle().equals(tempB.getTitle())) return -5;
+        }
+
+        return 0;
+
+    }
+
+    public void setUp() {
+
+        notesExpected.add(expected);
+
+        context = new RenamingDelegatingContext(getContext(), "test_");
+        dbmodel = new NoteSQLiteDBModel(context);
+        dbmodel.setAdapter(null); //prevents it from firing DataSetChanged() stuff
+        dbmodel.restartDB(); //ensures a new database every time for testing (for id basically)
+
+
+    }
+
+    public void test() throws Exception {
+
+        dbmodel.createNote(expected); //put expected note into database, refresh the notes ArrayList
+        ArrayList<Note> notesReality = dbmodel.getNotes();
+
+        assertEquals(0, compareNotesArrays(notesExpected, notesReality));
+
+    }
+
+    public void tearDown() throws Exception {
+        super.tearDown();
+    }
+
+}
+</code></pre>
+</div></div>
 <p>
 	So I wanted to go over what a quick test file could look like so that you have some perspective, and a hands-on sort of example to get started writing your own test cases for certain aspects of your application.
 </p>

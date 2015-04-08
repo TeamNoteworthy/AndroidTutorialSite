@@ -3,8 +3,9 @@
 <p>So now you've set up a basic Note project with a <code>NoteListActivity</code>; and persistence to save future notes. What seems to be the only thing missing from this notes app? Editing the notes themselves! This part of the tutorial will focus on editing the contents of pre-existing notes, adding text to new notes, deleting notes, and a couple of other cool things you can do with colors and layout files.</p>
 <p><strong><strong>&nbsp;</strong></strong></p>
 <p>Right click the &ldquo;edu.gatech.androidnoteapp&rdquo; folder in the Project explorer and select <strong>New-&gt;Java Class</strong>. Name it <code>NoteEditActivity</code> and replace its content with this code:</p>
-<div id="dynamicSection">
+<div>
 <input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -38,7 +39,7 @@ public class NoteEditActivity extends ActionBarActivity {
 }
 </code>
 </pre>
-</div>
+</div></div>
 <p>The onCreate() method is called because it holds the code for what you want the <code>NoteEditActivity</code> to do when it's called. The first three lines of code in the method are default code. The next three lines create references to the Title Textbox, Edit Textbox, and the layout for Edit Note screen that we will be constructing momentarily.</p>
 <p><strong><strong>&nbsp;</strong></strong></p>
 <p>The findViewbyID() method selects an object based on an id attribute from the XML that was processed in. When we create the titleText, bodyText, and EditLayout objects in the NoteEdit XML file in the next section, each object will be specified with an id attribute which allows the findViewByID method to reference the proper object.</p>
@@ -55,8 +56,9 @@ public class NoteEditActivity extends ActionBarActivity {
 
 <h3>Creating the Note Edit Layout:</h3>
 <p>In the sidebar, you should see the project breakdown with the folder for layouts. Right click on the layout folder, click <strong>new -&gt; Layout resource file</strong>. Name the file activity_note_edit.xml. The view in Android Studio should switch from code to a layout view. Switch that view to a text view, which should show up as a tab at the very bottom. Fill the file with this code:</p>
-<div id="dynamicSection">
+<div>
 <input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -95,7 +97,7 @@ public class NoteEditActivity extends ActionBarActivity {
 &lt;/RelativeLayout&gt;
 </code>
 </pre>
-</div>
+</div></div>
 <p>The layout resource file is an XML file. The XML code at the top of the file above the EditText objects is some code that sets up a Relative Layout with bounds on padding, element layout specifications, and names the layout with the <code>@+id/EditLayout</code> statement.</p>
 <p>The two sets of EditText objects indicate the Title and Body text boxes in the image below. The other variables in the specifications for these two objects set the height, width, input type, name, etc. If you look at the file, you can see that the two EditText objects are within the Relative Layout object. Thus, the Relative Layout is the parent to the two EditText Objects. So, any references to the parent's specifications will be referencing the specifications that are associated with the Relative Layout.</p>
 <p>After adding that code for the layout, this is what the graphic interface should look like (click the Design tab):</p>
@@ -109,8 +111,9 @@ public class NoteEditActivity extends ActionBarActivity {
 
 <h3>Creating the Menu Resource File:</h3>
 <p>The menu resource file will be used to populate the menu items that we want to be available when the options button is pressed in the top right corner of the <code>NoteEditActivity</code>. Right click on the menu folder, and click<strong> new -&gt; Menu Resource Item</strong>. Name the file menu_note_edit.xml and fill the file with this code:<strong><strong>&nbsp;</strong></strong></p>
-<div id="dynamicSection">
+<div>
 <input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 &lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -125,7 +128,7 @@ public class NoteEditActivity extends ActionBarActivity {
 &lt;/menu&gt;
 </code>
 </pre>
-</div>
+</div></div>
 <p>The menu object encompasses all the elements. The top lines of code are the default lines of code. The menu we will be implementing will include a <code>color</code> option and a <code>delete note</code> option. The <code>color</code> option will allow for customizing the note's color. The <code>delete note</code> option will delete the note from the database holding all the notes created so far.</p>
 <p>When constructing options in a menu, the <code>android:title</code> field indicates the text that will be displayed when the menu is shown to the user. The <code>showAsAction</code> field determines whether or not the menu item should remain in the options list or come to the action bar if there is room. When <code>never</code> is specified, that means that the menu item will never be in the action bar. When <code>ifRoom</code> is specified, that means that the menu item will be placed in the action bar if room is available. <code>Always</code> is another common option, which will force the menu item to permanently be in the action bar. Finally, the <code>orderInCategory</code> field will determine the order of priority of all the menu options. However, in the above example code, we have assigned both options to a value of 100, so there is no priority in this menu. Below is a screenshot of what the menu will look like when clicked on:</p>
 <h3><br /><br /></h3>
@@ -139,8 +142,9 @@ public class NoteEditActivity extends ActionBarActivity {
 
 <h3>Adding Functionality to the Menu Items:</h3>
 <p>As of now, the menu items exist as dummy items. They don't perform any function since the only thing we've done so far is just create the items and not add functionality. However, the functionality should not be added in the resource files. It's time to go back to the Note Edit class! We will be adding the following code right above the onCreateOptionsMenu() method:</p>
-<div id="dynamicSection">
+<div>
 <input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 public boolean onOptionsItemSelected(MenuItem item) {
@@ -206,10 +210,10 @@ public boolean onOptionsItemSelected(MenuItem item) {
 }
 </code>
 </pre>
-</div>
+</div></div>
 <p><em>The following import statements will also be necessary:</em></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 import android.app.AlertDialog;
@@ -217,11 +221,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 </code>
 </pre>
-</div>
+</div></div>
 <h4><strong><strong>&nbsp;</strong></strong></h4>
 <p><em>These statements will also need to be inserted above the @Override statement above the onCreate method: </em></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 private String customRed = &quot;#FF6666&quot;;
@@ -231,7 +235,7 @@ private String customYellow = &quot;#FFFACD&quot;;
 String[] colors = {&quot;Red&quot;, &quot;Green&quot;,&quot;Blue&quot;,&quot;Yellow&quot;};
 </code>
 </pre>
-</div>
+</div></div>
 <h3><strong><strong>&nbsp;</strong></strong></h3>
 <p>IMPORTANT: You may be getting errors in your code because certain variables have not been defined yet or that an object is null. Ignore those for now. They will be fixed by the end of this chapter.<strong><strong>&nbsp;</strong></strong></p>
 <p>In this portion of the code we will be implementing something called an Alert Dialog. An Alert Dialog is basically a popup window that will give the user to choose from certain options. First, the code will determine the ID of the object that was passed into it as a parameter. With the Alert Dialog, we are actually using what is known as an anonymous inner class constructor. If you looked at the builder.setItems() method, the second parameter is the anonymous inner class for an onClickListener. The way an inner class works is that the class's methods are declared immediately below where the class is created as seen in the code above.</p>
@@ -261,8 +265,8 @@ String[] colors = {&quot;Red&quot;, &quot;Green&quot;,&quot;Blue&quot;,&quot;Yel
 
 <h3>Connecting Database to NoteEdit Activity:</h3>
 <p><em>Add the following code into the onCreate() method in the </em><code><em>NoteEditActivity</em></code><em> class below the code that already exists:</em></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 // Determines if the note already exists or a new empty edit screen must be generated
@@ -281,10 +285,10 @@ bodyText.setText(note.getText());
 EditLayout.setBackgroundColor(Color.parseColor(note.getColor()));
 </code>
 </pre>
-</div>
+</div></div>
 <p><em>Add the following code above the @Override statement above the onCreate method:</em><strong><strong>&nbsp;</strong></strong></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 EditText bodyText, titleText;
@@ -296,14 +300,14 @@ public static final String KEY_NOTEID = &quot;noteid&quot;;
 public RelativeLayout EditLayout = null;
 </code>
 </pre>
-</div>
+</div></div>
 <p>This code is primarily to create an instance of the <code>NoteDBModel</code> class. This is the middleman when pulling information from the database to be used with the current note and pushing information about what the user has typed back into the database into the proper note.<strong><strong>&nbsp;</strong></strong></p>
 <p>The information about whether or not the note exists is passed as a boolean value through a Bundle of Extras with the intent from the <code>NoteListActivity</code>. A Bundle is a collection datatype that is the commonly used to send Extras between activities. An Extra is a value in a String, Integer, Boolean, or other data type that is attached to an Intent to send data between activities. In this case, the Extra is a boolean denoting whether or not the current note exists. If the note exists, there is now a reference to the current note. If it doesn't exist, a new note has been created and you now have a reference to it. However, this new note has not been saved to the database just yet.</p>
 <p><strong><strong>&nbsp;</strong></strong></p>
 <h3>Implementing the saveAndFinish() Method:</h3>
 <p><em>Add the following code right after the onCreate() method:</em></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 /**
@@ -339,12 +343,12 @@ private void saveAndFinish() {
 }
 </code>
 </pre>
-</div>
+</div></div>
 <p>The saveAndFinish() method saves the current note and any associated information in the database when the user presses the back button in the menu to return to the <code>NoteListActivity</code> or else closes the application.</p>
 <p>The first part of the method sets all the attributes of the methods based on what the user has typed into the title and body text fields that we set up in the layout XML file. Then, if the note exists, but the title and body text fields are empty, the application will delete the note from the database since there's no point in storing an empty note. If the note doesn't already exist but the title and body text fields are empty, the application will not save the note for the same reason. For any other case, the application will just save the note.<strong><strong>&nbsp;</strong></strong></p>
 <p><em>The following code should be added after the onCreateOptionsMenu method:</em></p>
-<div id="dynamicSection">
-<input type="button" class="dynamicTriangle"/>
+<div><input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 public void onBackPressed() {
@@ -352,7 +356,7 @@ public void onBackPressed() {
 }
 </code>
 </pre>
-</div>
+</div></div>
 <p>This piece of code will call the saveAndFinish() method we just defined if the back button built into the Android Operating system is pressed.<strong><strong>&nbsp;</strong></strong></p>
 <h3>Conclusion:</h3>
 <p>This concludes the section of the tutorial that covers the Edit screen of the NoteWorthy application. This chapter covered creating the layout for the screen, creating the Edit screen menu and menu items, hooking up the menu items to actions in the Edit screen, hooking up the notes in this <code>Activity</code> with the database holding the notes, and creating and saving new notes. Here is a picture of a sample screen of the application's Edit screen with a red screen and sample text:</p>

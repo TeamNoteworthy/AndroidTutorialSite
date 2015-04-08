@@ -74,8 +74,9 @@
 	</ol>
 	<p>Click on the triangle to the right to have a more expanded view on additional libraries and tools you can install for even more APIs!</p>
 	</li>
+	<div>
 	<input type="button" class="dynamicTriangle"/>
-	<div id = "dynamicSection">
+	<div class = "dynamicSection">
 		<li>
 		<h3>Get the support library for additional APIs (optional)</h3>
 		<p>The support library is required for:</p>
@@ -119,6 +120,7 @@
 			<strong>Note</strong>: Google Play services APIs are not available on all Android-powered devices, but are available on all devices with Google Play Store. To use these APIs in the Android emulator, you must also install the the <strong>Google APIs</strong> system image from the latest Android X.X directory in the SDK Manager.
 		</p>
 		</li>
+	</div>
 	</div>
 	<li>
 	<h3>Install the packages</h3>
@@ -309,7 +311,9 @@
 <p>
 	On this page we set up the name of the AVD, which can be whatever you want, but the default name is very useful as it is. Next, it's preferable that the Use Host GPU option is selected because it will allow for a faster emulator experience as it will use your computer's GPU to run the emulator. Of course, you can dabble in to the Advanced Settings by clicking the Show Advanced Settings button but you shouldn't need to delve into that for the sake of this tutorial. Now, click Finish and you should have your own AVD set up and running! If you have an AMD processor and you don't want to wait 20 minutes to boot your emulator (by running an ARM image), you should install <a href="https://www.genymotion.com/#!/download">Genymotion</a>, which runs Android in a VirtualBox VM.  You can find a step-by-step tutorial on its installation <a href="http://www.javacodegeeks.com/2013/07/android-studio-with-android-alternative-emulatorgenymotion.html">here</a>. 
 </p>
-<div id ="dynamicSection">
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class ="dynamicSection">
 	<h3> What Exactly is Gradle and Maven?</h3>
 	<p>
 		As you've created new projects, you've probably noticed the term Gradle and Maven being thrown out here and there and are unsure of what exactly they do. 
@@ -338,7 +342,9 @@
 		Of course, fully understanding Gradle and Maven are outside the scope of this tutorial so feel free to learn more about <a href="https://gradle.org/learn">Gradle</a> on your own and <a href="http://maven.apache.org/what-is-maven.html">Maven</a> as well.
 	</p>
 </div>
+</div>
 
+<br/><br/>
 <div align="center">
 <br>
 <a class="btn" href="01intro.php">&lt;&lt;</a>
