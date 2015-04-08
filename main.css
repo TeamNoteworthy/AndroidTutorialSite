@@ -153,6 +153,12 @@ table td {
 img {
     max-width: 75%;
     max-height: 400px;
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 2px;
+    border: 1px solid #AAAAAA;
+    background-color: #FFFFFF;
 }
 
 /* unvisited link */
