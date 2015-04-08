@@ -136,6 +136,47 @@ pre.code code {
 	
 }
 
+.btn {
+   border-top: 1px solid #FFDD00;
+   background: #FFC800;
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFC800), to(#CC9900));
+   background: -webkit-linear-gradient(top, #FFC800, #CC9900);
+   background: -moz-linear-gradient(top, #FFC800, #CC9900);
+   background: -ms-linear-gradient(top, #FFC800, #CC9900);
+   background: -o-linear-gradient(top, #FFC800, #CC9900);
+   padding: 12px 24px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   color: white;
+   font-size: 22px;
+   font-weight: bold;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+.btn:hover {
+   border-top-color: #FFDD00;
+   background: #FFC800;
+   color: #FFFFFF;
+}
+
+.btn:active {
+   border-top-color: #CC9900;
+   background: #CC9900;
+   color: #CCCCCC;
+}
+
+/* unvisited link */
+a:link {
+    color: #FFFFFF;
+}
+
+/* visited link */
+.btn:visited {
+    color: #FFFFFF;
+}
+
 table {
     display: table;
     margin-right: auto;
@@ -156,6 +197,7 @@ img {
     
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+    border-radius: 5px;
     padding: 2px;
     border: 1px solid #AAAAAA;
     background-color: #FFFFFF;
