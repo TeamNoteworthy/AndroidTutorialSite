@@ -55,7 +55,7 @@ public class NoteEditActivity extends ActionBarActivity {
 </div>
 
 <h3>Creating the Note Edit Layout:</h3>
-<p>In the sidebar, you should see the project breakdown with the folder for layouts. Right click on the layout folder, click <strong>new -&gt; Layout resource file</strong>. Name the file activity_note_edit.xml. The view in Android Studio should switch from code to a layout view. Switch that view to a text view, which should show up as a tab at the very bottom. Fill the file with this code:</p>
+<p>In the sidebar, you should see the project breakdown with the folder for layouts. Right click on the layout folder, click <strong>new -&gt; Layout resource file</strong>. Name the file activity_note_edit.xml. The view in Android Studio should switch from code to a layout text view as seen in Figure 6-1. Switch that view to a text view, which should show up as a tab at the very bottom. Fill the file with this code:</p>
 <div>
 <input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
@@ -100,7 +100,7 @@ public class NoteEditActivity extends ActionBarActivity {
 </div></div>
 <p>The layout resource file is an XML file. The XML code at the top of the file above the EditText objects is some code that sets up a Relative Layout with bounds on padding, element layout specifications, and names the layout with the <code>@+id/EditLayout</code> statement.</p>
 <p>The two sets of EditText objects indicate the Title and Body text boxes in the image below. The other variables in the specifications for these two objects set the height, width, input type, name, etc. If you look at the file, you can see that the two EditText objects are within the Relative Layout object. Thus, the Relative Layout is the parent to the two EditText Objects. So, any references to the parent's specifications will be referencing the specifications that are associated with the Relative Layout.</p>
-<p>After adding that code for the layout, this is what the graphic interface should look like (click the Design tab):</p>
+<p>After adding that code for the layout, Figure 6-2 is what the graphic interface should look like (click the Design tab):</p>
 
 <div align="center">
 <figure>
