@@ -1,7 +1,7 @@
 <head><title>Step 2: Installing Android Studio</title></head>
 <h1>Step 2: Installing Android Studio</h1>
 <p>
-	Android Studio is Google's official IDE for Android development and includes all you need to start developing Apps for Android, including the Android Studio IDE and Android SDK Tools. Plus, it comes with a bunch of useful features and tools! Of course, there are alternatives to Android Studio such as Eclipse and Xamarin Studio, but we will be solely using Android Studio and highly recommend you to do the same for the purpose of this tutorial. You can download Android Studio by clicking <a href="http://developer.android.com/sdk/index.html">here</a>.
+	Android Studio is Google's official IDE for Android development and includes all you need to start developing Apps for Android, including the Android Studio IDE and Android SDK Tools. Plus, it comes with a bunch of useful features and tools! Of course, there are alternatives to Android Studio such as Eclipse and Xamarin Studio, but we will be solely using Android Studio and highly recommend you to do the same for the purpose of this tutorial. You can download Android Studio by clicking <a href="http://developer.android.com/sdk/index.html">here</a>. Figure 2-1 below shows the basic gist of what you'll see.
 </p>
 
 <div align="center">
@@ -227,7 +227,7 @@
 <ol>
 	<li><h5>Main Project</h5></li>
 	<p>
-		This would be entire project context. In Eclipse, this would be your workspace except it's limited to what's relevant to your project. For example, <code>appProject</code> would be your project context if the name of your application was <code>app</code>.
+		This would be entire project context. Figure 2-3 above shows a top level view of an example project. In Eclipse, this would be your workspace except it's limited to what's relevant to your project. For example, <code>appProject</code> would be your project context if the name of your application was <code>app</code>.
 	</p>
 	<li><h5>.idea</h5></li>
 	<p>This is where project specific metadata is stored by Android Studio.</p>
@@ -266,7 +266,7 @@
 </figure>
 </div>
 
-<p>Next, you'll go to a page showing all of your current Android Virtual Devices.</p>
+<p>Next, you'll go to a page showing all of your current Android Virtual Devices, as shown in Figure 2-10 below.</p>
 
 <div align="center">
 <figure>
@@ -276,7 +276,7 @@
 </div>
 
 <p>
-	You may not have all of these devices set up, but that's what we'll be doing in this section, so don't worry! First, click “Create Virtual Device" as shown by the red circle above. 
+	You may not have all of these devices set up, but that's what we'll be doing in this section, so don't worry! First, click "Create Virtual Device" as shown by the red circle above in Figure 2-10. 
 </p>
 
 <div align="center">
@@ -287,7 +287,7 @@
 </div>
 
 <p>
-	Now, in this section is where you'll be choosing the device you want to emulate. There are a plethora of devices here to choose from and whichever you choose is honestly up to you and is personal preference. Please note that each device has different pixel densities, resolutions, and sizes, so try to pick a device that fits the type of device you want your application to be emulated on. If you have no preference, just go with the Nexus 4 as it's a fairly standard device and is easily runnable as opposed to the devices with higher resolutions which may be more taxing on your personal computer. Click next and follow on to the next page.
+	Now, in this section is where you'll be choosing the device you want to emulate, as you can see in Figure 2-11. There are a plethora of devices here to choose from and whichever you choose is honestly up to you and is personal preference. Please note that each device has different pixel densities, resolutions, and sizes, so try to pick a device that fits the type of device you want your application to be emulated on. If you have no preference, just go with the Nexus 4 as it's a fairly standard device and is easily runnable as opposed to the devices with higher resolutions which may be more taxing on your personal computer. Click next and follow on to the next page.
 </p>
 
 <div align="center">
@@ -298,7 +298,7 @@
 </div>
 
 <p>
-	Now, let's configure the system image of our Android device. We recommend using the most up-to-date version of Android which is Android Lollipop as of when this tutorial was last updated. Using the most up-to-date version ensures that you have the latest features and access to the latest API. Select the latest version and then click Next.
+	Now, let's configure the system image of our Android device, as shown in Figure 2-12. We recommend using the most up-to-date version of Android which is Android Lollipop as of when this tutorial was last updated. Using the most up-to-date version ensures that you have the latest features and access to the latest API. Select the latest version and then click Next.
 </p>
 
 <div align="center">
@@ -309,7 +309,10 @@
 </div>
 
 <p>
-	On this page we set up the name of the AVD, which can be whatever you want, but the default name is very useful as it is. Next, it's preferable that the Use Host GPU option is selected because it will allow for a faster emulator experience as it will use your computer's GPU to run the emulator. Of course, you can dabble in to the Advanced Settings by clicking the Show Advanced Settings button but you shouldn't need to delve into that for the sake of this tutorial. Now, click Finish and you should have your own AVD set up and running! If you have an AMD processor and you don't want to wait 20 minutes to boot your emulator (by running an ARM image), you should install <a href="https://www.genymotion.com/#!/download">Genymotion</a>, which runs Android in a VirtualBox VM.  You can find a step-by-step tutorial on its installation <a href="http://www.javacodegeeks.com/2013/07/android-studio-with-android-alternative-emulatorgenymotion.html">here</a>. 
+	On this page we set up the name of the AVD, which can be whatever you want, but the default name is very useful as it is. Check Figure 2-13 for reference. Next, it's preferable that the Use Host GPU option is selected because it will allow for a faster emulator experience as it will use your computer's GPU to run the emulator. Of course, you can dabble in to the Advanced Settings by clicking the Show Advanced Settings button but you shouldn't need to delve into that for the sake of this tutorial. Now, click Finish and you should have your own AVD set up and running! If you have an AMD processor and you don't want to wait 20 minutes to boot your emulator (by running an ARM image), you should install <a href="https://www.genymotion.com/#!/download">Genymotion</a>, which runs Android in a VirtualBox VM.  You can find a step-by-step tutorial on its installation <a href="http://www.javacodegeeks.com/2013/07/android-studio-with-android-alternative-emulatorgenymotion.html">here</a>. 
+</p>
+<p>
+	As for how Android projects are built and manage, that's out of the scope of this project and what you need to know. However, you may click the icon to the right in order to learn more information about Gradle and Maven!
 </p>
 <div>
 <input type="button" class="dynamicTriangle"/>
