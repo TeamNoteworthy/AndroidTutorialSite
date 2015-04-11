@@ -20,4 +20,4 @@ var tipuesearch_stem = {"words": [
      {"word": "javascript", "stem": "js"}
 ]};
 
-var tipuesearch_pages = ["01intro.php", "about.php", "03helloworld.php", "02IDE.php", "index.php", "07junit.php", "06noteedit.php", "04notelist.php", "05persistence.php", "08shipcode.php", "aboutus.php", "home.php"];
+var tipuesearch_pages = ["01intro.php", "about.php", "03helloworld.php", "02IDE.php", "index.php", "07junit.php", "06noteedit.php", "04notelist.php", "05persistence.php", "08shipcode.php", "index.php"];
