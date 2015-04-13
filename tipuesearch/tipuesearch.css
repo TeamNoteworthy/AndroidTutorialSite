@@ -59,7 +59,7 @@ http://www.tipue.com/search
 #tipue_search_results_count
 {
      font: 300 13px/1.6 'Open Sans', sans-serif;
-	color: #333;
+	color: #000;
 }
 .tipue_search_content_title
 {
@@ -69,8 +69,9 @@ http://www.tipue.com/search
 }
 .tipue_search_content_title a
 {
-     color: #333;
+     color: #111;
      text-decoration: none;
+	 font-weight: bold;
 }
 .tipue_search_content_title a:hover
 {
@@ -97,7 +98,7 @@ http://www.tipue.com/search
 .tipue_search_content_text
 {
      font: 300 15px/1.6 'Open Sans', sans-serif;
-	color: #555;
+	color: #222;
      word-break: break-all;
      word-break: break-word;
      -webkit-hyphens: auto;

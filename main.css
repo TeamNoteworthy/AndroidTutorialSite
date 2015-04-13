@@ -44,7 +44,7 @@ pre.code code {
 	height: 60px;
 	width: 70%;
 	margin: 0 auto;
-	background-color: #FFFFFF;
+	background-color: #00254C;
 }
 
 .leftnav {
@@ -84,7 +84,7 @@ pre.code code {
 	text-decoration: none;
 }
 .leftnav a:link{
-	color: #FFF;
+	color: #FFD633;
 }
 
 .leftnav a:visited{
@@ -92,7 +92,7 @@ pre.code code {
 }
 
 .leftnav a:hover, a:active {
-	background-color: #E6E6E6;
+	color: #FFF;
 }
 
 .clear {
