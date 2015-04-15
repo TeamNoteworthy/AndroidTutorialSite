@@ -8,6 +8,15 @@ p, h1{
 	color:black;
 }
 
+h1, h4 {
+	margin: 0;
+	padding: 0;
+}
+
+h4 {
+	font-size: 18px;
+}
+
 pre {
     white-space: pre-wrap;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -27,7 +36,8 @@ pre.code code {
 }
 
 #wrapper {
-	min-height: 100%;
+	min-width: 1200px;
+	width:expression(document.body.clientWidth < 600? "600px": "auto" ); /* internet explorer */
 	position: relative;
 	padding-bottom: 120px;
 }
@@ -124,7 +134,7 @@ pre.code code {
 
 .content {
 	width: 70%;
-	margin: 0 0 0 200px;
+	margin: 0 0 0 225px;
 }
 
 .dynamicSection {
@@ -231,8 +241,8 @@ input.dynamicTriangle{
 	cursor:pointer;
 	width: 52px;
 	height: 47px;
-	-moz-transition: transform 1s;
-	-webkit-transition: transform 1s;
-	transition: transform 1s;
+	-moz-transition: transform 0.5s;
+	-webkit-transition: transform 0.5s;
+	transition: transform 0.5s;
 	
 }

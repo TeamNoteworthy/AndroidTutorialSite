@@ -15,8 +15,8 @@
     </script>
 	
 	<script type="text/javascript">
-		$( ".dynamicTriangle" ).click(function() {
-			if (  $( this ).css( "transform" ) == 'none' ){
+		$( ".dynamicTriangle:not(#headerExpand)" ).click(function() {
+			if (  $( this ).css( "transform" ) == 'none'){
 				$(this).css("transform","rotate(90deg)");
 			} else {
 				$(this).css("transform","" );
