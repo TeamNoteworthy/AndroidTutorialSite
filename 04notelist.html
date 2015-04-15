@@ -22,6 +22,9 @@
 	Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select <strong>New->Java Class</strong> as shown in Figure 4-1. Name it <code>Note</code> and replace its content with this code:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -130,6 +133,7 @@ public class Note {
 }
 </code>
 </pre>
+</div></div>
 
 <p>
 	Notice that this class is simply a collection of variables, getters, setters, and a constructor for convenience. In your own app, this class can be as complex as you want to make it. This is all we need to do for the Note class.
@@ -204,7 +208,7 @@ public class Note {
 <p>
 	Click on the triangle to the right to learn about an alternative way to accomplish the same thing on the "Design" tab.<div><input type="button" class="dynamicTriangle"/><div class="dynamicSection">An alternative way to accomplish the same thing visually is to not switch to the "Text" tab. Instead stay on the "Design" tab. Delete the <code>TextView</code> by clicking on it and pressing delete. Then from the Palette on the left under the Containers subheading, drag in a <code>ListView</code>. Be sure to set its width and height to match_parent in the Properties pane.
 
-	If you choose this alternative route, you must then enter the "Text" tab and change <code>android:id="@+id/listView"</code> to <code>android:id="@android:id/list"</code>.</div></div>
+	If you choose this alternative route, you must then enter the "Text" tab and change <code>android:id="@+id/listView"</code> to <code>android:id="@android:id/list"</code>.</div>
 </p>
 
 <p>
@@ -232,6 +236,9 @@ public class Note {
 	For each note, we want its row to display the title of the note, and beneath that, the last date it was edited. For this we need two <code>TextView</code>s. Structure your XML contents as follows:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -273,6 +280,7 @@ public class Note {
 &lt;/LinearLayout&gt;
 </code>
 </pre>
+</div></div>
 
 <p>
 	Notice how we wrap both <code>TextView</code>s in a "vertical" <code>LinearLayout</code> so that the first <code>TextView</code> is on top and the second is below it. We also made sure to set the width/height of the <code>LinearLayout</code> and <code>TextView</code>s to wrap_content so they don't monopolize the space but share it instead.
@@ -315,6 +323,9 @@ public class Note {
 	Replace the entirety of this file's content with this code:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -466,6 +477,7 @@ public class NoteListAdapter extends BaseAdapter {
 }
 </code>
 </pre>
+</div></div>
 
 <p>
 	What we have just done is implement a subclass of <code>BaseAdapter</code>, overriding many of its methods. A lot of this class implements the default behavior, but there are three important things to take notice of here.
@@ -505,6 +517,9 @@ public class NoteListAdapter extends BaseAdapter {
 	Let's create a <code>NoteDBModel</code> interface that supports these methods. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteDBModel</code> and set its Kind to Interface. Replace the contents with this code:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -564,6 +579,7 @@ public interface NoteDBModel {
 }
 </code>
 </pre>
+</div></div>
 
 <p>
 	With this definition, we can be sure that any class that implements this interface will support these methods. Now let's create a class that implements this interface.
@@ -579,6 +595,9 @@ public interface NoteDBModel {
 	For now, we will make a barebones ("stubbed out") implementation of this class and hardcode some list items to show how the list works. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteSQLiteDBModel</code> and replace the contents with this code:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -694,6 +713,7 @@ public class NoteSQLiteDBModel implements NoteDBModel {
 }
 </code>
 </pre>
+</div></div>
 
 <p>
 	The main point of this class is to manage the notes <code>ArrayList</code>. Currently, we are doing that manually by adding new <code>Note</code>s in refreshNotes(). Later we will update the <code>ArrayList</code> by pulling from the SQLite database.
@@ -739,6 +759,9 @@ public class NoteSQLiteDBModel implements NoteDBModel {
 	Start by opening our <code>NoteListActivity</code> java file. Replace its contents with this code:
 </p>
 
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -872,6 +895,7 @@ public class NoteListActivity extends ListActivity {
 }
 </code>
 </pre>
+</div></div>
 
 <p>
 	<code>ListActivity</code> is a predefined Android subclass of <code>Activity</code> that has convenient pre-made functionality for managing <code>ListView</code>s.
