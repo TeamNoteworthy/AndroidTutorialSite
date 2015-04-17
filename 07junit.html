@@ -22,7 +22,7 @@
 </code></pre>
 </div></div>
 <p>
-	This is about the most basic example of a Java class that one can create, but I’ll go over what I mean here. Basically, let’s say we wanted to test some addition cases for this AdditionClass. It’s easy to think of some test cases, because it’s just adding two numbers together. So for example, let’s make a quick test that assumes <code>a</code> is 1 and <code>b</code> is 3, so the result we would expect would be 4. An Android JUnit test case for this is a separate class that will look something like this:
+	This is about the most basic example of a Java class that one can create. Basically, let’s test some additional cases for this AdditionClass. It’s easy to think of some test cases, because it’s just adding two numbers together. So for example, let’s make a quick test that assumes <code>a</code> is 1 and <code>b</code> is 3, so the expected result would be 4. An Android JUnit test case for this is a separate class that will look something like this:
 </p>
 
 <div><input type="button" class="dynamicTriangle"/>
@@ -47,20 +47,20 @@ import AdditionClass;
 </code></pre>
 </div></div>
 <p>
-	This is an extremely basic test case for something like this, and obviously the classes involved with our android application are a fair bit more complex, and thus require more elaborate testing. This example could have some important test cases to think about as well, for example, perhaps we could test for <code>a</code> being negative, and then <code>b</code> being negative, and then both, and then we could test for integer overflow correctness, etc. There are a dozen things just with this simple addition function that could be tested thoroughly. If you want to dig deeper into meta-analysis, one could even potentially test whether or not the line:
+	This is an extremely basic test case for something like this, and obviously the classes involved with our android application are a fair bit more complex, and thus require more elaborate testing. This example could have some important test cases to think about as well, for example, perhaps testing for <code>a</code> being negative, and then <code>b</code> being negative, and then both, and then testing for integer overflow correctness, etc. There are a dozen things just with this simple addition function that could be tested thoroughly. If you want to dig deeper into meta-analysis, one could even potentially test whether or not the line:
 </p>
 <code>
 AdditionClass adder = new AdditionClass();
 </code>
 <p>
-	is actually working as expected. There are some assumptions that we as programmers must make when we are creating an application or program. One of them is that Java works like it should, and that it is instantiating classes correctly. If we can’t make that assumption, then the JUnit test itself could be running incorrectly, and thus be completely invalid.
+	is actually working as expected. There are some assumptions that aer made when creating an application or program. One of them is that Java works like it should, and that it is instantiating classes correctly. If that assumption is not made, then the JUnit test itself could be running incorrectly, and thus be completely invalid.
 </p>
 <p>
-	The difficult part of JUnit testing isn’t actually writing the test cases. The difficult part is determining what your edge cases are, and how you should realistically approach finding as many as you possibly can. This is something that is difficult to teach because involves a deeper understanding of your application or code that you are writing. Since we can’t really teach this part, we can at least teach how to set up a quick test case in Android Studio to get yourself started.
+	The difficult part of JUnit testing isn’t actually writing the test cases. The difficult part is determining what your edge cases are, and how you should realistically approach finding as many as you possibly can. This is something that is difficult to teach because involves a deeper understanding of your application or code that you are writing. Since this is difficult, let's move onto how to set up a quick test case in Android Studio to get yourself started.
 </p>
 <h2>Android Studio JUnit Testing</h2>
 <p>
-	I’m making the assumption here that your application code is already imported/open in Android Studio. With that said, here’s what you need to do to get started:
+	Make sure your application code is already imported/open in Android Studio. With that said, here’s what you need to do to get started:
 </p>
 <p>
 	Go ahead and add another package (folder) to your android project under the Java folder. Should look something like this when done: (Ignore the ExampleTest file, that won’t exist yet)
@@ -104,7 +104,7 @@ AdditionClass adder = new AdditionClass();
 	<figcaption><strong>Figure 7-5:</strong> Selecting the correct options</figcaption>
 </figure></div>
 <p>
-	I found it helpful to hit the “Show Chooser Dialog” button just because it lets you choose what device to run the tests on, which is sometimes helpful. Then, to finish it up, you just need to hit Apply, and then Close.
+	It's helpful to hit the “Show Chooser Dialog” button just because it lets you choose what device to run the tests on, which is sometimes helpful. Then, to finish it up, you just need to hit Apply, and then Close.
 </p>
 <p>
 	Now you have a defined testing folder (package) for Android to run tests correctly for you. This also lets the IDE know that you’ll need certain parts (the testing parts to be specific) of the SDK to be available inside that folder. This is for things like imports, etc.
@@ -186,29 +186,29 @@ public class ExampleTest extends AndroidTestCase {
 </code></pre>
 </div></div>
 <p>
-	So I wanted to go over what a quick test file could look like so that you have some perspective, and a hands-on sort of example to get started writing your own test cases for certain aspects of your application.
+	Here's what a quick test file could look like so that you have some perspective, and a hands-on sort of example to get started writing your own test cases for certain aspects of your application.
 </p>
 <p>
 	This file extends a class called AndroidTestCase which has some tools necessary for doing things like creating fake contexts that the Android parts of the program require to function properly.
 </p>
 <p>
-	To start off, the top of the tile just contains some variables that we’ll be testing against, and this example only tests that the notes() array has 1 object, and that it has ID 1, and the same text and stuff as our “expected” note. This is just to make sure the database has saved the data we wanted, and then the NoteSQLiteDBModel class created the notes ArrayList correctly with one note in it that has the values we expect.
+	To start off, the top of the tile just contains some variables that will be tested against, and this example only tests that the notes() array has 1 object, and that it has ID 1, and the same text and stuff as our “expected” note. This is just to make sure the database has saved the data that is wanted, and then the NoteSQLiteDBModel class created the notes ArrayList correctly with one note in it that has expected values.
 </p>
 <p>
-	Since we don’t want to make any assumptions about how Java tests equality between ArrayLists, we can write our own quick function that compares two <Note> ArrayLists for the same notes, and not based on attributes such as the ArrayList memory address or any other Java meta-stuff we don’t need.
+	Let's not make any assumptions about how Java tests equality between ArrayLists, so that you can write our own quick function that compares two <Note> ArrayLists for the same notes, and not based on attributes such as the ArrayList memory address or any other unnecessary Java meta-stuff.
 </p>
 <p>
 	Basically, this function compareNotesArrays() just compares two ArrayLists of Notes together to make sure they are the same, and returns an integer (in this case acting as an error code) representing the status of the two ArrayLists. This function can be more complicated or simple depending on your needs as a tester, but this suffices this simple example.
 </p>
 <p>
-	The setUp() function is called only once inside of AndroidTestCase classes, and so can therefore be used to set up the variables that we need initialized properly only once, like the database and the dummy context we’re using to test the database.
+	The setUp() function is called only once inside of AndroidTestCase classes, and so can therefore be used to set up the variables that need to be initialized properly only once, like the database and the dummy context that is being used to test the database.
 </p>
 <p>
-	Then the test function literally just creates a note, and shoves it into the database. We grab the notes ArrayList from the NoteSQLiteDBModel, and then compare it with our “expected” test case arraylist we created as a variable of the ExampleTest class earlier. If they are the same, then the database should be behaving correctly. If you run this test with our application, you will find that everything is as it should be, and it correctly adds one Note to the Arraylist of Notes in the way we expect it to, so this test was a success.
+	Then the test function literally just creates a note, and shoves it into the database. Grab the notes ArrayList from the NoteSQLiteDBModel, and then compare it with the “expected” test case arraylist that was created as a variable of the ExampleTest class earlier. If they are the same, then the database should be behaving correctly. If you run this test with our application, you will find that everything is as it should be, and it correctly adds one Note to the Arraylist of Notes in the way that it is supposed to, so this test was a success.
 </p>
 <h2>Future Testing</h2>
 <p>
-	There are many things that could be improved about this test, and there are many more tests that could be written to fully test our application to the absolute limit. However, since this is an example application, it’s not as important.
+	There are many things that could be improved about this test, and there are many more tests that could be written to fully test the application to the absolute limit. However, since this is an example application, it’s not as important.
 </p>
 <p>
 	Some things to consider for your own applications in the future:
