@@ -12,7 +12,7 @@
 </div>
 
 <p>
-	Before you set up Android Studio, be sure you have installed Java Development Kit (JDK) 6 or higher since the Java Runtime Environment (JRE) alone is not sufficient (JDK 7 is required when developing for Android 5.0 and higher). To check if you have JDK installed (and which version), open a terminal and type <code>javac -version</code>. If the JDK is not available or the version is lower than 6, <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">go download JDK</a>. Refer to the following instructions below on how to setup Android Studio: 
+	Before you set up Android Studio, be sure you have installed Java Development Kit (JDK) 6 or higher since the Java Runtime Environment (JRE) alone is not sufficient (JDK 7 is required when developing for Android 5.0 and higher). To check if you have JDK installed (and which version), open a terminal and type <code>javac -version</code>; the terminal will throw an error if you don't have it installed. If the JDK is not available or the version is lower than 6, <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">go download JDK</a>. Refer to the following instructions below on how to setup Android Studio: 
 </p>
 
 <strong>To set up Android Studio on Windows</strong>:
@@ -50,34 +50,30 @@
 	After installing Android Studio, there may still be a couple of packages you need to install to make your package complete. These packages can be downloaded as needed using the Android SDK Manager. To launch the Android SDK Manager, click the SDK Manager icon  in the toolbar in Android Studio. If you still require assistance, please refer to <a href= "http://developer.android.com/sdk/installing/index.html?pkg=studio">Installing the Android SDK</a>.
 </p>
 
-<ul>
+<h3>Get the latest SDK tools</h3>
+<div align="center">
+<figure>
+	<a class="fancybox-img" href="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_SDK_Tools.png" title = "Figure 2-2: Android SDK Tools."><img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_SDK_Tools.png" alt=""></a>
+	<figcaption><strong>Figure 2-2:</strong> Android SDK Tools.</figcaption>
+</figure>
+</div>
+<p>As a minimum when setting up the Android SDK, you should download the latest tools and Android platform. Figure 2-2 shows the Android SDK Manager.</p>
+<ol>
 	<li>
-	<h3>Get the latest SDK tools</h3>
-	<div align="center">
-	<figure>
-		<a class="fancybox-img" href="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_SDK_Tools.png" title = "Figure 2-2: Android SDK Tools."><img src="https://raw.githubusercontent.com/TeamNoteworthy/AndroidTutorialSite/master/images/02_SDK_Tools.png" alt=""></a>
-		<figcaption><strong>Figure 2-2:</strong> Android SDK Tools.</figcaption>
-	</figure>
-	</div>
-	<p>As a minimum when setting up the Android SDK, you should download the latest tools and Android platform. Figure 2-2 shows the Android SDK Manager.</p>
-	<ol>
-		<li>
-			Open the tools directory and select:
-			<ul>
-			<strong>
-				<li>Android SDK Tools</li>
-				<li>Android SDK Platform-tools</li>
-				<li>Android SDK Build-tools</li>
-			</strong>
-			</ul>
-		</li>
-	</ol>
-	<p>Click on the triangle to the right to have a more expanded view on additional libraries and tools you can install for even more APIs!</p>
+		Open the tools directory and select:
+		<ul>
+		<strong>
+			<li>Android SDK Tools</li>
+			<li>Android SDK Platform-tools</li>
+			<li>Android SDK Build-tools</li>
+		</strong>
+		</ul>
 	</li>
+</ol>
+<p>Click on the triangle to the right to have a more expanded view on additional libraries and tools you can install for even more APIs!</p>
 	<div>
 	<input type="button" class="dynamicTriangle"/>
 	<div class = "dynamicSection">
-		<li>
 		<h3>Get the support library for additional APIs (optional)</h3>
 		<p>The support library is required for:</p>
 		<ol>
@@ -98,9 +94,7 @@
 			<li><strong>Android Support Repository</strong></li>
 			<li><strong>Android Support Library</strong></li>
 		</ol>
-		</li>
 		
-		<li>
 		<h3>Get Google Play services for even more APIs (optional))</h3>
 		<p>The Google Play services APIs provide a variety of features and services for your Android apps, such as:</p>
 		<ol>
@@ -119,10 +113,8 @@
 		<p>
 			<strong>Note</strong>: Google Play services APIs are not available on all Android-powered devices, but are available on all devices with Google Play Store. To use these APIs in the Android emulator, you must also install the the <strong>Google APIs</strong> system image from the latest Android X.X directory in the SDK Manager.
 		</p>
-		</li>
 	</div>
 	</div>
-	<li>
 	<h3>Install the packages</h3>
 	<p>Once you've selected all the desired packages, continue to install:</p>
 	<ol>
@@ -131,7 +123,6 @@
 		<li>Click <strong>Install</strong>.</li>
 	</ol>
 	<p>The download progress is shown at the bottom of the SDK Manager window. <strong>Do not exit the SDK Manager</strong> or it will cancel the download.</p>
-	</li>
 </ul>
 
 <p>
@@ -181,7 +172,7 @@
 </div>
 
 <p>
-	Refer to Figure 2-5 above. On the left hand side we have our project explorer, which lists all of the folders and subfolders that are inside of our project. You can also see the Structure tab on the left hand side to get a top level view of the variables, methods, etc. of whatever java file you're working on. There's also build variants and Favorites, which are out of the scope of this tutorial. On the top we have our standard toolbar, which gives us access to many useful features and tools that are included in Android Studio. When working with a .xml file, we are introduced to a new layout.
+	Refer to Figure 2-5 above. On the left hand side we have our Project Explorer, which lists all of the folders and subfolders that are inside of our project. You can also see the Structure tab on the left-hand side to get a top level view of the variables, methods, etc. of the Java file you're working on. There are also build variants and Favorites, which are out of the scope of this tutorial. On the top we have our standard toolbar, which gives us access to many useful features and tools that are included in Android Studio. When working with a .xml file, we are introduced to a new layout.
 </p>
 
 <div align="center">
@@ -227,16 +218,16 @@
 <ol>
 	<li><h5>Main Project</h5></li>
 	<p>
-		This would be entire project context. Figure 2-3 above shows a top level view of an example project. In Eclipse, this would be your workspace except it's limited to what's relevant to your project. For example, <code>appProject</code> would be your project context if the name of your application was <code>app</code>.
+		This would be entire project context. Figure 2-8 above shows a top level view of an example project. In Eclipse, this would be your workspace except it's limited to what's relevant to your project. For example, <code>appProject</code> would be your project context if the name of your application was <code>app</code>.
 	</p>
 	<li><h5>.idea</h5></li>
-	<p>This is where project specific metadata is stored by Android Studio.</p>
+	<p>This is where project-specific metadata is stored by Android Studio.</p>
 	<li><h5>Project Module</h5></li>
 	<p>
-		This is the actual project. ex: <strong>app</strong> would be the project module if your app's name was app. Inside the project module has a few other folders which we will detail below:
+		This is the actual project. ex: <code>app</code> would be the project module if your app's name were "app." Inside the project module has a few other folders which we will detail below:
 	</p>
 	<ul>
-		<li><strong>manifests</strong> - This is where you put the AndroidManifest.xml. Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. The manifest file presents essential information about your app to the Android system--information the system must have before it can run any of the app's code. </li><br>
+		<li><strong>manifests</strong> - This is where you put the <code>AndroidManifest.xml</code>. Every application must have an <code>AndroidManifest.xml</code> file (with precisely that name) in its root directory. The manifest file presents essential information about your app to the Android system--information the system must have before it can run any of the app's code. </li><br>
 		<li><strong>java</strong> - This is where you put all of your Java source code that implements the functionality of your app.</li><br>
 
 		<li><strong>res</strong> - This folder contains various visual resources.</li><br>
@@ -246,10 +237,10 @@
 			<strong>layout</strong> - This folder is where you place the .xml files that specify each <code>Activity</code>'s layout each Activity.
 		</li><br>
 		<li><strong>menu</strong> - This folder is where you place the .xml files that relate to specific menus for certain activities.</li><br>
-		<li><strong>values</strong> - This folder is is intended for storing .xml files that describe resources of various types. </li><br>
+		<li><strong>values</strong> - This folder is is intended for storing <code>.xml</code> files that describe resources of various types. </li><br>
 	</ul>
 	<li><h5>gradle</h5></li>
-	<p>This is the Gradle build system, which we'll discuss in more detail in the next section.</p>
+	<p>This is the Gradle build system, which we'll discuss in more detail in the dynamic section at the bottom.</p>
 	<li><h5>External Libraries</h5></li>
 	<p>This is not actually a folder but a place where Referenced Libraries are shown.</p>
 </ol>
@@ -287,7 +278,7 @@
 </div>
 
 <p>
-	Now, in this section is where you'll be choosing the device you want to emulate, as you can see in Figure 2-11. There are a plethora of devices here to choose from and whichever you choose is honestly up to you and is personal preference. Please note that each device has different pixel densities, resolutions, and sizes, so try to pick a device that fits the type of device you want your application to be emulated on. If you have no preference, just go with the Nexus 4 as it's a fairly standard device and is easily runnable as opposed to the devices with higher resolutions which may be more taxing on your personal computer. Click next and follow on to the next page.
+	Now, in this section is where you'll be choosing the device you want to emulate, as you can see in Figure 2-11. There are a plethora of devices here to choose from and whichever you choose is up to your personal preference. Please note that each device has different pixel densities, resolutions, and sizes, so try to pick a device that fits the type of device you want your application to be emulated on. If you have no preference, just go with the Nexus 4 as it's a fairly standard device and is easily runnable as opposed to the devices with higher resolutions which may be more taxing on your personal computer. Click <strong>Next</strong> and follow on to the next page.
 </p>
 
 <div align="center">
@@ -298,7 +289,7 @@
 </div>
 
 <p>
-	Now, let's configure the system image of our Android device, as shown in Figure 2-12. We recommend using the most up-to-date version of Android which is Android Lollipop as of when this tutorial was last updated. Using the most up-to-date version ensures that you have the latest features and access to the latest API. Select the latest version and then click Next.
+	Now, let's configure the system image of our Android device, as shown in Figure 2-12. We recommend using the most up-to-date version of Android which is Android Lollipop as of when this tutorial was last updated. Using the most up-to-date version ensures that you have the latest features and access to the latest API. Select the latest version and then click <strong>Next</strong>.
 </p>
 
 <div align="center">
@@ -317,7 +308,7 @@
 <div>
 <input type="button" class="dynamicTriangle"/>
 <div class ="dynamicSection">
-	<h3> What Exactly is Gradle and Maven?</h3>
+	<h3> What Exactly are Gradle and Maven?</h3>
 	<p>
 		As you've created new projects, you've probably noticed the term Gradle and Maven being thrown out here and there and are unsure of what exactly they do. 
 	</p>
