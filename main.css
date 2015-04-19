@@ -74,7 +74,7 @@ pre.code code {
 
 .leftnav ul {
 	list-style-type: none;
-	margin: 8px 0 0 0;
+	margin: 8px 0 0 20px;
 	padding: 0;
 	overflow: hidden;
 }
@@ -83,7 +83,6 @@ pre.code code {
 	float: left;
 	display: inline-block;
 	width: auto;
-	min-width:150px;
 	padding: 10px;
 	text-align:center;
 	background-color: #00254C;

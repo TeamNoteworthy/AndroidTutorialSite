@@ -24,6 +24,19 @@
 		});
 	</script>
 	
+	<script type="text/javascript">
+		$("#headerExpand").click(function() {
+			if( $(".dynamicTriangle:not(#headerExpand)").css("transform") == 'none') {
+				$(".dynamicTriangle:not(#headerExpand)").css("transform", "rotate(90deg)");
+				$("#headerExpand").html("<a href=\"#\">Collapse all dynamic sections</a>");
+			} else {
+				$(".dynamicTriangle:not(#headerExpand)").css("transform", "");
+				$("#headerExpand").html("<a href=\"#\">Expand all dynamic sections</a>");
+			}
+		
+		});
+	</script>
+	
 	<script>
 		$(document).ready(function() {
 			 $('#tipue_search_input').tipuesearch({
