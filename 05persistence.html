@@ -84,10 +84,10 @@
 	So for Android specifically, there are two parts of code. One part is the “helper” part that serves to initialize the database table correctly, and then the other part is for actually changing data inside of that table. The very first part of code is rather short, and can be seen on the following page.
 </p>
 <p>
-	You’ll notice that this class <b>extends</b> SQLiteOpenHelper. SQLiteOpenHelper is a class built in to Android whose main purpose is to help open SQLite tables correctly. That’s almost all this class does too.
+	You’ll notice that this class <b>extends</b> <code>SQLiteOpenHelper</code>. <code>SQLiteOpenHelper</code> is a class built in to Android whose main purpose is to help open SQLite tables correctly. That’s almost all this class does too.
 </p>
 <p>
-	The main first few lines are just defining some public constant variables that can be used throughout the application to reference the column names of the notes table correctly. They’re declared as final so that they don’t get changed during runtime because that would cause plenty of other problems. The database version variable is mainly something to keep Android happy, and won't be used in this application, but it’s pretty obvious to see what it does.
+	The main first few lines are just defining some public constant variables that can be used throughout the application to reference the column names of the notes table correctly. They’re declared as <code>final</code> so that they don’t get changed during runtime because that would cause plenty of other problems. The database version variable is mainly something to keep Android happy, and won't be used in this application, but it’s pretty obvious to see what it does.
 </p>
 <p>
 	The next part of this class is the substance of the entire operation at this point. It’s literally just a giant string that ends up being used as the SQL query to create the database properly. The string ends up looking something like:
@@ -96,13 +96,13 @@
 CREATE TABLE notes (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, text TEXT, date TEXT, color TEXT)
 </code>
 <p>
-	This creates a table called “notes” that has five columns called _id, title, text, date, and color. The text that is in all capital letters after the column name tells the SQLite handlers of android what type of data goes in the “slots” so-to-speak.
+	This creates a table called “notes” that has five columns called <code>_id</code>, <code>title</code>, <code>text</code>, <code>date</code>, and <code>color</code>. The text that is in all capital letters after the column name tells the SQLite handlers of android what type of data goes in the “slots” so-to-speak.
 </p>
 <p>
-	The NoteSQLiteHelper constructor just initializes the class with Android’s SQLiteOpenHelper class correctly, using the context of the app it came from, etc. etc. Again, mostly just details to keep Android happy. 
+	The <code>NoteSQLiteHelper</code> constructor just initializes the class with Android’s <code>SQLiteOpenHelper</code> class correctly, using the context of the app it came from, etc. etc. Again, mostly just details to keep Android happy. 
 </p>
 <p>
-	The onCreate() function is called when the database needs to be created (more on this shortly), and the onUpgrade function can do many things, but it is used during testing to refresh the entire database of notes at once if necessary. On to the next parts of code!
+	The <code>onCreate()</code> function is called when the database needs to be created (more on this shortly), and the <code>onUpgrade()</code> function can do many things, but it is used during testing to refresh the entire database of notes at once if necessary. On to the next parts of code!
 </p>
 <div><input type="button" class="dynamicTriangle"/>
 <div class="dynamicSection">
@@ -391,19 +391,19 @@ public class NoteSQLiteDBModel implements NoteDBModel {
 </code></pre>
 </div></div>
 <p>
-	Since the Model-View-Controller design paradigm will be used for this project, this class is called the NoteSQLiteDBModel. It’s a “model” of the SQLite database that the rest of the application can use to display stuff to the user.
+	Since the Model-View-Controller design paradigm will be used for this project, this class is called the <code>NoteSQLiteDBModel</code>. It’s a “model” of the SQLite database that the rest of the application can use to display stuff to the user.
 </p>
 <p>
 	The beginning of the class consists of some pretty standard variable definitions that are mostly self-explanatory based on their names. The allColums[] array might look scary, but it’s to help us out with SQL queries later since one of the arguments takes an array of the columns you want to query.
 </p>
 <p>
-	The NoteListAdapter that you see here is the list adapter that’s actually displaying all the notes from earlier in the tutorial. The main reason this is here is to call adapter.notifyDataSetChanged() periodically so that the main screen knows that the ArrayList containing the actual Note objects has changed, and so its screen should change too. So if the user decides to change the title or body text of a note or something, then obviously the user wants to see that change on the screen.
+	The <code>NoteListAdapter</code> that you see here is the list adapter that’s actually displaying all the notes from earlier in the tutorial. The main reason this is here is to call <code>adapter.notifyDataSetChanged()</code> periodically so that the main screen knows that the <code>ArrayList</code> containing the actual <code>Note</code> objects has changed, and so its screen should change too. So if the user decides to change the title or body text of a note or something, then obviously the user wants to see that change on the screen.
 </p>
 <p>
-	So the first function that you can see here is called refreshNotes(). This function’s sole purpose is to refresh the notes ArrayList correctly so that the rest of the application gets an updated set of notes objects. A cursor object is basically what it sounds like. Whenever you query a database, it returns some number of rows for you to look at. A cursor is an object that “points” at one particular row (usually the first one to start with), and can therefore tell you the data inside any particular column of that row.
+	So the first function that you can see here is called <code>refreshNotes()</code>. This function’s sole purpose is to refresh the notes <code>ArrayList</code> correctly so that the rest of the application gets an updated set of notes objects. A cursor object is basically what it sounds like. Whenever you query a database, it returns some number of rows for you to look at. A cursor is an object that “points” at one particular row (usually the first one to start with), and can therefore tell you the data inside any particular column of that row.
 </p>
 <p>
-	Note: If the query() function looks scary with all those nulls, it’s really not that complicated. Here’s what the Android manual defines these various options as:
+	Note: If the <code>query()</code> function looks scary with all those nulls, it’s really not that complicated. Here’s what the Android manual defines these various options as:
 </p>
 <code>
 query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit)
@@ -412,22 +412,22 @@ query(String table, String[] columns, String selection, String[] selectionArgs, 
 	Most of those terms are SQL-related, and if you specifically need to know what they mean, you can read up on some SQL on your own. None of these will be used since the application will pull everything from the database so all the notes can be shown to the user.
 </p>
 <p>
-	Since this function refreshed the notes ArrayList, let's call the notifyDataSetChanged() from earlier so that the user’s screen updates properly.
+	Since this function refreshed the notes <code>ArrayList</code>, let's call the <code>notifyDataSetChanged()</code> from earlier so that the user’s screen updates properly.
 </p>
 <p>
-	The restart DB function just calls the onUpgrade() function from the SQLiteOpenHelper class that was defined earlier. It’s basically a dummy function that drops and recreates the Notes table in case it is necessary to entirely recreate the database.
+	The restart DB function just calls the <code>onUpgrade()</code> function from the <code>SQLiteOpenHelper</code> class that was defined earlier. It’s basically a dummy function that drops and recreates the <code>Notes</code> table in case it is necessary to entirely recreate the database.
 </p>
 <p>
-	The cursorToNote() function is just a small helper function that uses the specific parts of a cursor’s syntax to properly populate a Note object so that it can populate the notes ArrayList later.
+	The <code>cursorToNote()</code> function is just a small helper function that uses the specific parts of a cursor’s syntax to properly populate a <code>Note</code> object so that it can populate the notes <code>ArrayList</code> later.
 </p>
 <p>
-	createNote() and saveNote() are very similar functions, but createNote() calls a database.insert() query, and saveNote() calls a database.update() query. The very first part of these functions uses what is called a ContentValue. In Android, there is a class that works behind the scenes called the ContentResolver. This ContentResolver knows what to do with certain types of data when it’s called in particular ways, so it makes our lives as programmers much easier. The best part about content values in Android is that it can just tell the database to insert them, and it’ll do all the work by its own.
+	<code>createNote()</code> and <code>saveNote()</code> are very similar functions, but <code>createNote()</code> calls a <code>database.insert()</code> query, and <code>saveNote()</code> calls a <code>database.update()</code> query. The very first part of these functions uses what is called a <code>ContentValue</code>. In Android, there is a class that works behind the scenes called the <code>ContentResolver</code>. This <code>ContentResolver</code> knows what to do with certain types of data when it’s called in particular ways, so it makes our lives as programmers much easier. The best part about content values in Android is that it can just tell the database to insert them, and it’ll do all the work by its own.
 </p>
 <p>
-	A small note on updateNote(). For SQL, in order to update a specific note, you need some kind of identifier for it. This is done currently by the note’s _id field in the database. This is useful because it’s stored inside the Note object anyway, so the database can be told to update a specific row where the _id field is equal to whatever note we’d like to update. This is how we update information instead of deleting the note, and recreating it every time. It mainly serves to save some computer workload, and it’s less wasteful.
+	A small note on <code>updateNote()</code>. For SQL, in order to update a specific note, you need some kind of identifier for it. This is done currently by the note’s <code>_id</code> field in the database. This is useful because it’s stored inside the <code>Note</code> object anyway, so the database can be told to update a specific row where the <code>_id</code> field is equal to whatever note we’d like to update. This is how we update information instead of deleting the note, and recreating it every time. It mainly serves to save some computer workload, and it’s less wasteful.
 </p>
 <p>
-	deleteNote() does the same thing that updateNote() does, except since it’s deleting a note, the only thing the SQLite database cares about is which specific note to delete. Since this ID can be specified easily, and the SQLite database will delete the entry from the database. When this entry is deleted, we have to recreate the notes ArrayList again, which is why refreshNotes() is called at the end of the function.
+	<code>deleteNote()</code> does the same thing that <code>updateNote()</code> does, except since it’s deleting a note, the only thing the SQLite database cares about is which specific note to delete. Since this ID can be specified easily, and the SQLite database will delete the entry from the database. When this entry is deleted, we have to recreate the notes <code>ArrayList</code> again, which is why <code>refreshNotes()</code> is called at the end of the function.
 </p>
 <h2>Finishing Thoughts</h2>
 <p>
