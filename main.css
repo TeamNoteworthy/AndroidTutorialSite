@@ -74,7 +74,7 @@ pre.code code {
 
 .leftnav ul {
 	list-style-type: none;
-	margin: 8px 0 0 0;
+	margin: 8px 0 0 20px;
 	padding: 0;
 	overflow: hidden;
 }
@@ -83,7 +83,6 @@ pre.code code {
 	float: left;
 	display: inline-block;
 	width: auto;
-	min-width:150px;
 	padding: 10px;
 	text-align:center;
 	background-color: #00254C;
@@ -153,7 +152,7 @@ pre.code code {
    background: -moz-linear-gradient(top, #FFC800, #CC9900);
    background: -ms-linear-gradient(top, #FFC800, #CC9900);
    background: -o-linear-gradient(top, #FFC800, #CC9900);
-   padding: 12px 24px;
+   padding: 12px 5px;
    -webkit-border-radius: 8px;
    -moz-border-radius: 8px;
    border-radius: 8px;
@@ -246,3 +245,35 @@ input.dynamicTriangle{
 	transition: transform 0.5s;
 	
 }
+
+button.sourceCode {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+button.sourceCode:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+button.sourceCode:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }

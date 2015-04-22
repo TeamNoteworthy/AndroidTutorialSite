@@ -1,7 +1,7 @@
 <head><title>Step 5: Persistence in Android</title></head>
 <h1>Step 5: Persistence in Android</h1>
 
-<h4>Source Code for just this step: <a href="https://github.com/TeamNoteworthy/AndroidNoteApp/tree/05-Persistence/app/src/main/java/edu/gatech/androidnoteapp">here</a></h4>
+<h4>Source Code for just this step: <button class="sourceCode"><a style='text-decoration:none' href="https://github.com/TeamNoteworthy/AndroidNoteApp/tree/05-Persistence/app/src/main/java/edu/gatech/androidnoteapp">Source Code</a></button></h4>
 
 <p>
 	The first question that you’re asking right now is: “What is persistence?” It’s pretty much what you think--the phone application should persist! Well what does persist even mean? It means that when you close the application, data and settings should be preserved somewhere so that the app picks up where you left off. An application for taking notes or adding notes about various things would be pretty pointless if you lost all of the notes after you closed the application!
@@ -423,7 +423,7 @@ query(String table, String[] columns, String selection, String[] selectionArgs, 
 	A small note on updateNote(). For SQL, in order to update a specific note, you need some kind of identifier for it. This is done currently by the note’s _id field in the database. This is useful because it’s stored inside the Note object anyway, so the database can be told to update a specific row where the _id field is equal to whatever note we’d like to update. This is how we update information instead of deleting the note, and recreating it every time. It mainly serves to save some computer workload, and it’s less wasteful.
 </p>
 <p>
-	deleteNote() does the same thing that updateNote() does, except since it’s deleting a note, the only thing the SQLite database cares about is which specific note to delete. Sine this ID can be specified easily, and the SQLite database will delete the entry from the database. When this entry is deleted, we have to recreate the notes ArrayList again, which is why refreshNotes() is called at the end of the function.
+	deleteNote() does the same thing that updateNote() does, except since it’s deleting a note, the only thing the SQLite database cares about is which specific note to delete. Since this ID can be specified easily, and the SQLite database will delete the entry from the database. When this entry is deleted, we have to recreate the notes ArrayList again, which is why refreshNotes() is called at the end of the function.
 </p>
 <h2>Finishing Thoughts</h2>
 <p>
