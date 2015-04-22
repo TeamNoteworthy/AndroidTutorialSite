@@ -23,9 +23,6 @@
 	Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select <strong>New->Java Class</strong> as shown in Figure 4-1. Name it <code>Note</code> and replace its content with this code:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -134,7 +131,6 @@ public class Note {
 }
 </code>
 </pre>
-</div></div>
 
 <p>
 	Notice that this class is simply a collection of variables, getters, setters, and a constructor for convenience. In your own app, this class can be as complex as you want to make it. This is all we need to do for the Note class.
@@ -143,7 +139,7 @@ public class Note {
 <h3>Add ListView</h3>
 
 <p>
-	Our next task is to add the list visual itself to the screen. These are called <code>ListView</code>s and represent a UI container that pulls information from a data source in Java (often an array), formats that data into a visual layout representing a row in the list, and displays those rows in the <code>ListView</code>.
+	Our next task is to add the list visual itself to the screen. These are called <code>ListView</code>s and they represent a UI container that pulls information from a data source in Java (often an array), formats that data into a visual layout representing a row in the list, and displays those rows in the <code>ListView</code>.
 </p>
 
 <p>
@@ -207,7 +203,7 @@ public class Note {
 </pre>
 
 <p>
-	Click on the triangle to the right to learn about an alternative way to accomplish the same thing on the "Design" tab.<div><input type="button" class="dynamicTriangle"/><div class="dynamicSection">An alternative way to accomplish the same thing visually is to not switch to the "Text" tab. Instead stay on the "Design" tab. Delete the <code>TextView</code> by clicking on it and pressing delete. Then from the Palette on the left under the Containers subheading, drag in a <code>ListView</code>. Be sure to set its width and height to match_parent in the Properties pane.
+	Click on the triangle to the right to learn about an alternative way to accomplish the same thing on the "Design" tab.<div><input type="button" class="dynamicTriangle"/><div class="dynamicSection">An alternative way to accomplish the same thing visually is to not switch to the "Text" tab. Instead stay on the "Design" tab. Delete the <code>TextView</code> by clicking on it and pressing delete. Then from the Palette on the left under the Containers subheading, drag in a <code>ListView</code>. Be sure to set its width and height to <code>match_parent</code> in the Properties pane.
 
 	If you choose this alternative route, you must then enter the "Text" tab and change <code>android:id="@+id/listView"</code> to <code>android:id="@android:id/list"</code>.</div>
 </p>
@@ -237,9 +233,6 @@ public class Note {
 	For each note, we want its row to display the title of the note, and beneath that, the last date it was edited. For this we need two <code>TextView</code>s. Structure your XML contents as follows:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -281,10 +274,9 @@ public class Note {
 &lt;/LinearLayout&gt;
 </code>
 </pre>
-</div></div>
 
 <p>
-	Notice how we wrap both <code>TextView</code>s in a "vertical" <code>LinearLayout</code> so that the first <code>TextView</code> is on top and the second is below it. We also made sure to set the width/height of the <code>LinearLayout</code> and <code>TextView</code>s to wrap_content so they don't monopolize the space but share it instead.
+	Notice how we wrap both <code>TextView</code>s in a "vertical" <code>LinearLayout</code> so that the first <code>TextView</code> is on top and the second is below it. We also made sure to set the width/height of the <code>LinearLayout</code> and <code>TextView</code>s to <code>wrap_content</code> so they don't monopolize the space but share it instead.
 </p>
 
 <p>
@@ -303,7 +295,7 @@ public class Note {
 </div>
 
 <p>
-	That's all we need to do to set our desired layout. Before we can display the rows, however, we must create a class that does a three-way link between the layout we just created, our list row data, and our <code>ListView</code>. These types of classes are called <code>Adapter</code>s.
+	That's all we need to do to set our desired layout. Before we can display the rows, however, we must create a class that links together the layout we just created, our list row data, and our <code>ListView</code>. These types of classes are called <code>Adapter</code>s.
 </p>
 
 <h3>Note List Adapter</h3>
@@ -313,7 +305,7 @@ public class Note {
 </p>
 
 <p>
-	An adapter is a class that links a data source (i.e. an array of <code>Note</code> objects) to a <code>View</code> that pulls from data sources (i.e. <code>ListView</code>). It is like a middleman that handles translating the data into a format that the <code>View</code> is designed to accept.
+	An adapter is a class that links a data source (e.g. an array of <code>Note</code> objects) to a <code>View</code> that pulls from data sources (e.g. <code>ListView</code>). It is like a middleman that handles translating the data into a format that the <code>View</code> is designed to accept.
 </p>
 
 <p>
@@ -324,9 +316,6 @@ public class Note {
 	Replace the entirety of this file's content with this code:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -478,26 +467,27 @@ public class NoteListAdapter extends BaseAdapter {
 }
 </code>
 </pre>
-</div></div>
 
 <p>
 	What we have just done is implement a subclass of <code>BaseAdapter</code>, overriding many of its methods. A lot of this class implements the default behavior, but there are three important things to take notice of here.
 </p>
-
+<div>
+<input type="button" class="dynamicTriangle"/>
+<div class="dynamicSection">
 <p>
 	The first is that we maintain a reference to a list of <code>Note</code>s in this class. This serves as an unchanging reference to the underlying data source from which we pull rows and to which we add rows.
 </p>
 
 <p>
-	The second is that we implemented getItemId() to return the id stored in our <code>Note</code>. This will be helpful later when we want to find a <code>Note</code> object based solely on its position in the list when the row is touched.
+	The second is that we implemented <code>getItemId()</code> to return the id stored in our <code>Note</code>. This will be helpful later when we want to find a <code>Note</code> object based solely on its position in the list when the row is touched.
 </p>
 
 <p>
-	The third is the behavior of getView().  The way a list manages <code>View</code>s for its rows is by recycling them if possible. Since the <code>View</code> types of every row in the list are the same, you only need enough <code>View</code>s to display the number of items shown on screen. Then, for example, when you scroll the list, the <code>View</code>s that go off screen can be recycled to handle the items that come on screen.
+	The third is the behavior of <code>getView()</code>.  The way a list manages <code>View</code>s for its rows is by recycling them if possible. Since the <code>View</code> types of every row in the list are the same, you only need enough <code>View</code>s to display the number of items shown on screen. Then, for example, when you scroll the list, the <code>View</code>s that go off screen can be recycled to handle the items that come on screen.
 </p>
 
 <p>
-	Notice that we implemented a class called <code>RowViewElements</code>. This acts as a simple vehicle, much like a <code>Note</code>, to store references to <code>View</code>s within each list row. In getView(), if we are processing a new <code>View</code> that is not being recycled (<code>if (convertView == null)</code>), we have to link each reference to the <code>View</code>s in the row's layout, otherwise we don't since they have already been linked by this same code before being recycled.
+	Notice that we implemented a class called <code>RowViewElements</code>. This acts as a simple vehicle, much like a <code>Note</code>, to store references to <code>View</code>s within each list row. In <code>getView()</code>, if we are processing a new <code>View</code> that is not being recycled (<code>if (convertView == null)</code>), we have to link each reference to the <code>View</code>s in the row's layout, otherwise we don't since they have already been linked by this same code before being recycled.
 </p>
 
 <p>
@@ -507,6 +497,7 @@ public class NoteListAdapter extends BaseAdapter {
 <p>
 	We then, regardless of whether the <code>View</code> is recycled or not, use the <code>View</code> references from <code>RowViewElements</code> to set the actual title, date, and color of the row.
 </p>
+</div></div>
 
 <h3>Note Model Interface</h3>
 
@@ -515,12 +506,9 @@ public class NoteListAdapter extends BaseAdapter {
 </p>
 
 <p>
-	Let's create a <code>NoteDBModel</code> interface that supports these methods. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteDBModel</code> and set its Kind to Interface. Replace the contents with this code:
+	Let's create a <code>NoteDBModel</code> interface that supports these methods. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteDBModel</code> and set its <strong>Kind</strong> to <strong>Interface</strong>. Replace the contents with this code:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -580,7 +568,6 @@ public interface NoteDBModel {
 }
 </code>
 </pre>
-</div></div>
 
 <p>
 	With this definition, we can be sure that any class that implements this interface will support these methods. Now let's create a class that implements this interface.
@@ -589,16 +576,13 @@ public interface NoteDBModel {
 <h3>NoteSQLiteDBModel</h3>
 
 <p>
-	Our goal is to have persistent storage of notes so when we save a note, close the app, and open the app again, the note will still be there. One common way to achieve persistence on Android devices is to use a SQLite database. This is a simple relational database (one row for each object, one column for each attribute) that is stored on the device supporting the SQL language for row inserting, deleting, updating, etc. We will cover the database in more detail in Chapter  6.
+	Our goal is to have persistent storage of notes so when we save a note, close the app, and open the app again, the note will still be there. One common way to achieve persistence on Android devices is to use a SQLite database. This is a simple relational database (one row for each object, one column for each attribute) that is stored on the device and it supports the SQL language for row inserting, deleting, updating, etc. We will cover the database in more detail in Chapter  6.
 </p>
 
 <p>
 	For now, we will make a barebones ("stubbed out") implementation of this class and hardcode some list items to show how the list works. Right click the <code>edu.gatech.androidnoteapp</code> folder in the Project explorer and select New->Java Class. Name it <code>NoteSQLiteDBModel</code> and replace the contents with this code:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -714,7 +698,6 @@ public class NoteSQLiteDBModel implements NoteDBModel {
 }
 </code>
 </pre>
-</div></div>
 
 <p>
 	The main point of this class is to manage the notes <code>ArrayList</code>. Currently, we are doing that manually by adding new <code>Note</code>s in refreshNotes(). Later we will update the <code>ArrayList</code> by pulling from the SQLite database.
@@ -760,9 +743,6 @@ public class NoteSQLiteDBModel implements NoteDBModel {
 	Start by opening our <code>NoteListActivity</code> java file. Replace its contents with this code:
 </p>
 
-<div>
-<input type="button" class="dynamicTriangle"/>
-<div class="dynamicSection">
 <pre class="code">
 <code>
 package edu.gatech.androidnoteapp;
@@ -896,14 +876,13 @@ public class NoteListActivity extends ListActivity {
 }
 </code>
 </pre>
-</div></div>
 
 <p>
 	<code>ListActivity</code> is a predefined Android subclass of <code>Activity</code> that has convenient pre-made functionality for managing <code>ListView</code>s.
 </p>
 
 <p>
-	When the <code>Activity</code> is created, we create a new model and adapter and bind them with the <code>ListView</code>.We also reference our menu_note_list for the options menu. The Context menu pops up when a row item is touched and held and we use this for deleting notes. The rest of the methods are stubs that we will fill out in the following chapters.
+	When the <code>Activity</code> is created, we create a new model and adapter and bind them with the <code>ListView</code>.We also reference our <code<menu_note_list</code> for the options menu. The Context menu pops up when a row item is touched and held and we use this for deleting notes. The rest of the methods are stubs that we will fill out in the following chapters.
 </p>
 
 <p>
