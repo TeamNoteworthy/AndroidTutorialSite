@@ -50,6 +50,14 @@ pre.code code {
 	right: 0;
 }
 
+#headerExpand  {
+	color: #FFF;
+}
+
+#headerExpand :visited {
+	color: #FFF;
+}
+
 .nav {
 	height: 60px;
 	width: 70%;
@@ -156,7 +164,7 @@ pre.code code {
    -webkit-border-radius: 8px;
    -moz-border-radius: 8px;
    border-radius: 8px;
-   color: white;
+   color: #FFF;
    font-size: 22px;
    font-weight: bold;
    text-decoration: none;
@@ -166,7 +174,6 @@ pre.code code {
 .btn:hover {
    border-top-color: #FFDD00;
    background: #FFC800;
-   color: #FFFFFF;
 }
 
 .btn:active {
@@ -240,10 +247,16 @@ input.dynamicTriangle{
 	cursor:pointer;
 	width: 52px;
 	height: 47px;
+	color:#FFF;
 	-moz-transition: transform 0.5s;
 	-webkit-transition: transform 0.5s;
 	transition: transform 0.5s;
 	
+}
+
+li#headerExpand {
+
+	color: #FFF;
 }
 
 button.sourceCode {
@@ -262,7 +275,7 @@ button.sourceCode {
    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
    box-shadow: rgba(0,0,0,1) 0 1px 0;
    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
+   color: #FFF;
    font-size: 14px;
    font-family: Helvetica, serif;
    text-decoration: none;
@@ -273,6 +286,11 @@ button.sourceCode:hover {
    background: #28597a;
    color: #ccc;
    }
+   
+button.sourceCode a {
+	color: #FFF;
+
+}
 button.sourceCode:active {
    border-top-color: #1b435e;
    background: #1b435e;
